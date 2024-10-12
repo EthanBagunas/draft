@@ -1,15 +1,53 @@
-.gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #ff0000; /* Red */
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ff0000, #000000); /* Red, Black */
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ff0000, #000000); /* Red, Black */
+/* .gradient-custom-2 {
+    background: #ff0000; 
+
+    background: -webkit-linear-gradient(to right, #ff0000, #000000);
+   
+    background: linear-gradient(to right, #ff0000, #000000); 
+} */
+
+.btn-custom {
+    background-color: #8a70a4;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #7a6094;
+    color: white;
 }
 
 .login-btn {
-    width: 180px;
+    margin-top: 50px;
+    width: 330px;
+    border-radius: 20px;
 }
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+.forgot-password-container {
+    margin-bottom: 15px; /* Moves "Forgot password?" link upwards */
+}
+.login-button-container {
+    margin-top: 0px; /* Moves Login button downwards */
+    width: 330px;
+}
+.login-btn {
+    width: 100%; /* Makes the button full width of its container */
+    padding: 10px 0; /* Adds some vertical padding */
+}
+/* .btn-outline-custom {
+    color: #7A6092;
+    border-color: #7A6092;
+}
+
+.btn-outline-custom:hover {
+    color: #fff;
+    background-color: #7A6092 !important;
+    border-color: #7A6092 !important;
+} */
 
 .register-box {
     width: 600px;
@@ -27,3 +65,5 @@
         border-bottom-right-radius: .3rem;
     }
 }
+
+/* tanang button custom */
