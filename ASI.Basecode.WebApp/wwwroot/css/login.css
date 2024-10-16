@@ -65,9 +65,24 @@
         border-bottom-right-radius: .3rem;
     }
 }
-
+/* SITE body bg color */
 body {
-    background-color: #D4C2E2; /* Set body background color */
+    background-color: #D4C2E2; 
 }
 
-/* tanang button custom */
+/* REGISTER PAGE */
+.custom-card-body {
+    background-color: #65558F; /* box1 color */
+    opacity: 0.7;
+    margin: 0;
+    padding: 0;
+}
+
+.text-white {
+    color: white; 
+}
+
+.register-btn {
+    background: #5B4497; 
+} 
+
