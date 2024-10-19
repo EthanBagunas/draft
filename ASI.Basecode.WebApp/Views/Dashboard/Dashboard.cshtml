@@ -1,6 +1,40 @@
+@using static ASI.Basecode.Resources.Views.Screen
+@section styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
 @{
     ViewData["Title"] = "Dashboard";
 }
 
-<h1>Welcome to the Dashboard</h1>
-<p>This is a public dashboard accessible without logging in.</p>
+<!-- remove the header above, the one using alliance and then replace with our own version of it -->
+
+<div class="dash-container">
+    <div class="dash-header"></div>
+    <div class="dash-body">
+        <div class="dash-outer-container">
+            <div class="dash-search-container">
+                <form>
+                    <input type="text" placeholder="Enter Location" class="dash-search-input">
+                    <span style="font-size: 12px; font-weight: 600; margin-left: 10px;">Filter Search</span>
+                    <button class="dash-buttons">1</button>
+                    <button class="dash-buttons">2</button>
+                    <button class="dash-buttons">3</button>
+                    <button class="dash-buttons">4</button>
+                    <button class="dash-buttons">5</button>
+                </form>
+            </div>
+            <div class="dash-inner-container">
+                <div style="">
+                    <span class="dash-search-results-title">Showing search results for: </span>
+                </div>
+                <div class="dash-search-results">
+                    <div class="dash-result"><div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
