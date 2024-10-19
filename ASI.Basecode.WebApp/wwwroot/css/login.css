@@ -73,13 +73,27 @@ body {
 /* REGISTER PAGE */
 .custom-card-body {
     background-color: #65558F; /* box1 color */
-    opacity: 0.7;
+    opacity: 0.6;
     margin: 0;
     padding: 0;
+    /*width: 1011px;
+    height: 846px;
+    padding: 49px 167px 60px 168px; */
+    background-image: url('~/img/reg_bg.png'); /* Added background image */
+    background-size: cover; /* Ensures the image covers the entire area */
+    background-position: center; /* Centers the background image */
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    /* background-color: rgba(101, 85, 143, 0.6); */
 }
 
 .text-white {
     color: white; 
+    font-family: TimesNewRoman;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    font-size: 18px;
 }
 
 .register-btn {
