@@ -1,0 +1,57 @@
+@model LoginViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+@section Styles {
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/hompage.css" />
+}
+@{
+    ViewBag.LoginView = true;
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- start sa header logo and tools -->
+<header class="header">
+    <div class="logo-container">
+        <img src="~/img/logo-invert.svg " 
+            class = "logo">
+    </div>   
+    <!-- start sa icon sa taas (pic, notif, account, room, menu) -->
+   <div class="icon-container-top">
+        <div class="circle-image-account"></div>
+        <div class="menu-container">
+            <img src="~/img/icons/menu.svg">
+        </div>
+        <div class="notification-container">
+            <img src="~/img/icons/notif.svg">
+        </div>
+        <div class="account-container">
+            <img src="~/img/icons/account.svg">
+        </div>
+        <div class="room-container">
+            <img src="~/img/icons/room.svg">
+        </div>
+   </div>
+    <!-- end -->
+</header>
+
+<!-- start sa search box and buttons-->
+<div class="frame-top">
+    <div class="search-wrapper">
+        <input type="text" placeholder="Enter location..." class="custom-search-textbox">
+        <div class="location-container">
+            <img src="~/img/icons/location.svg" alt="location icon" class="location">
+        </div>
+        <div class="search-container">
+            <img src="~/img/icons/search.svg" alt="search icon" class="search">
+        </div>
+    </div>
+    <div class="check-in-button shadow-check-in">
+        <img src="~/img/icons/check-in.svg">
+    </div>
+    <div class="check-in-time-button">
+    </div>
+    <div class="check-out-button"></div>
+    <div class="max-button"></div>
+</div>
+<!-- end sa search box and buttons-->
+

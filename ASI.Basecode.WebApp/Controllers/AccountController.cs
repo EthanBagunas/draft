@@ -116,6 +116,15 @@ namespace ASI.Basecode.WebApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Homepage()
+        {
+            return View();
+        }
+
+        
+
         [HttpPost]
         [AllowAnonymous]
         public IActionResult Register(UserViewModel model)
