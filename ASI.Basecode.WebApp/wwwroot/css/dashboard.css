@@ -1,5 +1,5 @@
-body{
-    background-color: #725c88 !important;
+#root{
+    background-color: #D9D9D9 !important;
 }
 
 .dash-container {
@@ -69,8 +69,8 @@ body{
 .dash-search-results{
     width: 90%;
     height: 90%;
-    margin-top: 0;
-    margin: 0 auto;  
+    margin: 0 auto;
+    padding: 10px;
 }
 
 .dash-search-results-title{
@@ -79,28 +79,14 @@ body{
     margin-left: 30px; 
     margin-bottom: 20px;
     color: #757575;
-    width: auto;
+    margin-top: 20px;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-}
-
-.grid-container span {
-    font-size: 12px;
-}
-
-.dash-result {
+.dash-result{
     background-color: #D9D9D9;
     height: 150px;
+    width: 150px;
+    margin-top: 20px;
+    margin-left: 30px;
     border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
 }
