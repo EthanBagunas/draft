@@ -1,0 +1,88 @@
+@model LoginViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+@section Styles {
+    <link rel="stylesheet" href="~/css/header.css" />
+    <link rel="stylesheet" href="~/css/hompage.css" />
+    <link rel="stylesheet" href="~/css/texts.css" />
+}
+@{
+    ViewBag.LoginView = true;
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- start sa header logo and tools -->
+<header class="header">
+    <div class="logo-container">
+        <img src="~/img/logo-invert.svg " 
+            class = "logo">
+    </div>   
+    <!-- start sa icon sa taas (pic, notif, account, room, menu) -->
+   <div class="icon-container-top">
+        <div class="circle-image-account"></div>
+        <button class="menu-container button3">
+            <img src="~/img/icons/menu.svg">
+        </button>
+        <div class="notification-container">
+            <img src="~/img/icons/notif.svg">
+        </div>
+        <div class="account-container">
+            <img src="~/img/icons/account.svg">
+        </div>
+        <div class="room-container">
+            <img src="~/img/icons/room.svg">
+        </div>
+   </div>
+    <!-- end -->
+</header>
+
+<!-- start sa search box and buttons-->
+<div class="frame-top">
+    <form class="container-search">
+    <input type="text" placeholder="Enter location..." class="custom-search-textbox">
+    <div class="location-icon">
+        <img src="~/img/icons/location.svg">
+    </div>
+    <button class="search-button button1">
+        <img src="~/img/icons/search.svg">
+    </button>
+    </form>
+    <button class="check-in-button shadow-check-in button2">
+        <div class="check-in-icon">
+            <img src="~/img/icons/check-in.svg">
+        </div>
+        <div class="input-text-1 check-in-text">
+            Reservation Date
+        </div>
+    </button>
+    <button class="check-in-time-button button2">
+        <div class="check-in-time-icon">
+            <img src="~/img/icons/time.svg">
+        </div>
+        <div class="input-text-1 check-in-time-text">
+            Reservation Time
+        </div>
+    </button>
+    <button class="check-out-button button2">
+        <div class="check-out-icon">
+            <img src="~/img/icons/time.svg">
+        </div>
+        <div class="input-text-1 check-out-text">
+            Session End Time
+        </div>
+    </button>
+    <button class="max-button"> 
+        <form class="form-people">
+            <input type="text" placeholder="Number of People" class="people-textbox input-text-1">
+            <div class="people-icon">
+            <img src="~/img/icons/people.svg">
+        </div>
+        </form>
+    </button>
+</div>
+<!-- end sa search box and buttons-->
+
+<body>
+
+</body>
+
+

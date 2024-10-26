@@ -123,6 +123,14 @@ namespace ASI.Basecode.WebApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccountInfo()
+        {
+            return View();
+        }
+
+
         
 
         [HttpPost]
@@ -137,10 +145,6 @@ namespace ASI.Basecode.WebApp.Controllers
             catch(InvalidDataException ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-            }
-            catch(Exception ex)
-            {
-                TempData["ErrorMessage"] = Resources.Messages.Errors.ServerError;
             }
             return View();
         }

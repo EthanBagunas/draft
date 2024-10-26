@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASI.Basecode.WebApp.Controllers
 {
@@ -36,5 +37,13 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             return View();
         }
+
+         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Homepage()
+        {
+            return View();
+        }
+
     }
 }

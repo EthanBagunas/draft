@@ -1,0 +1,12 @@
+.input-text-1{
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--accent-color);
+  }
+.custom-text1{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200;
+  color: var(--main-text-color);
+}
