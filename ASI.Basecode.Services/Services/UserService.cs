@@ -35,8 +35,8 @@ namespace ASI.Basecode.Services.Services
         public void AddUser(UserViewModel model)
         {
             var user = new User();
-            if (!_repository.UserExists(model.UserId))
-            {
+            try { 
+
                 _mapper.Map(model, user);
                 user.Password = PasswordManager.EncryptPassword(model.Password);
                 user.CreatedTime = DateTime.Now;
@@ -46,10 +46,23 @@ namespace ASI.Basecode.Services.Services
 
                 _repository.AddUser(user);
             }
+
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine("An InvalidOperationException occurred: " + ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+            }
+
+            /*if (!_repository.UserExists(model.UserId))
+            { }
             else
             {
                 throw new InvalidDataException(Resources.Messages.Errors.UserExists);
-            }
+            }*/
         }
     }
 }
