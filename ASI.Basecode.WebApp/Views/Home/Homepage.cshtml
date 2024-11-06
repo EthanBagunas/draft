@@ -1,177 +1,88 @@
 @model LoginViewModel
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
-    <link rel="stylesheet" href="~/css/headerfinal.css" />
+    <link rel="stylesheet" href="~/css/header.css" />
     <link rel="stylesheet" href="~/css/hompage.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
 @{
     ViewBag.LoginView = true;
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Home Page";
 }
 
+<!-- start sa header logo and tools -->
+<header class="header">
+    <div class="logo-container">
+        <img src="~/img/logo-invert.svg " 
+            class = "logo">
+    </div>   
+    <!-- start sa icon sa taas (pic, notif, account, room, menu) -->
+   <div class="icon-container-top">
+        <div class="circle-image-account"></div>
+        <button class="menu-container button3">
+            <img src="~/img/icons/menu.svg">
+        </button>
+        <div class="notification-container">
+            <img src="~/img/icons/notif.svg">
+        </div>
+        <div class="account-container">
+            <img src="~/img/icons/account.svg">
+        </div>
+        <div class="room-container">
+            <img src="~/img/icons/room.svg">
+        </div>
+   </div>
+    <!-- end -->
+</header>
+
+<!-- start sa search box and buttons-->
+<div class="frame-top">
+    <form class="container-search">
+    <input type="text" placeholder="Enter location..." class="custom-search-textbox">
+    <div class="location-icon">
+        <img src="~/img/icons/location.svg">
+    </div>
+    <button class="search-button button1">
+        <img src="~/img/icons/search.svg">
+    </button>
+    </form>
+    <button class="check-in-button shadow-check-in button2">
+        <div class="check-in-icon">
+            <img src="~/img/icons/check-in.svg">
+        </div>
+        <div class="input-text-1 check-in-text">
+            Reservation Date
+        </div>
+    </button>
+    <button class="check-in-time-button button2">
+        <div class="check-in-time-icon">
+            <img src="~/img/icons/time.svg">
+        </div>
+        <div class="input-text-1 check-in-time-text">
+            Reservation Time
+        </div>
+    </button>
+    <button class="check-out-button button2">
+        <div class="check-out-icon">
+            <img src="~/img/icons/time.svg">
+        </div>
+        <div class="input-text-1 check-out-text">
+            Session End Time
+        </div>
+    </button>
+    <button class="max-button"> 
+        <form class="form-people">
+            <input type="text" placeholder="Number of People" class="people-textbox input-text-1">
+            <div class="people-icon">
+            <img src="~/img/icons/people.svg">
+        </div>
+        </form>
+    </button>
+</div>
+<!-- end sa search box and buttons-->
+
 <body>
-  <header>
-    <nav class="header">
-      <div class="logo-container"> 
-          <div class="logo-icon"><img src="~/img/logo-invert.svg " style="color: var(--background-color1);"></div>
-      </div>
-      <div class="grid-container">
-        <button class="grid-item-button grid-item-container grid-item i"><i class="fas fa-home"></i></button>
-        <button class="grid-item-button grid-item-container grid-item i"><i class="fa-solid fa-door-open"></i></button>
-        <button class="grid-item-button grid-item-container grid-item i"><i class="fas fa-user"></i></button>
-        <button class="grid-item-button grid-item-container grid-item i"><i class="fas fa-bell"></i></button>
-        <button class="grid-item-button grid-item-container grid-item i"><i class="fa-solid fa-right-from-bracket"></i></button>
-      </div>
-      <div class="profile">
-        <span class="custom-text1">Administrator</span>
-        <div class="profile-image profile-image-i"><img src="/path/to/profile.jpg" alt="Profile" onerror="this.style.display='none'"><i class="fas fa-user-circle"></i></div>
-      </div>
-    </nav>
-  </header>
-  <div class="table">
-    <div class="table_container">
-      <table>
-                <thead class = "th-text">
-                  <tr>
-                        <th>Status</th>
-                        <th>Room ID</th>
-                        <th>Room Name</th>
-                        <th>Capacity</th>
-                        <th>Hourly Rate</th>
-                        <th>Total Amount</th>
-                        <th>Invoice Status</th>
-                        <th>Guest Name</th>
-                        <th>Contact Number</th>
-                        <th>Email Address</th>
-                        <th>Date Reserved</th>
-                        <th>Start Session</th>
-                        <th>End Session</th>
-                        <th>POC</th>
-                 </tr>
-                </thead>
 
-                <!--start sa content sa table-->
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p>Paid</p></td>
-                        <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                        <td>Employee Name</td>                  
-                 </tr>
-                </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p>Paid</p></td>
-                        <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                        <td>Employee Name</td>                  
-                 </tr>
-                </tbody>
-
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
-                 </tr>
-                </tbody>
-                                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
-                 </tr>
-                </tbody>
-                                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
-                 </tr>
-                </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p>Paid</p></td>
-                        <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                        <td>Employee Name</td>                  
-                 </tr>
-                </tbody>                
-            </table>
 </body>
-
-      
 
 
