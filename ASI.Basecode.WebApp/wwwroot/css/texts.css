@@ -10,3 +10,83 @@
   font-weight: 200;
   color: var(--main-text-color);
 }
+.th-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400px;
+  color: var(--background-color2);
+}
+
+.td-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 100px;
+  color: var(--main-text-color);
+}
+
+.status-vacant-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color:#73A110 ;
+  margin-top: 16px;
+}
+
+.status-occupied-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color: #EC9100;
+  margin-top: 16px;
+}
+
+.status-reserved-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color: #45229F;
+  margin-top: 16px;
+
+}
+
+.invoice-paid-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color:#73A110 ;
+  margin-top: 16px;
+
+}
+
+.invoice-pending-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color: #B12B3D;
+  margin-top: 16px;
+
+}
+
+.invoice-partial-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 200px;
+  font-style: italic;
+  color: #45229F;
+  margin-top: 16px;
+
+}
+
+.page-title{
+  margin-top: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--main-text-color);
+  opacity: 0.5;
+}

@@ -38,12 +38,20 @@ namespace ASI.Basecode.WebApp.Controllers
             return View();
         }
 
-         [HttpGet]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult Homepage()
         {
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Room()
+        {
+            return View();
+        }
+        
+        
     }
 }
