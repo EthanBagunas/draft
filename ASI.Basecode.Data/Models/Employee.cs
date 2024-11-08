@@ -5,7 +5,7 @@ namespace ASI.Basecode.Data.Models
 {
     public partial class Employee
     {
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
         public string JobDepartment { get; set; }

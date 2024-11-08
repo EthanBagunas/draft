@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.ServiceModels
 {
+    // for register only
     public class UserViewModel
     {
         [Required(ErrorMessage = "Username is required.")]

@@ -36,26 +36,26 @@ namespace ASI.Basecode.Services.Services
         {
             var user = new User();
             try { 
+            
+                    _mapper.Map(model, user);
+                    user.Password = PasswordManager.EncryptPassword(model.Password);
+                    user.CreatedTime = DateTime.Now;
+                    user.UpdatedTime = DateTime.Now;
+                    user.CreatedBy = System.Environment.UserName;
+                    user.UpdatedBy = System.Environment.UserName;
 
-                _mapper.Map(model, user);
-                user.Password = PasswordManager.EncryptPassword(model.Password);
-                user.CreatedTime = DateTime.Now;
-                user.UpdatedTime = DateTime.Now;
-                user.CreatedBy = System.Environment.UserName;
-                user.UpdatedBy = System.Environment.UserName;
+                    _repository.AddUser(user);
+                }
 
-                _repository.AddUser(user);
-            }
+                catch (InvalidOperationException ex)
+                {
+                    Console.WriteLine("An InvalidOperationException occurred: " + ex.Message);
+                }
 
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine("An InvalidOperationException occurred: " + ex.Message);
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
-            }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+                }
 
             /*if (!_repository.UserExists(model.UserId))
             { }

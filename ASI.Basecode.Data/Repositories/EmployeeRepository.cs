@@ -15,7 +15,7 @@ namespace ASI.Basecode.Data.Repositories
 
         public bool UserExists(int employee_ID)
         {
-            return this.GetDbSet<Employee>().Any(x => x.EmployeeId == employee_ID);
+            return this.GetDbSet<Employee>().Any(x => x.Id == employee_ID);
         }
 
         public void AddEmployee(Employee employee)

@@ -29,7 +29,7 @@ namespace ASI.Basecode.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Addr=(localdb)\\MSSqlLocalDb; database=BookingManagement; Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+                optionsBuilder.UseSqlServer("Addr=(localdb)\\MSSqlLocalDb; database= BookingManagement; Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
             }
         }
 
@@ -37,16 +37,12 @@ namespace ASI.Basecode.Data
         {
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(e => e.CustId);
-
                 entity.ToTable("Customer");
 
-                entity.Property(e => e.CustId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("cust_ID");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .HasColumnName("address")
                     .IsFixedLength();
 
@@ -68,17 +64,13 @@ namespace ASI.Basecode.Data
 
             modelBuilder.Entity<Employee>(entity =>
             {
-                entity.Property(e => e.EmployeeId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("employee_ID");
-
                 entity.Property(e => e.Address)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .HasColumnName("address")
                     .IsFixedLength();
 
                 entity.Property(e => e.ContactNum)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .HasColumnName("contact_num")
                     .IsFixedLength();
 
@@ -101,7 +93,7 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .HasColumnName("password")
                     .IsFixedLength();
 
@@ -109,7 +101,7 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Username)
                     .IsRequired()
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .HasColumnName("username")
                     .IsFixedLength();
             });
@@ -118,9 +110,7 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Reservation");
 
-                entity.Property(e => e.ReservationId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("reservation_ID");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
 
@@ -145,13 +135,9 @@ namespace ASI.Basecode.Data
 
             modelBuilder.Entity<RoomInformation>(entity =>
             {
-                entity.HasKey(e => e.RoomId);
-
                 entity.ToTable("Room Information");
 
-                entity.Property(e => e.RoomId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("room_ID");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Description).HasColumnName("description");
 
@@ -165,9 +151,7 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Transaction");
 
-                entity.Property(e => e.TransactionId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("transaction_ID");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
 
@@ -191,11 +175,11 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.CreatedTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsFixedLength();
 
                 entity.Property(e => e.Password)
-                    .HasMaxLength(10)
+                    .HasMaxLength(100)
                     .IsFixedLength();
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
@@ -203,7 +187,7 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
 
                 entity.Property(e => e.UserId)
-                    .HasMaxLength(10)
+                    .HasMaxLength(50)
                     .IsFixedLength();
             });
 

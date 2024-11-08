@@ -5,7 +5,7 @@ namespace ASI.Basecode.Data.Models
 {
     public partial class Customer
     {
-        public int CustId { get; set; }
+        public int Id { get; set; }
         public string Custfname { get; set; }
         public string Custlname { get; set; }
         public string Address { get; set; }

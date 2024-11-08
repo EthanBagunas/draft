@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 namespace ASI.Basecode.Services.ServiceModels
 {
     public class EmpViewModel
-    {    
-        public int EmployeeId { get; set; }
+    {
+        [Required(ErrorMessage = "Username is required.")]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name is required.")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
+
 
         [Required(ErrorMessage = "Confirmation Password is required.")]
         [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]

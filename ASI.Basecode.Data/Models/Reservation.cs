@@ -5,7 +5,7 @@ namespace ASI.Basecode.Data.Models
 {
     public partial class Reservation
     {
-        public int ReservationId { get; set; }
+        public int Id { get; set; }
         public int? CustomerIdFk { get; set; }
         public int? RoomId { get; set; }
         public DateTime? ReservationDate { get; set; }

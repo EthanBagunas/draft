@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ASI.Basecode.Resources.Constants.Enums;
+
 namespace ASI.Basecode.Services.Services
 {
     public class EmpService: IEmpService
@@ -29,7 +31,6 @@ namespace ASI.Basecode.Services.Services
             {
                 // connects the viewmodel and the repo model  
                 _mapper.Map(model, emp);
-
                 emp.Password = PasswordManager.EncryptPassword(model.Password);
                 emp.CreatedTime = DateTime.Now;
                 emp.UpdatedTime = DateTime.Now;
