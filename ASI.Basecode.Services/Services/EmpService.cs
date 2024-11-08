@@ -24,6 +24,7 @@ namespace ASI.Basecode.Services.Services
             _repository = repository;
 
         }
+        // insert new employee
         public void AddEmp(EmpViewModel model) 
         {
             var emp = new Employee();
@@ -42,5 +43,15 @@ namespace ASI.Basecode.Services.Services
             }
         }
 
+        public LoginResult AuthenticateEmp(string empname, string password, ref Employee emp) 
+        {
+            emp = new Employee();
+            var passwordKey = PasswordManager.EncryptPassword(password);
+            emp =_repository.GetEmployees().Where(x => x.Username == empname && 
+                                                       x.Password == passwordKey).FirstOrDefault();
+
+            return emp != null ? LoginResult.Success : LoginResult.Failed;
+        }
+        
     }
 }

@@ -13,7 +13,7 @@ namespace ASI.Basecode.Services.Interfaces
 {
     public interface IEmpService
     {
-        //LoginResult AuthenticateEmp(int empid, string password, ref Employee employee);
+        LoginResult AuthenticateEmp(string username, string password, ref Employee employee);
         void AddEmp(EmpViewModel model);
     }
 }

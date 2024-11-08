@@ -13,6 +13,10 @@ namespace ASI.Basecode.Data.Repositories
     {
         public EmployeeRepository(IUnitOfWork unitOfWork) : base(unitOfWork) { }
 
+        public IQueryable<Employee> GetEmployees() 
+        {
+            return this.GetDbSet<Employee>();
+        }
         public bool UserExists(int employee_ID)
         {
             return this.GetDbSet<Employee>().Any(x => x.Id == employee_ID);

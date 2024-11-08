@@ -10,6 +10,7 @@ namespace ASI.Basecode.Data.Interfaces
 {
     public  interface IEmployeeRepository
     {
+        IQueryable<Employee> GetEmployees();
         bool UserExists(int employee_ID);
         void AddEmployee(Employee employee);
 
