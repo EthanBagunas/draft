@@ -47,7 +47,7 @@ namespace ASI.Basecode.Services.Services
         {
             emp = new Employee();
             var passwordKey = PasswordManager.EncryptPassword(password);
-            emp =_repository.GetEmployees().Where(x => x.Username == empname && 
+            emp =_repository.GetEmployees().Where(x => x.UserId == empname && 
                                                        x.Password == passwordKey).FirstOrDefault();
 
             return emp != null ? LoginResult.Success : LoginResult.Failed;

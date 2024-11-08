@@ -81,22 +81,22 @@ namespace ASI.Basecode.WebApp.Controllers
         /// <param name="model">The model.</param>
         /// <param name="returnUrl">The return URL.</param>
         /// <returns> Created response view </returns>
+        /// 
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             this._session.SetString("HasSession", "Exist");
+            /*User user = new() { Id = 0, UserId = "0", Name = "Name", Password = "Password" };
 
-            //User user = null;
-
-            User user = new() { Id = 0, UserId = "0", Name = "Name", Password = "Password" };
-            
             await this._signInManager.SignInAsync(user);
             this._session.SetString("UserName", model.UserId);
 
             return RedirectToAction("Index", "Home");
-
-            /*var loginResult = _userService.AuthenticateUser(model.UserId, model.Password, ref user);
+            */
+            User user = null;
+            var loginResult = _userService.AuthenticateUser(model.UserId, model.Password, ref user);
             if (loginResult == LoginResult.Success)
             {
                 // 認証OK
@@ -110,25 +110,25 @@ namespace ASI.Basecode.WebApp.Controllers
                 TempData["ErrorMessage"] = "Incorrect UserId or Password";
                 return View();
             }
-            return View();*/
         }
+
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult EmpRegister()
+        public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult EmpRegister(EmpViewModel model)
+        public IActionResult Register(UserViewModel model)
         {
             try
             {
                 Console.WriteLine("Hello");
                 Console.WriteLine(model);
-                _empService.AddEmp(model);
+                _userService.AddUser(model);
                 return RedirectToAction("Login", "Account");
             }
             catch (InvalidDataException ex)
@@ -141,33 +141,8 @@ namespace ASI.Basecode.WebApp.Controllers
             }
             return View();
         }
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register()
-        {
-            return View();
-        }
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult Register(UserViewModel model)
-        {
-            try
-            {
-                Console.WriteLine("Hello");
-                Console.WriteLine(model);
-                _userService.AddUser(model);
-                return RedirectToAction("Login", "Account");
-            }
-            catch(InvalidDataException ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-            }
-            catch(Exception ex)
-            {
-                TempData["ErrorMessage"] = Resources.Messages.Errors.ServerError;
-            }
-            return View();
-        }
+     
+       
 
         /// <summary>
         /// Sign Out current account and return login view.

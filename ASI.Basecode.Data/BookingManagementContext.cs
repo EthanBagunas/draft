@@ -74,6 +74,8 @@ namespace ASI.Basecode.Data
                     .HasColumnName("contact_num")
                     .IsFixedLength();
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(50);
+
                 entity.Property(e => e.CreatedTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Fname)
@@ -94,15 +96,15 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(100)
-                    .HasColumnName("password")
                     .IsFixedLength();
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
 
-                entity.Property(e => e.Username)
+                entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(50)
-                    .HasColumnName("username")
                     .IsFixedLength();
             });
 
@@ -139,7 +141,7 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Description).HasColumnName("description");
+                entity.Property(e => e.AvailableSlots).HasColumnName("available_slots");
 
                 entity.Property(e => e.Price)
                     .HasMaxLength(10)
@@ -168,27 +170,29 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Address).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedTime).HasColumnType("datetime");
 
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsFixedLength();
+                entity.Property(e => e.Fname).HasMaxLength(50);
 
-                entity.Property(e => e.Password)
-                    .HasMaxLength(100)
-                    .IsFixedLength();
+                entity.Property(e => e.JobDepartment)
+                    .HasMaxLength(50)
+                    .HasColumnName("Job_Department");
+
+                entity.Property(e => e.Lname).HasMaxLength(50);
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Password).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(50)
-                    .IsFixedLength();
+                entity.Property(e => e.UserId).HasMaxLength(50);
             });
 
             OnModelCreatingPartial(modelBuilder);
