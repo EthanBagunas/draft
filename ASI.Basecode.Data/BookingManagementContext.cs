@@ -18,7 +18,6 @@ namespace ASI.Basecode.Data
         }
 
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Reservation> Reservations { get; set; }
         public virtual DbSet<RoomInformation> RoomInformations { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
@@ -59,52 +58,6 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)
                     .HasColumnName("status")
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.Property(e => e.Address)
-                    .HasMaxLength(50)
-                    .HasColumnName("address")
-                    .IsFixedLength();
-
-                entity.Property(e => e.ContactNum)
-                    .HasMaxLength(50)
-                    .HasColumnName("contact_num")
-                    .IsFixedLength();
-
-                entity.Property(e => e.CreatedBy).HasMaxLength(50);
-
-                entity.Property(e => e.CreatedTime).HasColumnType("datetime");
-
-                entity.Property(e => e.Fname)
-                    .HasMaxLength(10)
-                    .HasColumnName("fname")
-                    .IsFixedLength();
-
-                entity.Property(e => e.JobDepartment)
-                    .HasMaxLength(10)
-                    .HasColumnName("job_department")
-                    .IsFixedLength();
-
-                entity.Property(e => e.Lname)
-                    .HasMaxLength(10)
-                    .HasColumnName("lname")
-                    .IsFixedLength();
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsFixedLength();
-
-                entity.Property(e => e.UpdatedBy).HasMaxLength(50);
-
-                entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
-
-                entity.Property(e => e.UserId)
-                    .IsRequired()
-                    .HasMaxLength(50)
                     .IsFixedLength();
             });
 
@@ -170,17 +123,13 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("User");
 
-                entity.Property(e => e.Address).HasMaxLength(50);
+                entity.Property(e => e.Contact).HasMaxLength(20);
 
                 entity.Property(e => e.CreatedBy).HasMaxLength(50);
 
                 entity.Property(e => e.CreatedTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Fname).HasMaxLength(50);
-
-                entity.Property(e => e.JobDepartment)
-                    .HasMaxLength(50)
-                    .HasColumnName("Job_Department");
 
                 entity.Property(e => e.Lname).HasMaxLength(50);
 

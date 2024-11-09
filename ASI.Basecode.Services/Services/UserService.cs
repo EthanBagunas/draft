@@ -4,6 +4,7 @@ using ASI.Basecode.Services.Interfaces;
 using ASI.Basecode.Services.Manager;
 using ASI.Basecode.Services.ServiceModels;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.IO;
 using System.Linq;
@@ -63,6 +64,35 @@ namespace ASI.Basecode.Services.Services
             {
                 throw new InvalidDataException(Resources.Messages.Errors.UserExists);
             }*/
+        }
+        public void UpdateUser(EditUserViewModel model)
+        {
+            //var user = new User();
+            var user = _repository.GetUsers().FirstOrDefault(x => x.UserId == model.UserId);
+
+            // Check if the user was found
+            if (user == null)
+            {
+                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+            }
+            try
+            {
+                _mapper.Map(model, user);
+                user.Password = PasswordManager.EncryptPassword(model.Password);
+                user.UpdatedTime = DateTime.Now;
+                user.UpdatedBy = System.Environment.UserName;
+                _repository.UpdateUser(user);
+            }
+
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine("An InvalidOperationException occurred: " + ex.Message);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+            }
         }
     }
 }

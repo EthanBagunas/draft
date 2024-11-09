@@ -31,6 +31,12 @@ namespace ASI.Basecode.Data.Repositories
             this.GetDbSet<User>().Add(user);
             UnitOfWork.SaveChanges();
         }
+        public void UpdateUser(User user)
+        {
+            this.GetDbSet<User>().Update(user);
+            UnitOfWork.SaveChanges();
+
+        }
 
     }
 }

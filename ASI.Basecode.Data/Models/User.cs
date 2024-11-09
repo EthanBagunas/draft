@@ -15,8 +15,6 @@ namespace ASI.Basecode.Data.Models
         public DateTime? UpdatedTime { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
-        public string JobDepartment { get; set; }
-        public string Address { get; set; }
-        public int? Contact { get; set; }
+        public string Contact { get; set; }
     }
 }

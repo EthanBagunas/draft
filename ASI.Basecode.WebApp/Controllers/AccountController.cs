@@ -123,7 +123,6 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             try
             {
-                Console.WriteLine(model);
                 _userService.AddUser(model);
                 return RedirectToAction("Login", "Account");
             }
@@ -139,16 +138,27 @@ namespace ASI.Basecode.WebApp.Controllers
         }
 
 
+        
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult EditUser(EditUserViewModel model)
+        public IActionResult UpdateUser(EditUserViewModel model)
         {
-            /*
+
             try 
             {
                 Console.WriteLine(model);
-            
-            }*/
+                _userService.UpdateUser(model);
+
+                return RedirectToAction("Login", "Account");
+            }
+            catch (InvalidDataException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = Resources.Messages.Errors.ServerError;
+            }
             return View();
         }
      
