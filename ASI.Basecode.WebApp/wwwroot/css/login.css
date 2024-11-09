@@ -6,13 +6,13 @@
     background: linear-gradient(to right, #ff0000, #000000); 
 } */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .btn-custom {
     background-color: #8a70a4;
-    color: white;
-}
-
-.btn-custom:hover {
-    background-color: #7a6094;
     color: white;
 }
 
@@ -20,24 +20,81 @@
     margin-top: 50px;
     width: 330px;
     border-radius: 20px;
+    width: 100%; 
+    padding: 10px 0; 
 }
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px; /* Adjust as needed */
-}
-.forgot-password-container {
-    margin-bottom: 15px; /* Moves "Forgot password?" link upwards */
+.login-btn:hover {
+    background-color: #BFA6D0;
 }
 .login-button-container {
-    margin-top: 0px; /* Moves Login button downwards */
-    width: 330px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
-.login-btn {
-    width: 100%; /* Makes the button full width of its container */
-    padding: 10px 0; /* Adds some vertical padding */
+
+.login-form-container {
+    background-color: white; 
+    padding: 2rem; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+    width: 100%; 
+    max-width: 600px;
+    margin: auto; 
 }
+.login-form {
+    background-color: rgba(101, 85, 143, 0.8);
+    padding: 2rem;
+    /*color: white;*/
+    width: 47%; 
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+    
+     
+}
+
+.login-form h1 {
+    font-size: 3rem;
+    margin-top: 0.7rem;
+    margin-bottom: 2.2rem;
+    font-weight: 900 px;
+    text-align: center;
+}
+.forgot-password-container{
+    color: white !important;
+    text-align: center;
+    
+}
+.bg-image {
+    background-image: url('../img/bg1.jpg'); 
+    background-size: cover; 
+    background-position: center; 
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+}
+.logo-container 
+  {  
+    width: 100%; /* Make the container full width */
+    display: flex;
+    justify-content: center; /* Center the logo horizontally */
+    margin-bottom: 0.8rem;  
+    
+  }
+    
+
+  img.Logo {
+    width: 58px;
+    height: 33px;
+    margin: 6px 1477px 5px 0;
+    object-fit: contain; 
+}
+
 /* .btn-outline-custom {
     color: #7A6092;
     border-color: #7A6092;
@@ -49,6 +106,7 @@
     border-color: #7A6092 !important;
 } */
 
+/*
 .register-box {
     width: 600px;
 }
@@ -79,9 +137,9 @@ body {
     /*width: 1011px;
     height: 846px;
     padding: 49px 167px 60px 168px; */
-    background-image: url('~/img/reg_bg.png'); /* Added background image */
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-position: center; /* Centers the background image */
+    background-image: url('~/img/reg_bg.png'); 
+    background-size: cover; 
+    background-position: center; 
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     /* background-color: rgba(101, 85, 143, 0.6); */
@@ -98,5 +156,4 @@ body {
 
 .register-btn {
     background: #5B4497; 
-} 
-
+} */
