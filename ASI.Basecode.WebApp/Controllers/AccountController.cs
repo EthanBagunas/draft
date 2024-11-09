@@ -27,7 +27,6 @@ namespace ASI.Basecode.WebApp.Controllers
         private readonly TokenProviderOptionsFactory _tokenProviderOptionsFactory;
         private readonly IConfiguration _appConfiguration;
         private readonly IUserService _userService;
-        private readonly IEmpService _empService;   
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
@@ -47,7 +46,6 @@ namespace ASI.Basecode.WebApp.Controllers
                             IConfiguration configuration,
                             IMapper mapper,
                             IUserService userService,
-                            IEmpService empService,
                             TokenValidationParametersFactory tokenValidationParametersFactory,
                             TokenProviderOptionsFactory tokenProviderOptionsFactory) : base(httpContextAccessor, loggerFactory, configuration, mapper)
         {
@@ -57,7 +55,6 @@ namespace ASI.Basecode.WebApp.Controllers
             this._tokenValidationParametersFactory = tokenValidationParametersFactory;
             this._appConfiguration = configuration;
             this._userService = userService;
-            this._empService = empService;
 
         }
 
@@ -126,7 +123,6 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             try
             {
-                Console.WriteLine("Hello");
                 Console.WriteLine(model);
                 _userService.AddUser(model);
                 return RedirectToAction("Login", "Account");
@@ -139,6 +135,20 @@ namespace ASI.Basecode.WebApp.Controllers
             {
                 TempData["ErrorMessage"] = Resources.Messages.Errors.ServerError;
             }
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult EditUser(EditUserViewModel model)
+        {
+            /*
+            try 
+            {
+                Console.WriteLine(model);
+            
+            }*/
             return View();
         }
      
