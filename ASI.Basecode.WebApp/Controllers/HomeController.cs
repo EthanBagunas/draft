@@ -54,7 +54,7 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult NewRoom(RoomViewModel model)
         {
-            var room = new RoomInformation();
+            var room = new Room();
             try
             {
                 _roomService.AddRoom(model);

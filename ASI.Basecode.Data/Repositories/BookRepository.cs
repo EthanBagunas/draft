@@ -16,9 +16,9 @@ namespace ASI.Basecode.Data.Repositories
 
         }
 
-        public IQueryable<Reservation> GetBookings()
+        public IQueryable<Book> GetBookings()
         {
-            return this.GetDbSet<Reservation>();
+            return this.GetDbSet<Book>();
         }
 
         public bool UserExists(string userId)
@@ -26,14 +26,14 @@ namespace ASI.Basecode.Data.Repositories
             return this.GetDbSet<User>().Any(x => x.UserId == userId);
         }
 
-        public void CreateBook(Reservation reservation)
+        public void CreateBook(Book book)
         {
-            this.GetDbSet<Reservation>().Add(reservation);
+            this.GetDbSet<Book>().Add(book);
             UnitOfWork.SaveChanges();
         }
-        public void UpdateBook(Reservation reservation)
+        public void UpdateBook(Book book)
         {
-            this.GetDbSet<Reservation>().Update(reservation);
+            this.GetDbSet<Book>().Update(book);
             UnitOfWork.SaveChanges();
         }
 

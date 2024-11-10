@@ -13,15 +13,15 @@ namespace ASI.Basecode.Data.Repositories
     {
         public RoomRepository(IUnitOfWork unitOfWork): base(unitOfWork) { }
 
-        public void  AddRoom(RoomInformation room)
+        public void  AddRoom(Room room)
         {
-            this.GetDbSet<RoomInformation>().Add(room);
+            this.GetDbSet<Room>().Add(room);
             UnitOfWork.SaveChanges();
         }
-        public void UpdateRoom(RoomInformation room)
+        public void UpdateRoom(Room room)
 
         {
-            this.GetDbSet<RoomInformation>().Update(room);
+            this.GetDbSet<Room>().Update(room);
             UnitOfWork.SaveChanges();
 
         }

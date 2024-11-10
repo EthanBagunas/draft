@@ -26,7 +26,7 @@ namespace ASI.Basecode.Services.Services
         }
         public void AddRoom(RoomViewModel model)
         {
-            var room = new RoomInformation();
+            var room = new Room();
             try 
             {
                 _mapper.Map(model, room);

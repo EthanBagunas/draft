@@ -37,8 +37,6 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Book");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
 
                 entity.Property(e => e.DateIn)
@@ -64,8 +62,6 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Customer");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .HasMaxLength(50)
                     .HasColumnName("address")
@@ -90,8 +86,6 @@ namespace ASI.Basecode.Data
             modelBuilder.Entity<Room>(entity =>
             {
                 entity.ToTable("Room");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CurrOccupant)
                     .HasMaxLength(10)

@@ -13,7 +13,7 @@ namespace ASI.Basecode.Data.Interfaces
         //IQueryable<User> GetBookings();
 
         //bool UserExists(string userId);
-        void CreateBook(Reservation reservation);
-        void UpdateBook(Reservation reservation);
+        void CreateBook(Book book);
+        void UpdateBook(Book book);
     }
 }

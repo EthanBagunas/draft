@@ -9,7 +9,7 @@ namespace ASI.Basecode.Data.Interfaces
 {
     public interface IRoomRepository
     {
-        void AddRoom(RoomInformation room);
-        void UpdateRoom(RoomInformation room);
+        void AddRoom(Room room);
+        void UpdateRoom(Room room);
     }
 }

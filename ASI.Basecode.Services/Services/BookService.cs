@@ -28,7 +28,7 @@ namespace ASI.Basecode.Services.Services
 
         public void AddBook(BookViewModel model)
         {
-            var book = new Reservation();
+         /*   var book = new Book();
             try { 
                  
             }
@@ -36,22 +36,22 @@ namespace ASI.Basecode.Services.Services
             catch (Exception ex)
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
-            }
+            }*/
 
         }
         public void UpdateBook(BookViewModel model)
         {
-            var book = new Reservation();
+            /*var book = new Book();
             try
             {
-                _mapper.Map(model, book);
-                _repository.UpdateBook(book);
+                _mapper.Map(model, Book);
+                _repository.UpdateBook(Book);
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
-            }
+            }*/
         }            
     }
 }
