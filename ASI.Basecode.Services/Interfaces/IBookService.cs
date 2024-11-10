@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASI.Basecode.Services.ServiceModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,8 @@ namespace ASI.Basecode.Services.Interfaces
 {
     public interface IBookService
     {
+        void AddBook(BookViewModel model);
+        void UpdateBook(BookViewModel model);
+
     }
 }

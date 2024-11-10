@@ -84,11 +84,6 @@ namespace ASI.Basecode.Services.Services
                 _repository.UpdateUser(user);
             }
 
-            catch (InvalidOperationException ex)
-            {
-                Console.WriteLine("An InvalidOperationException occurred: " + ex.Message);
-            }
-
             catch (Exception ex)
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);

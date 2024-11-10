@@ -1,18 +1,57 @@
 ﻿using ASI.Basecode.Data.Interfaces;
+using ASI.Basecode.Data.Models;
 using ASI.Basecode.Services.Interfaces;
+using ASI.Basecode.Services.Manager;
+using ASI.Basecode.Services.ServiceModels;
+using AutoMapper;
+using Basecode.Data.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static ASI.Basecode.Resources.Constants.Enums;
+
 
 namespace ASI.Basecode.Services.Services
 {
-    public class BookService: IBookService
+    public  class BookService: IBookService
     {
-        private readonly IBookRepository _bookRepository;
-        public BookService(IBookRepository bookRepository) { 
-        _bookRepository = bookRepository;
+        private readonly IBookRepository _repository;
+        private readonly IMapper _mapper;
+
+        public BookService(IBookRepository repository, IMapper mapper ) 
+        {
+            _mapper = mapper;
+            _repository = repository;
         }
+
+        public void AddBook(BookViewModel model)
+        {
+            var book = new Reservation();
+            try { 
+                 
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+            }
+
+        }
+        public void UpdateBook(BookViewModel model)
+        {
+            var book = new Reservation();
+            try
+            {
+                _mapper.Map(model, book);
+                _repository.UpdateBook(book);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+            }
+        }            
     }
 }

@@ -17,10 +17,9 @@ namespace ASI.Basecode.Data
         {
         }
 
+        public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Reservation> Reservations { get; set; }
-        public virtual DbSet<RoomInformation> RoomInformations { get; set; }
-        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,6 +33,33 @@ namespace ASI.Basecode.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Book>(entity =>
+            {
+                entity.ToTable("Book");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
+
+                entity.Property(e => e.DateIn)
+                    .HasColumnType("date")
+                    .HasColumnName("date_in");
+
+                entity.Property(e => e.DateOut)
+                    .HasColumnType("date")
+                    .HasColumnName("date_out");
+
+                entity.Property(e => e.DateRange)
+                    .HasColumnType("date")
+                    .HasColumnName("date_range");
+
+                entity.Property(e => e.ReservationDate)
+                    .HasColumnType("date")
+                    .HasColumnName("reservation_date");
+
+                entity.Property(e => e.RoomId).HasColumnName("room_ID");
+            });
+
             modelBuilder.Entity<Customer>(entity =>
             {
                 entity.ToTable("Customer");
@@ -61,62 +87,26 @@ namespace ASI.Basecode.Data
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<Reservation>(entity =>
+            modelBuilder.Entity<Room>(entity =>
             {
-                entity.ToTable("Reservation");
+                entity.ToTable("Room");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
-
-                entity.Property(e => e.DateIn)
-                    .HasColumnType("date")
-                    .HasColumnName("date_in");
-
-                entity.Property(e => e.DateOut)
-                    .HasColumnType("date")
-                    .HasColumnName("date_out");
-
-                entity.Property(e => e.DateRange)
-                    .HasColumnType("date")
-                    .HasColumnName("date_range");
-
-                entity.Property(e => e.ReservationDate)
-                    .HasColumnType("date")
-                    .HasColumnName("reservation_date");
-
-                entity.Property(e => e.RoomId).HasColumnName("room_ID");
-            });
-
-            modelBuilder.Entity<RoomInformation>(entity =>
-            {
-                entity.ToTable("Room Information");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.AvailableSlots).HasColumnName("available_slots");
-
-                entity.Property(e => e.Price)
+                entity.Property(e => e.CurrOccupant)
                     .HasMaxLength(10)
-                    .HasColumnName("price")
+                    .HasColumnName("curr_occupant")
                     .IsFixedLength();
-            });
 
-            modelBuilder.Entity<Transaction>(entity =>
-            {
-                entity.ToTable("Transaction");
+                entity.Property(e => e.CurrStatus)
+                    .HasMaxLength(10)
+                    .HasColumnName("curr_status")
+                    .IsFixedLength();
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
-
-                entity.Property(e => e.EmployeeIdFk).HasColumnName("employee_ID_FK");
-
-                entity.Property(e => e.ReservationIdFk).HasColumnName("reservation_ID_FK");
-
-                entity.Property(e => e.TransactionDate)
-                    .HasColumnType("date")
-                    .HasColumnName("transaction_date");
+                entity.Property(e => e.Roomname)
+                    .HasMaxLength(10)
+                    .HasColumnName("roomname")
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<User>(entity =>
