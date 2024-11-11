@@ -1,9 +1,9 @@
-/*start sa table*/
+/*start sa table sa main*/
 .custom-table-container{
     width: 100%;
     overflow-x: scroll;
     overflow-y: auto;
-    margin-top: 70px;
+    margin-top: 10px;
     max-height: 430px;
     margin-left: 0;
     border-radius: 20px;

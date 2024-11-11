@@ -10,6 +10,13 @@
   font-weight: 200;
   color: var(--main-text-color);
 }
+
+.custom-text-btn{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: bolder;
+  color: var(--main-text-color);
+}
 .th-text{
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -89,4 +96,10 @@
   font-weight: bold;
   color: var(--main-text-color);
   opacity: 0.5;
+}
+
+.custom-main-text-normal{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
 }

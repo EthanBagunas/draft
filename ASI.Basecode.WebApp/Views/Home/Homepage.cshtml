@@ -30,9 +30,6 @@
       </div>
 </div>
 <div class= "custom-main-container">
-  <div class="custom-dash">
-    <p class= "page-title">Dashboard</p>
-  </div>
   <!--search -->
   <div class = "custom-search-filter-container">
     <div class="custom-box">
@@ -41,22 +38,49 @@
     </div>
 
     <!-- Filter -->
-    <div class="filter-box">
-        <span>Filter</span>
-        <span>Sort by:</span>
-        <div class="custom-select">
-          <ul class="custom-options">
-             <li>Room ID</li>
-             <li>Room Name</li>
-             <li>Hourly Rate</li>
-             <li>Guest Name</li>
-             <li>Email Address</li>
-             <li>Point of Contact</li>
-          </ul>
-        </div>
+    <div class="custom-filter-box">
+        <span class="custom-main-text-normal">Filter</span>
+        <span class="custom-main-text-normal">Sort by:</span>
+        <div class="custom-filter-select custom-main-text-normal" id="dropdown">
+          <span>Date Reserved</span>
+          <button><i class="fa-solid fa-caret-down"></i></button>
+          <ul class="custom-filter-options custom-main-text-normal"> 
+            <li class="custom-filter-options-li">Date Reserved</li>
+            <li class="custom-filter-options-li">Guest Name</li>
+            <li class="custom-filter-options-li">Point of Contact</li>
+            <li class="custom-filter-options-li">Room Name</li>
+        </ul>
+        </div>    
     </div>
   </div>
   <!--end-->
+
+  <!--show dropdown -->
+    <div class="show-box custom-main-text-normal"> <span>Show</span>
+      <div class="custom-show-select custom-main-text-normal" id="dropdown">
+      <span>All</span>
+      <button><i class="fa-solid fa-caret-down"></i></button>
+        <ul class="custom-show-options custom-main-text-normal"> 
+            <li class="custom-show-options-li">All</li>
+            <li class="custom-show-options-li">Vacant</li>
+            <li class="custom-show-options-li">Occupied</li>
+            <li class="custom-show-options-li">Reserved</li>
+        </ul>   
+      </div>
+      <div class="custom-data-grid custom-main-text-normal">
+        <span>Vacant:</span>
+        <span>Occupied:</span>
+        <span>Reserved:</span>
+      </div>
+      <div class="custom-add-container">
+        <button class = "add-booking-btn custom-main-text-normal">
+          <span>Add Booking</span>
+        </button>
+      </div>
+    </div>
+
+
+  <!--home table-->
   <div class="custom-table-container">
     <div class="dash-table">
       <table>

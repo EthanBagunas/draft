@@ -97,7 +97,7 @@
 
 
 /*filter */
-.filter-box {
+.custom-filter-box {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -106,38 +106,237 @@
     outline: none;
 }
 
-.custom-select {
-    width: 180px;
+.custom-filter-select {
+    width: 160px;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
+    align-items: center;
     padding: 10px;
     border-radius: 20px;
     border: none;
     outline: none;
     background-color: var(--background-color1);
     cursor: pointer;
+    position: relative;
 }
-.custom-options{
-    width: 180px;
-    margin-top:30px;
+.custom-filter-select> button{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    margin-left: 26px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.custom-filter-select> button:hover{
+    border: none;
+    outline: none;
+    background-color: var(--background-color2);
+}
+.custom-filter-select> button> i{
+    width: 16px;
+    height: 16px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;  
+    justify-content: center;  
+
+}
+.custom-filter-options{
+    width: 160px;
+    list-style: none;
+    padding: 14px;
+    background-color: var(--background-color1);
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    margin-top: 10px;
+    z-index: 1000;
+    display: none;
+    
+}
+
+.custom-filter-select:focus-within .custom-filter-options {
+    display: block; 
+}
+
+.custom-filter-options-li{
+    padding: 4px;
+    margin: 0;
+    border-radius: 10px;
+    cursor:pointer;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+.custom-filter-options-li:hover{
+    background-color: var(--hover-color1);
+}
+.custom-filter-options-li:focus{
+    background-color: var(--hover-color1);
+}
+/*end sa filter */
+
+
+/*show dropdown*/
+.show-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin-top: 28px;
+}
+.custom-show-select {
+    width: 120px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    background-color: var(--background-color1);
+    cursor: pointer;
+    position: relative; 
+}
+
+.custom-show-select> button{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    margin-left: 60px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.custom-show-select> button:hover{
+    border: none;
+    outline: none;
+    background-color: var(--background-color2);
+}
+.custom-show-select> button> i{
+    width: 16px;
+    height: 16px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;  
+    justify-content: center;  
+
+}
+.custom-show-options{
+    width: 160px;
+    list-style: none;
+    padding: 14px;
+    background-color: var(--background-color1);
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    margin-top: 10px;
+    z-index: 1000;
+    display: none;
+    
+}
+
+.custom-show-select:focus-within .custom-show-options {
+    display: block; 
+}
+.custom-show-options {
+    width: 120px;
     list-style: none;
     padding: 10px;
     background-color: var(--background-color1);
     border: none;
-    outline:none;
-    border-radius: 16px;
+    outline: none;
+    border-radius: 10px;
     position: absolute;
-    
+    top: 100%; 
+    left: 0;  
+    margin-top: 10px;
+    z-index: 1000;
 }
-.custom-options-li{
-    padding: 10px;
-    margin: 4px, 0;
-    border-radius: 8px;
-    cursor:pointer
+
+.custom-show-options.show{
+    display: block;
 }
-.custom-options-li:hover{
-    background-color: var(--background-color2);
+.custom-show-options-li{
+    padding: 4px;
+    margin: 0;
+    border-radius: 10px;
+    cursor:pointer;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
 }
+.custom-show-options-li:hover{
+    background-color: var(--hover-color1);
+}
+.custom-show-options-li:focus{
+    background-color: var(--hover-color1);
+}
+/*show dropdown end */
+
+/*room stats */
+.custom-data-grid{
+    margin-left: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);  
+    align-items: center; 
+    gap: 60px;
+    justify-content: start;
+}
+
+/*add booking btn*/
+.custom-add-container{
+    display: flex;
+    align-items: center;  
+    justify-content: center;  
+    margin-left: 778px;
+}
+.add-booking-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    padding: 8px;
+    position: fixed;
+    margin-left: 90px;
+    background-color: var(--background-color1);
+    border: none;
+    outline: none;
+    border-radius: 30px;
+}
+
+.add-booking-btn:hover{
+    background-color: var(--hover-color1);
+    border: none;
+    outline: none;
+}
+.add-booking-btn:focus{
+    background-color: var(--hover-color1);
+    border: none;
+    outline: none;
+}
+/*end - add booking btn*/
+
 
 
 
