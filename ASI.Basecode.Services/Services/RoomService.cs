@@ -1,5 +1,6 @@
 ﻿using ASI.Basecode.Data.Interfaces;
 using ASI.Basecode.Data.Models;
+using ASI.Basecode.Data.Repositories;
 using ASI.Basecode.Services.Interfaces;
 using ASI.Basecode.Services.Manager;
 using ASI.Basecode.Services.ServiceModels;
@@ -40,6 +41,14 @@ namespace ASI.Basecode.Services.Services
         public void UpdateRoom(RoomViewModel model)
         {
 
+        }
+        
+        public IEnumerable<Room> GetAllRooms()
+        {
+            // Replace this with your actual data retrieval logic
+
+            
+            return _repository.GetAll().ToList();
         }
     }
     

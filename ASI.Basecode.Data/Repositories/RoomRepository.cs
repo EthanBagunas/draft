@@ -25,5 +25,9 @@ namespace ASI.Basecode.Data.Repositories
             UnitOfWork.SaveChanges();
 
         }
+        public IEnumerable<Room> GetAll()
+        {
+            return this.GetDbSet<Room>();
+        }
     }
 }

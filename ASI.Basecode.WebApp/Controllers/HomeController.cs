@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 namespace ASI.Basecode.WebApp.Controllers
 {
     /// <summary>
@@ -66,6 +67,15 @@ namespace ASI.Basecode.WebApp.Controllers
                 
             }
             return View();
+        }
+        [HttpGet]
+        [AllowAnonymous]
+
+        public ActionResult<IEnumerable<Room>> GetAllRooms()
+        {
+            var rooms = _roomService.GetAllRooms();
+            return Ok(rooms); // Returns a 200 OK response with the list of rooms
+
         }
     }
 }

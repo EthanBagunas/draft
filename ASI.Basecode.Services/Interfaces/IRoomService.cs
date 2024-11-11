@@ -12,5 +12,7 @@ namespace ASI.Basecode.Services.Interfaces
     {
         void AddRoom(RoomViewModel model);
         void UpdateRoom(RoomViewModel model);
+        IEnumerable<Room> GetAllRooms();
+
     }
 }
