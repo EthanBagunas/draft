@@ -28,15 +28,18 @@ namespace ASI.Basecode.Services.Services
 
         public void AddBook(BookViewModel model)
         {
-         /*   var book = new Book();
-            try { 
-                 
+           var book = new Book();
+            try 
+            {
+                _mapper.Map(model, book);
+                book.ReservationDate= DateTime.Now;
+                _repository.CreateBook(book);
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
-            }*/
+            }
 
         }
         public void UpdateBook(BookViewModel model)

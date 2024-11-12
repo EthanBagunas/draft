@@ -46,10 +46,10 @@ namespace ASI.Basecode.Services.Services
         public IEnumerable<Room> GetAllRooms()
         {
             // Replace this with your actual data retrieval logic
-
-            
             return _repository.GetAll().ToList();
         }
+
+       
     }
     
 

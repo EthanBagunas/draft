@@ -19,6 +19,7 @@ namespace ASI.Basecode.WebApp.Controllers
     public class HomeController : ControllerBase<HomeController>
     {
         private readonly IRoomService _roomService;
+        private readonly IBookService _bookService;
 
         /// <summary>
         /// Constructor
@@ -32,9 +33,11 @@ namespace ASI.Basecode.WebApp.Controllers
                               ILoggerFactory loggerFactory,
                               IConfiguration configuration,
                                IMapper mapper,
-                                IRoomService roomService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
+                                IRoomService roomService,
+                                IBookService bookService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
         {
-            this._roomService = roomService; ;
+            this._roomService = roomService; 
+            this._bookService = bookService;
         }
 
         /// <summary>
@@ -45,10 +48,9 @@ namespace ASI.Basecode.WebApp.Controllers
 
 
         [HttpGet]
-        [AllowAnonymous]       
+        [AllowAnonymous]
         public IActionResult Index()
         {
-            
             return View();
         }
         [HttpPost]
@@ -62,12 +64,26 @@ namespace ASI.Basecode.WebApp.Controllers
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
-           
-            { 
-                
+            {
+                Console.WriteLine("Exception occured:" + ex);
             }
             return View();
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult NewBook(BookViewModel model) { 
+            var book = new Book();
+            try {
+                _bookService.AddBook(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured:" + ex);
+            }
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
 
@@ -75,7 +91,6 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             var rooms = _roomService.GetAllRooms();
             return Ok(rooms); // Returns a 200 OK response with the list of rooms
-
         }
     }
 }

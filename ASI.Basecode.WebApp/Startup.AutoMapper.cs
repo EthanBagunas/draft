@@ -28,6 +28,7 @@ namespace ASI.Basecode.WebApp
                 CreateMap<UserViewModel, User>();
                 CreateMap<EditUserViewModel, User>();
                 CreateMap<RoomViewModel, Room>();
+                CreateMap<BookViewModel, Book>();
             }
         }
     }
