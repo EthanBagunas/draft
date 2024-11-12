@@ -13,12 +13,19 @@
     padding-bottom: 8px;
 }
 
+.dash-table table,
+.dash-table table th,
+.dash-table table td{
+    text-align: center !important;
+}
+
 /* Table styles */
 table {
     width: 100%;
     min-width: 1200px;
     border-collapse: collapse;
     table-layout: fixed;
+    text-align: center;
 }
 
 /* Column widths - adjust percentages as needed */
@@ -30,6 +37,7 @@ table th {
     padding: 14px 8px;
     white-space: nowrap;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 table td {
@@ -39,6 +47,7 @@ table td {
     text-overflow: ellipsis;
     vertical-align: middle;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 /* Define specific column widths */
