@@ -45,43 +45,125 @@
 /*room table*/
 .custom-roomtable-container{
     width: 100%;
-    overflow-y: auto;
-    margin-top: 10px;
-    max-height: 520px;
-    margin-left: 0;
+    margin: 20px auto;
     border-radius: 20px;
+    position: relative;
+    overflow: auto;
+    max-height: calc(100vh - 250px);
 }
 
 .room-table{
-    max-width: fit-content;
-    max-height: fit-content;
     width: 100%;
 }
 
-table{
-    min-width: max-content;
+.room-table table{
+    width: 100%;
     border-collapse: collapse;
     table-layout: auto;
 }
 
-table th{
-    position: sticky;
-    top: 0px;
-    text-align: center;
-    text-justify: center;
-    background-color: var(--secondary-color);
-    padding: 14px;
-    white-space: nowrap;
+.room-table table th,
+.room-table table td{
+    padding: 12px 20px;
+    text-align: left;
     vertical-align: middle;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-table td{
-    background-color: transparent;
-    text-align: center;
-    text-justify: center;
-    padding: 8px 16px; 
-    white-space: nowrap; 
-    vertical-align: middle;
+.room-table table th:nth-child(1),
+.room-table table td:nth-child(1){
+    width: 15%;
+}
+
+.room-table table th:nth-child(2),
+.room-table table td:nth-child(2){
+    width: 15%;
+}
+
+.room-table table th:nth-child(3),
+.room-table table td:nth-child(3){
+    width: 40%;
+}
+
+.room-table table th:nth-child(4),
+.room-table table td:nth-child(4){
+    width: 15%;
+}
+
+.room-table table th:nth-child(5),
+.room-table table td:nth-child(5){
+    width: 15%;
+}
+
+.room-table table th{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.room-table tbody tr{
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.room-table tbody tr:hover{
+    background-color: rgba(220, 212, 243, 0.1);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1400px){
+    .room-table table th,
+    .room-table table td{
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .room-table table th,
+    .room-table table td{
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+.custom-roomtable-container::-webkit-scrollbar{
+    width: 8px;
+}
+
+.custom-roomtable-container::-webkit-scrollbar-track{
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-roomtable-container::-webkit-scrollbar-thumb{
+    background: #888;
+    border-radius: 4px;
+}
+
+.custom-roomtable-container::-webkit-scrollbar-thumb:hover{
+    background: #555;
+}
+
+.custom-back{
+    display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 15px;
+    padding: 5px 10px;
+}
+
+.admin-page-title{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.custom-main-container{
+    padding: 0 30px;
+    max-width: 100%;
+    margin: 0 auto;
 }
