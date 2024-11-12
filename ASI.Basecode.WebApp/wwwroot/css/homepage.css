@@ -9,7 +9,7 @@
     height: 100%;
     background-color: transparent;
     justify-content: center;
-    padding: 0 2rem; 
+    padding: 20px;
     box-shadow: none;
     position: fixed; 
     top: 65px;
@@ -27,18 +27,17 @@
 
 /*for search bar */
 .custom-search-filter-container {
-    display: grid;
-    grid-template-columns: repeat(4, auto);  
-    align-items: center; 
-    gap: 30px;
-    margin-top:30px;
-    justify-content: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    gap: 20px;
 }
 .custom-box{
-    width: 400px;
-    height: 40px;
     display: flex;
     align-items: center;
+    gap: 10px;
+    min-width: 300px;
     padding: 10px;
     background-color: var(--background-color1);
     border-radius: 30px;
@@ -101,22 +100,20 @@
     display: flex;
     align-items: center;
     gap: 20px;
-    font-size: 16px;
-    border: none;
-    outline: none;
 }
 
 .custom-filter-select {
-    width: 160px;
     display: flex;
-    justify-content: left;
     align-items: center;
-    padding: 10px;
-    border-radius: 20px;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 150px;
     border: none;
     outline: none;
     background-color: var(--background-color1);
-    cursor: pointer;
     position: relative;
 }
 .custom-filter-select> button{
@@ -190,24 +187,22 @@
 .show-box {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 20px;
-    border: none;
-    outline: none;
-    padding: 10px;
-    margin-top: 28px;
+    justify-content: space-between;
+    padding: 10px 30px 20px;
+    gap: 30px;
 }
 .custom-show-select {
-    width: 120px;
     display: flex;
-    justify-content: left;
     align-items: center;
-    padding: 8px;
-    border-radius: 20px;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 150px;
     border: none;
     outline: none;
     background-color: var(--background-color1);
-    cursor: pointer;
     position: relative; 
 }
 
@@ -296,33 +291,27 @@
 
 /*room stats */
 .custom-data-grid{
-    margin-left: 26px;
-    display: grid;
-    grid-template-columns: repeat(3, auto);  
-    align-items: center; 
-    gap: 60px;
-    justify-content: start;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin-left: 40px;
 }
 
 /*add booking btn*/
 .custom-add-container{
-    display: flex;
-    align-items: center;  
-    justify-content: center;  
-    margin-left: 778px;
+    margin-left: auto;
+    margin-right: 30px;
 }
 .add-booking-btn{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 150px;
-    padding: 8px;
-    position: fixed;
-    margin-left: 90px;
+    padding: 10px 20px;
     background-color: var(--background-color1);
     border: none;
-    outline: none;
     border-radius: 30px;
+    transition: all 0.2s ease;
 }
 
 .add-booking-btn:hover{
@@ -406,6 +395,13 @@
 
 .submit-btn:hover {
     background-color: #45a049;
+}
+
+/* Status indicators in data grid */
+.custom-data-grid span {
+    padding: 6px 16px;
+    border-radius: 20px;
+    background-color: #f5f5f5;
 }
 
 

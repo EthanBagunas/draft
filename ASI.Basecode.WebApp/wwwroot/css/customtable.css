@@ -1,85 +1,200 @@
-/*start sa table sa main*/
-.custom-table-container{
+/* Container styles */
+.custom-table-container {
     width: 100%;
-    overflow-x: scroll;
-    overflow-y: auto;
     margin-top: 10px;
-    max-height: 520px;
-    margin-left: 0;
     border-radius: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
-.dash-table{
-    max-width: fit-content;
-    max-height: fit-content;
+.dash-table {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
 }
 
-table{
-    min-width: max-content;
+/* Table styles */
+table {
+    width: 100%;
+    min-width: 1200px;
     border-collapse: collapse;
-    table-layout: auto;
+    table-layout: fixed;
 }
 
-table th{
+/* Column widths - adjust percentages as needed */
+table th {
     position: sticky;
-    top: 0px;
-    text-align: center;
-    text-justify: center;
+    top: 0;
+    z-index: 10;
     background-color: var(--secondary-color);
-    padding: 14px;
+    padding: 14px 8px;
     white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+table td {
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     vertical-align: middle;
+    font-size: 0.9rem;
 }
 
-table td{
-    background-color: transparent;
-    text-align: center;
-    text-justify: center;
-    padding: 8px 16px; 
-    white-space: nowrap; 
-    vertical-align: middle;
-    align-items: center;
-    justify-content: center;
+/* Define specific column widths */
+table th:nth-child(1),
+table td:nth-child(1) {
+    width: 8%;
 }
 
-.status{
-    padding-left: 10px;
-    padding-right: 12px;
-    padding-top: 2px;
-    padding-bottom: 2px;
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 6%;
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+    width: 12%;
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+    width: 6%;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+    width: 8%;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+    width: 8%;
+}
+
+table th:nth-child(7),
+table td:nth-child(7) {
+    width: 8%;
+}
+
+table th:nth-child(8),
+table td:nth-child(8) {
+    width: 10%;
+}
+
+table th:nth-child(9),
+table td:nth-child(9) {
+    width: 8%;
+}
+
+table th:nth-child(10),
+table td:nth-child(10) {
+    width: 12%;
+}
+
+table th:nth-child(11),
+table td:nth-child(11) {
+    width: 8%;
+}
+
+table th:nth-child(12),
+table td:nth-child(12) {
+    width: 8%;
+}
+
+table th:nth-child(13),
+table td:nth-child(13) {
+    width: 8%;
+}
+
+table th:nth-child(14),
+table td:nth-child(14) {
+    width: 10%;
+}
+
+/* Status and Invoice styles - keep existing styles */
+.status {
+    padding: 2px 12px;
     border-radius: 30px;
-    text-align:center;
-    text-justify: center;
-} 
-.status-vacant{
-    background-color: #E6FFB0;
-}
-.status-occupied{
-    background-color: #FFE1B0;
-}
-.status-reserved{
-    background-color: #DCD4F3;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
-.invoice
-{
-    padding-left: 10px;
-    padding-right: 12px;
+.invoice {
+    padding: 2px 12px;
     border-radius: 30px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    text-align:center;
-    text-justify: center;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
-.invoice-paid
-{
-    background-color: #E6FFB0;
+/* Keep your existing status and invoice color classes */
+.status-vacant { background-color: #E6FFB0; }
+.status-occupied { background-color: #FFE1B0; }
+.status-reserved { background-color: #DCD4F3; }
+.invoice-paid { background-color: #E6FFB0; }
+.invoice-pending { background-color: #F4CCD1; }
+.invoice-partial { background-color: #DCD4F3; }
+
+/* Add media queries for responsive design */
+@media screen and (max-width: 1400px) {
+    table th,
+    table td {
+        font-size: 0.85rem;
+        padding: 6px 4px;
+    }
 }
 
-.invoice-pending{
-    background-color: #F4CCD1;
+@media screen and (max-width: 1200px) {
+    .custom-table-container {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    
+    table th,
+    table td {
+        font-size: 0.8rem;
+        padding: 4px 2px;
+    }
 }
-.invoice-partial{
-    background-color: #DCD4F3;
+
+/* Add smooth scrolling */
+.custom-table-container {
+    scroll-behavior: smooth;
+}
+
+/* Optional: Add scrollbar styling */
+.custom-table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Add hover effect for table rows */
+table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+    background-color: rgba(220, 212, 243, 0.1); /* Light purple with opacity */
+    cursor: pointer;
+}
+
+/* Add border bottom to separate rows */
+table tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
