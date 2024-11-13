@@ -37,6 +37,10 @@ namespace ASI.Basecode.Data.Repositories
             UnitOfWork.SaveChanges();
 
         }
+        public IEnumerable<User> GetAll()
+        {
+            return this.GetDbSet<User>();
+        }
 
     }
 }

@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using static ASI.Basecode.Resources.Constants.Enums;
 
@@ -55,6 +57,7 @@ namespace ASI.Basecode.WebApp.Controllers
             this._tokenValidationParametersFactory = tokenValidationParametersFactory;
             this._appConfiguration = configuration;
             this._userService = userService;
+
 
         }
 
@@ -161,7 +164,12 @@ namespace ASI.Basecode.WebApp.Controllers
             }
             return View();
         }
-     
+
+        public ActionResult<IEnumerable<User>> GetAllUsers()
+        {
+            var users = _userService.GetAllUsers();
+            return Ok(users);
+        }
        
 
         /// <summary>

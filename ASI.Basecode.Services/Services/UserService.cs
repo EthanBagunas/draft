@@ -5,9 +5,11 @@ using ASI.Basecode.Services.Manager;
 using ASI.Basecode.Services.ServiceModels;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using static ASI.Basecode.Resources.Constants.Enums;
 
 namespace ASI.Basecode.Services.Services
@@ -88,6 +90,10 @@ namespace ASI.Basecode.Services.Services
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
             }
+        }
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _repository.GetAll().ToList();
         }
     }
 }
