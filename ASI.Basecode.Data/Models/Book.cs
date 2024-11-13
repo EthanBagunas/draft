@@ -8,9 +8,11 @@ namespace ASI.Basecode.Data.Models
         public int Id { get; set; }
         public int? CustomerIdFk { get; set; }
         public int? RoomId { get; set; }
+        public DateTime? BookingDate { get; set; }
+        public TimeSpan? TimeIn { get; set; }
+        public TimeSpan? TimeOut { get; set; }
+        public int? Duration { get; set; }
+        public string Status { get; set; }
         public DateTime? ReservationDate { get; set; }
-        public DateTime? DateIn { get; set; }
-        public DateTime? DateOut { get; set; }
-        public DateTime? DateRange { get; set; }
     }
 }

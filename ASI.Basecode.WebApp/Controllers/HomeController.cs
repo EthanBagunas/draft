@@ -67,30 +67,32 @@ namespace ASI.Basecode.WebApp.Controllers
             {
                 Console.WriteLine("Exception occured:" + ex);
             }
-            return View();
+            return Ok(room);
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult NewBook(BookViewModel model) { 
+        public IActionResult NewBook(BookViewModel model) {
             var book = new Book();
-            try {
+            try
+            {
                 _bookService.AddBook(model);
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception occured:" + ex);
             }
-            return View();
+            return Ok(book);
         }
 
         [HttpGet]
         [AllowAnonymous]
-
         public ActionResult<IEnumerable<Room>> GetAllRooms()
         {
             var rooms = _roomService.GetAllRooms();
             return Ok(rooms); // Returns a 200 OK response with the list of rooms
         }
+
+
     }
 }

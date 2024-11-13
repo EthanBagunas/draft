@@ -13,6 +13,7 @@ namespace ASI.Basecode.Data.Interfaces
         bool UserExists(string userId);
         void AddUser(User user);
         void UpdateUser(User user);
+        void DeleteUser(string userId);
 
         IEnumerable<User> GetAll();
     }

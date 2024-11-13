@@ -10,7 +10,7 @@ namespace ASI.Basecode.Services.Interfaces
         LoginResult AuthenticateUser(string userid, string password, ref User user);
         void AddUser(UserViewModel model);
         void UpdateUser(EditUserViewModel model);
-
+        void DeleteUser(UserViewModel model);
         IEnumerable<User> GetAllUsers();
     }
 }

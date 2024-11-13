@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using static ASI.Basecode.Resources.Constants.Enums;
+using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.Services
 {
@@ -66,6 +67,11 @@ namespace ASI.Basecode.Services.Services
             {
                 throw new InvalidDataException(Resources.Messages.Errors.UserExists);
             }*/
+        }
+        public void DeleteUser(UserViewModel model)
+        {
+    
+            _repository.DeleteUser(model.UserId);
         }
         public void UpdateUser(EditUserViewModel model)
         {

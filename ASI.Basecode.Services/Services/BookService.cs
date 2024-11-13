@@ -33,6 +33,7 @@ namespace ASI.Basecode.Services.Services
             {
                 _mapper.Map(model, book);
                 book.ReservationDate= DateTime.Now;
+                book.Duration = (int)(model.TimeOut.Value - model.TimeIn.Value).TotalHours;
                 _repository.CreateBook(book);
             }
 

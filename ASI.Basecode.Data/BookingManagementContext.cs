@@ -37,25 +37,31 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Book");
 
+                entity.Property(e => e.BookingDate)
+                    .HasColumnType("date")
+                    .HasColumnName("booking_date");
+
                 entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
 
-                entity.Property(e => e.DateIn)
-                    .HasColumnType("date")
-                    .HasColumnName("date_in");
-
-                entity.Property(e => e.DateOut)
-                    .HasColumnType("date")
-                    .HasColumnName("date_out");
-
-                entity.Property(e => e.DateRange)
-                    .HasColumnType("date")
-                    .HasColumnName("date_range");
+                entity.Property(e => e.Duration).HasColumnName("duration");
 
                 entity.Property(e => e.ReservationDate)
                     .HasColumnType("date")
                     .HasColumnName("reservation_date");
 
                 entity.Property(e => e.RoomId).HasColumnName("room_ID");
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(10)
+                    .HasColumnName("status");
+
+                entity.Property(e => e.TimeIn)
+                    .HasColumnType("time(0)")
+                    .HasColumnName("time_in");
+
+                entity.Property(e => e.TimeOut)
+                    .HasColumnType("time(0)")
+                    .HasColumnName("time_out");
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -87,15 +93,9 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Room");
 
-                entity.Property(e => e.CurrOccupant)
-                    .HasMaxLength(10)
-                    .HasColumnName("curr_occupant")
-                    .IsFixedLength();
+                entity.Property(e => e.MaxCapacity).HasColumnName("max_capacity");
 
-                entity.Property(e => e.CurrStatus)
-                    .HasMaxLength(10)
-                    .HasColumnName("curr_status")
-                    .IsFixedLength();
+                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Roomname)
                     .HasMaxLength(10)

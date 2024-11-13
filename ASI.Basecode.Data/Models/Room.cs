@@ -7,7 +7,7 @@ namespace ASI.Basecode.Data.Models
     {
         public int Id { get; set; }
         public string Roomname { get; set; }
-        public string CurrOccupant { get; set; }
-        public string CurrStatus { get; set; }
+        public int? MaxCapacity { get; set; }
+        public int? Price { get; set; }
     }
 }

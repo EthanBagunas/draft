@@ -165,6 +165,21 @@ namespace ASI.Basecode.WebApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult DeleteUser(UserViewModel user)
+        {
+            try
+            {
+                _userService.DeleteUser(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error {e.Message}");
+            }
+            return Ok();
+        }
+
         public ActionResult<IEnumerable<User>> GetAllUsers()
         {
             var users = _userService.GetAllUsers();
