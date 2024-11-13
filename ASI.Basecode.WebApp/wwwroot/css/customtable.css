@@ -21,8 +21,8 @@
 
 /* Table styles */
 table {
-    width: 100%;
-    min-width: 1200px;
+    table-layout: auto; /* Forces fixed layout */
+    width: 100%; 
     border-collapse: collapse;
     table-layout: fixed;
     text-align: center;
@@ -53,72 +53,73 @@ table td {
 /* Define specific column widths */
 table th:nth-child(1),
 table td:nth-child(1) {
-    width: 8%;
+    width: 20px
 }
 
 table th:nth-child(2),
 table td:nth-child(2) {
-    width: 6%;
+    width: 20px;
+    
 }
 
 table th:nth-child(3),
 table td:nth-child(3) {
-    width: 12%;
+    width: 250px;
 }
 
 table th:nth-child(4),
 table td:nth-child(4) {
-    width: 6%;
+    width: 250px;
 }
 
 table th:nth-child(5),
 table td:nth-child(5) {
-    width: 8%;
+    width: 250px;
 }
 
 table th:nth-child(6),
 table td:nth-child(6) {
-    width: 8%;
+    width: 250px;
 }
 
 table th:nth-child(7),
 table td:nth-child(7) {
-    width: 8%;
+    width: 250px;
 }
 
 table th:nth-child(8),
 table td:nth-child(8) {
-    width: 10%;
+    width: 250px;
 }
 
 table th:nth-child(9),
 table td:nth-child(9) {
-    width: 8%;
+    width: 250px;
 }
 
 table th:nth-child(10),
 table td:nth-child(10) {
-    width: 12%;
+    width: 12px;
 }
 
 table th:nth-child(11),
 table td:nth-child(11) {
-    width: 8%;
+    width: 8px;
 }
 
 table th:nth-child(12),
 table td:nth-child(12) {
-    width: 8%;
+    width: 8px;
 }
 
 table th:nth-child(13),
 table td:nth-child(13) {
-    width: 8%;
+    width: 8px;
 }
 
 table th:nth-child(14),
 table td:nth-child(14) {
-    width: 10%;
+    width: 10px;
 }
 
 /* Status and Invoice styles - keep existing styles */
