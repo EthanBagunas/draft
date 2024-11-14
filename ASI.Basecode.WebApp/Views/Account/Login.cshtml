@@ -47,10 +47,40 @@
 
 @section scripts {
     <script>
-        // Check for error message and display Toastr notification
-        var errorMessage = '@TempData["ErrorMessage"]';
-        if (errorMessage) {
-            toastr.error(errorMessage);
-        }
+        $(document).ready(function() {
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                
+                var userId = $('#form2Example11').val();
+                var password = $('#form2Example22').val();
+                
+                console.log('Login attempt for user:', userId);
+                
+                var formData = new FormData();
+                formData.append('UserId', userId);
+                formData.append('Password', password);
+                formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val());
+                
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log('Server response:', response);
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            toastr.error(response.message || 'Login failed');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Login error:', error);
+                        toastr.error('An error occurred during login');
+                    }
+                });
+            });
+        });
     </script>
 }

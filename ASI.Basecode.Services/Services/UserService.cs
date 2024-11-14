@@ -28,12 +28,43 @@ namespace ASI.Basecode.Services.Services
 
         public LoginResult AuthenticateUser(string userId, string password, ref User user)
         {
-            user = new User();
-            var passwordKey = PasswordManager.EncryptPassword(password);
-            user = _repository.GetUsers().Where(x => x.UserId == userId &&
-                                                     x.Password == passwordKey).FirstOrDefault();
+            try
+            {
+                user = _repository.GetUsers()
+                    .Where(x => x.UserId == userId)
+                    .FirstOrDefault();
 
-            return user != null ? LoginResult.Success : LoginResult.Failed;
+                if (user == null)
+                {
+                    Console.WriteLine("User not found");
+                    return LoginResult.Failed;
+                }
+
+                // Check if password is stored in plain text (legacy)
+                if (user.Password == password)
+                {
+                    // Update to encrypted password
+                    user.Password = PasswordManager.EncryptPassword(password);
+                    user.UpdatedTime = DateTime.Now;
+                    _repository.UpdateUser(user);
+                    return LoginResult.Success;
+                }
+
+                // Check encrypted password
+                var passwordKey = PasswordManager.EncryptPassword(password);
+                if (user.Password == passwordKey)
+                {
+                    return LoginResult.Success;
+                }
+
+                Console.WriteLine("Password mismatch");
+                return LoginResult.Failed;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Authentication error: {ex.Message}");
+                return LoginResult.Failed;
+            }
         }
 
         public void AddUser(UserViewModel model)

@@ -85,30 +85,47 @@ namespace ASI.Basecode.WebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            this._session.SetString("HasSession", "Exist");
-            /*User user = new() { Id = 0, UserId = "0", Name = "Name", Password = "Password" };
-
-            await this._signInManager.SignInAsync(user);
-            this._session.SetString("UserName", model.UserId);
-
-            return RedirectToAction("Index", "Home");
-            */
-            User user = null;
-            var loginResult = _userService.AuthenticateUser(model.UserId, model.Password, ref user);
-            if (loginResult == LoginResult.Success)
+            try 
             {
-                // 認証OK
-                await this._signInManager.SignInAsync(user);
-                this._session.SetString("UserName", user.Name);
-                return RedirectToAction("Index", "Home");
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarning("Invalid model state for user {UserId}", model.UserId);
+                    return Json(new { success = false, message = "Invalid input" });
+                }
+
+                _logger.LogInformation("Attempting login for user {UserId}", model.UserId);
+                
+                User user = new User();
+                var loginResult = _userService.AuthenticateUser(model.UserId, model.Password, ref user);
+                
+                if (loginResult == LoginResult.Success && user != null)
+                {
+                    this._session.SetString("SessionId", System.Guid.NewGuid().ToString());
+                    this._session.SetString("HasSession", "Exist");
+                    await this._signInManager.SignInAsync(user);
+                    this._session.SetString("UserName", user.Name);
+
+                    return Json(new { 
+                        success = true, 
+                        redirectUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : Url.Action("Index", "Home") 
+                    });
+                }
+                
+                return Json(new { 
+                    success = false, 
+                    message = "Incorrect UserId or Password" 
+                });
             }
-            else
+            catch (Exception ex)
             {
-                // 認証NG
-                TempData["ErrorMessage"] = "Incorrect UserId or Password";
-                return View();
+                _logger.LogError(ex, "Login error for user {UserId}", model.UserId);
+                return Json(new { 
+                    success = false, 
+                    message = "An error occurred during login" 
+                });
             }
         }
 
