@@ -21,6 +21,27 @@
     --two-use-color: #5500cb;
 }
 
+<<<<<<< Updated upstream
+=======
+::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(var(--background-color2), var(--scroll-color));
+}
+/*custom main container */
+.custom-main-container {
+    width: calc(100% - 32px);
+    height: 100%;
+    background-color: transparent;
+    justify-content: center;
+    padding: 20px;
+    box-shadow: none;
+    position: fixed; 
+    top: 65px;
+    left: 0;
+    z-index: 1000;
+    margin-left: 16px;
+    right: 16px;
+}
+>>>>>>> Stashed changes
 body {
     background-color: var(--background-color4);
     max-width: 100%;

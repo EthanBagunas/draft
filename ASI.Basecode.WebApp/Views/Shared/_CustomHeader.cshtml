@@ -1,0 +1,37 @@
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+<header class="custom-header">
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <div class="logo-icon">
+            <img src="~/img/logo-invert.svg" alt="Logo" style="color: var(--background-color1);">
+        </div>
+    </div>
+
+    <!-- Grid Container with Buttons -->
+    <div class="grid-container">
+        <a href="@Url.Action("Homepage", "Home")" class="grid-item-button grid-item-container grid-item i">
+            <i class="fas fa-home"></i>
+        </a>
+        <a href="@Url.Action("AdminRoom", "Account")" class="grid-item-button grid-item-container grid-item i">
+            <i class="fa-solid fa-door-open"></i>
+        </a>
+        <a href="@Url.Action("AccountInfo", "Account")" class="grid-item-button grid-item-container grid-item i">
+            <i class="fas fa-user"></i>
+        </a>
+        <button class="grid-item-button grid-item-container grid-item i">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile">
+        <span class="custom-text1">Administrator</span>
+        <div class="profile-image profile-image-i">
+            <img src="/path/to/profile.jpg" alt="Profile" onerror="this.style.display='none'">
+            <i class="fas fa-user-circle"></i>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,161 @@
+@model LoginViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+@section Styles {
+    <link rel="stylesheet" href="~/css/headerfinal.css" />
+    <link rel="stylesheet" href="~/css/texts.css" />
+    <link rel="stylesheet" href="~/css/homepage.css" />
+    <link rel="stylesheet" href="~/css/homepagetable.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
+}
+
+@{
+    ViewBag.LoginView = true;
+    ViewData["Title"] = "Dashboard";
+}
+<div class= "custom-main-container">
+  <div class= "home-page-title">
+   <span class="page-title">Dashboard</span>
+  </div>
+  <!--search -->
+  <div class = "custom-search-filter-container">
+    <div class="custom-box">
+      <input type="text" placeholder="Search...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- Filter and show all -->
+    <div class="custom-filter-box">
+       <!-- filter-->
+        <span class="custom-main-text-normal">Sort by:</span>
+        <div class="custom-filter-select custom-main-text-normal" id="dropdown">
+          <span>Date Reserved</span>
+          <button><i class="fa-solid fa-caret-down"></i></button>
+          <ul class="custom-filter-options custom-main-text-normal"> 
+            <li class="custom-filter-options-li">Date Reserved</li>
+            <li class="custom-filter-options-li">Guest Name</li>
+            <li class="custom-filter-options-li">Point of Contact</li>
+            <li class="custom-filter-options-li">Room Name</li>
+        </ul>
+        </div> 
+        <!-- show  -->
+        <div class= "show-box custom-main-text-normal"><span>Show:</span>
+        <div class="custom-show-select custom-main-text-normal" id="dropdown">
+        <span>All</span>
+        <button><i class="fa-solid fa-caret-down"></i></button>
+        <ul class="custom-show-options custom-main-text-normal"> 
+            <li class="custom-show-options-li">All</li>
+            <li class="custom-show-options-li">Vacant</li>
+            <li class="custom-show-options-li">Occupied</li>
+            <li class="custom-show-options-li">Reserved</li>
+        </ul>   
+      </div>
+      </div>
+      <!--ayaw sa nis elements add-booking-btn kay medyo samok <div class="stat custom-data-grid custom-main-text-normal">
+        <span>Vacant:</span>
+        <span>Occupied:</span>
+        <span>Reserved:</span>
+      </div>--> 
+    </div> 
+  </div>
+  <!--end-->
+
+  <!--home table-->
+  <div class="custom-table-container">
+    <div class="dash-table">
+      <table>
+          <thead class = "th-text">
+            <tr>
+                <th>Status</th>
+                <th>Room ID</th>
+                <th>Room Name</th>
+                <th>Capacity</th>
+                <th>Hourly Rate</th>
+                <th>Total Amount</th>
+                <th>Guest Name</th>
+                <th>Contact Number</th>
+                <th>Email Address</th>
+                <th>Date Reserved</th>
+                <th>Start Session</th>
+                <th>End Session</th>
+                <th>POC</th>
+          </tr>
+          </thead>
+         <tbody class="td-text">
+                <!-- Default "No Results" row, initially hidden -->
+                <tr class="no-results">
+                    <td colspan="10" class="centered">No results found</td>
+                </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+  
+      <!--booking btn-->
+    <div class="stat custom-main-text-normal">
+      <div class="custom-add-container">
+        <button class = "add-booking-btn custom-main-white-text-normal">
+          <span>Add Booking</span>
+        </button>
+      </div>
+    </div>
+
+  <!-- Modal -->
+  <div id="bookingModal" class="custom-modal">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2>Add New Booking</h2>
+              <span class="close-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+              <!-- Add your form elements here -->
+              <form id="bookingForm">
+                  <!-- Form content will go here -->
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="cancel-btn">Cancel</button>
+              <button type="button" class="submit-btn">Submit</button>
+          </div>
+      </div>
+  </div>
+
+  @section Scripts {
+    <script>
+        // Get modal elements
+        const modal = document.getElementById('bookingModal');
+        const addBookingBtn = document.querySelector('.add-booking-btn');
+        const closeBtn = document.querySelector('.close-modal');
+        const cancelBtn = document.querySelector('.cancel-btn');
+
+        // Open modal
+        addBookingBtn.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        // Close modal functions
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Close modal when clicking close button
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Prevent modal from closing when clicking inside modal content
+        modal.querySelector('.modal-content').addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+    </script>
+  }
+</div>
+ 
+      
+

@@ -1,0 +1,72 @@
+@model LoginViewModel
+@using static ASI.Basecode.Resources.Views.Screen
+@section Styles {
+    <link rel="stylesheet" href="~/css/headerfinal.css" />
+    <link rel="stylesheet" href="~/css/texts.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/customtable.css" />
+    <link rel="stylesheet" href="~/css/homepage.css" />
+    <link rel="stylesheet" href="~/css/adminroom.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
+}
+@{
+    ViewBag.LoginView = true;
+    ViewData["Title"] = "Account Information";
+}
+
+<div class= "custom-main-container">
+  <div class= "room-page-title">
+    <span class="page-title">Room Information</span>
+  </div>
+    <!--search -->
+  <div class = "custom-search-filter-container">
+    <div class="custom-box">
+      <input type="text" placeholder="Search...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- Filter and show all -->
+    <div class="custom-room-box">
+       <!-- filter-->
+        <span class="custom-main-text-normal">Sort by:</span>
+        <div class="custom-room-select custom-main-text-normal" id="dropdown">
+          <span>Room Name</span>
+          <button><i class="fa-solid fa-caret-down"></i></button>
+          <ul class="custom-room-options custom-main-text-normal"> 
+            <li class="custom-room-options-li">Room ID</li>
+            <li class="custom-room-options-li">Room Name</li>
+            <li class="custom-room-options-li">Capacity</li>
+            <li class="custom-room-options-li">Hourly Rate</li>
+        </ul>
+        </div> 
+    </div>
+  </div>
+    <!--table-->
+  <div class="custom-roomtable-container">
+    <div class="room-table">
+      <table>
+          <thead class = "th-text">
+            <tr>
+                <th>Room ID</th>
+                <th>Room Number</th>
+                <th>Room Name</th>
+                <th>Capacity</th>
+                <th>Hourly Rate</th>
+          </tr>
+          </thead>
+
+        <!--start sa content sa table-->
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>123</td>
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+                <td>₱900</td>          
+            </tr>
+        </tbody>
+    </div>
+    </table>
+  <!--end-->
