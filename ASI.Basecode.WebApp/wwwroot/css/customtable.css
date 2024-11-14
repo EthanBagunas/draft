@@ -1,0 +1,213 @@
+/* Container styles */
+.custom-table-container {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+/*--gwapa ko so much--*/
+/*--gwapa ko so much--*/
+/*--gwapa ko so much--*/
+
+.dash-table {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.dash-table table,
+.dash-table table th,
+.dash-table table td{
+    text-align: center !important;
+}
+
+/* Table styles */
+table {
+    table-layout: auto; /* Forces fixed layout */
+    width: 100%; 
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+}
+
+/* Column widths - adjust percentages as needed */
+table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    padding: 14px 8px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+table td {
+    padding: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Define specific column widths */
+table th:nth-child(1),
+table td:nth-child(1) {
+    width: 20px
+}
+
+table th:nth-child(2),
+table td:nth-child(2) {
+    width: 20px;
+    
+}
+
+table th:nth-child(3),
+table td:nth-child(3) {
+    width: 250px;
+}
+
+table th:nth-child(4),
+table td:nth-child(4) {
+    width: 250px;
+}
+
+table th:nth-child(5),
+table td:nth-child(5) {
+    width: 250px;
+}
+
+table th:nth-child(6),
+table td:nth-child(6) {
+    width: 250px;
+}
+
+table th:nth-child(7),
+table td:nth-child(7) {
+    width: 250px;
+}
+
+table th:nth-child(8),
+table td:nth-child(8) {
+    width: 250px;
+}
+
+table th:nth-child(9),
+table td:nth-child(9) {
+    width: 250px;
+}
+
+table th:nth-child(10),
+table td:nth-child(10) {
+    width: 12px;
+}
+
+table th:nth-child(11),
+table td:nth-child(11) {
+    width: 8px;
+}
+
+table th:nth-child(12),
+table td:nth-child(12) {
+    width: 8px;
+}
+
+table th:nth-child(13),
+table td:nth-child(13) {
+    width: 8px;
+}
+
+table th:nth-child(14),
+table td:nth-child(14) {
+    width: 10px;
+}
+
+/* Status and Invoice styles - keep existing styles */
+.status {
+    padding: 2px 12px;
+    border-radius: 30px;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.invoice {
+    padding: 2px 12px;
+    border-radius: 30px;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Keep your existing status and invoice color classes */
+.status-vacant { background-color: #E6FFB0; }
+.status-occupied { background-color: #FFE1B0; }
+.status-reserved { background-color: #DCD4F3; }
+.invoice-paid { background-color: #E6FFB0; }
+.invoice-pending { background-color: #F4CCD1; }
+.invoice-partial { background-color: #DCD4F3; }
+
+/* Add media queries for responsive design */
+@media screen and (max-width: 1400px) {
+    table th,
+    table td {
+        font-size: 0.85rem;
+        padding: 6px 4px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .custom-table-container {
+        max-height: 600px;
+        overflow-y: auto;
+    }
+    
+    table th,
+    table td {
+        font-size: 0.8rem;
+        padding: 4px 2px;
+    }
+}
+
+/* Add smooth scrolling */
+.custom-table-container {
+    scroll-behavior: smooth;
+}
+
+/* Optional: Add scrollbar styling */
+.custom-table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.custom-table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Add hover effect for table rows */
+table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+table tbody tr:hover {
+    background-color: rgba(220, 212, 243, 0.1); /* Light purple with opacity */
+    cursor: pointer;
+}
+
+/* Add border bottom to separate rows */
+table tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
