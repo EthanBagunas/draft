@@ -1,4 +1,4 @@
-@model LoginViewModel
+@model IEnumerable<ASI.Basecode.Data.Models.User>
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
@@ -12,6 +12,49 @@
 }
 @section Scripts {
     <script src="~/js/modal.js"></script> <!-- Reference to the external JS file -->
+    <script>
+    $(document).ready(function() {
+        // Handle checkbox selection
+        $('.employee-checkbox').on('change', function() {
+            var selectedCount = $('.employee-checkbox:checked').length;
+            
+            // Enable/disable edit and delete buttons based on selection
+            if (selectedCount === 1) {
+                $('#edit-button').prop('disabled', false);
+                $('#delete-button').prop('disabled', false);
+            } else if (selectedCount > 1) {
+                $('#edit-button').prop('disabled', true);
+                $('#delete-button').prop('disabled', false);
+            } else {
+                $('#edit-button').prop('disabled', true);
+                $('#delete-button').prop('disabled', true);
+            }
+        });
+
+        // Handle delete button click
+        $('#delete-button').click(function() {
+            var selectedUsers = $('.employee-checkbox:checked').map(function() {
+                return $(this).data('user-id');
+            }).get();
+
+            if (confirm('Are you sure you want to delete the selected user(s)?')) {
+                selectedUsers.forEach(function(userId) {
+                    $.ajax({
+                        url: '@Url.Action("DeleteUser", "Account")',
+                        type: 'POST',
+                        data: { id: userId },
+                        success: function() {
+                            location.reload();
+                        },
+                        error: function(error) {
+                            console.error('Error deleting user:', error);
+                        }
+                    });
+                });
+            }
+        });
+    });
+    </script>
 }
 @{
     ViewBag.LoginView = true;
@@ -70,49 +113,35 @@
             <tr>
                     <th>   </th>
                     <th>Profile</th>
-                    <th>Employee ID</th>
-                    <th>Department</th>
+                    <th>ID</th>
+                    <th>User ID</th>
                     <th>Last Name</th>
                     <th>First Name</th>
-                    <th>Username</th>
+                    <th>Name</th>
                     <th>Contact Number</th>
                     <th>Password</th>
           </tr>
           </thead>
           <!--start sa content sa table-->
         <tbody class="td-text">
-            <tr>
-               <!-- sample only, iconnect pa nis database-->
-               <td>
-               <input type="checkbox" class="employee-checkbox" />
-               </td>
-                <td>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" class="employee-checkbox" data-user-id="@user.Id" />
+                    </td>
+                    <td>
                         <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
                     </td>
-                <td>92834748</td>
-                <td>Accounting Department</td>
-                <td>Amanence</td>
-                <td>Audrei Daniellita</td>   
-                <td>audrei.amanence@pc.ph</td>
-                <td>+63 995 911 8176</td>  
-                <td>***********</td>       
-            </tr>
-            <tr>
-               <!-- sample only, iconnect pa nis database-->
-               <td>
-               <input type="checkbox" class="employee-checkbox" />
-               </td>
-                <td>
-                        <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
-                    </td>
-                <td>92834748</td>
-                <td>Accounting Department</td>
-                <td>Amanence</td>
-                <td>Audrei Daniellita</td>   
-                <td>audrei.amanence@pc.ph</td>
-                <td>+63 995 911 8176</td>  
-                <td>***********</td>       
-            </tr>
+                    <td>@user.Id</td>
+                    <td>@user.UserId</td>
+                    <td>@user.Lname</td>
+                    <td>@user.Fname</td>
+                    <td>@user.Name</td>
+                    <td>@user.Contact</td>
+                    <td>***********</td>
+                </tr>
+            }
         </tbody>
     </div>
     </table>
@@ -158,6 +187,26 @@
         </form>
     </div>
 </div>
+
+<style>
+.employee-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.toolbar-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
 
 
 

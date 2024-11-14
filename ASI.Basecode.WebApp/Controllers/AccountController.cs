@@ -142,7 +142,17 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult AccountInfo()
         {
-            return View();
+            try
+            {
+                var users = _userService.GetAllUsers();
+                return View(users);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving user information");
+                TempData["ErrorMessage"] = "Error retrieving user information";
+                return View(Enumerable.Empty<User>());
+            }
         }
 
         [HttpGet]
