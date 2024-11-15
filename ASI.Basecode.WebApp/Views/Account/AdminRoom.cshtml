@@ -16,9 +16,8 @@
 }
 
 <div class= "custom-main-container">
-  <div class="custom-back">
-    <button class = "custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
-    <span class="admin-page-title">Room Information</span>
+  <div class= "room-page-title">
+    <span class="page-title">Room Information</span>
   </div>
     <!--search -->
   <div class = "custom-search-filter-container">
@@ -27,18 +26,20 @@
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
-    <!-- Filter -->
-    <div class="custom-filter-box">
-        <span class="custom-main-text-normal">Filter</span>
-        <span class="custom-main-text-normal">Role</span>
-        <div class="custom-filter-select custom-main-text-normal" id="dropdown">
-          <span>Administrator</span>
+    <!-- Filter and show all -->
+    <div class="custom-room-box">
+       <!-- filter-->
+        <span class="custom-main-text-normal">Sort by:</span>
+        <div class="custom-room-select custom-main-text-normal" id="dropdown">
+          <span>Room Name</span>
           <button><i class="fa-solid fa-caret-down"></i></button>
-          <ul class="custom-filter-options custom-main-text-normal"> 
-            <li class="custom-filter-options-li">Administrator</li>
-            <li class="custom-filter-options-li">Employee</li>
+          <ul class="custom-room-options custom-main-text-normal"> 
+            <li class="custom-room-options-li">Room ID</li>
+            <li class="custom-room-options-li">Room Name</li>
+            <li class="custom-room-options-li">Capacity</li>
+            <li class="custom-room-options-li">Hourly Rate</li>
         </ul>
-        </div>    
+        </div> 
     </div>
   </div>
     <!--table-->
@@ -69,4 +70,3 @@
     </div>
     </table>
   <!--end-->
-

@@ -59,47 +59,26 @@
 
 }
 
-.invoice-paid-text{
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 200px;
-  font-style: italic;
-  color:#73A110 ;
-  margin-top: 16px;
 
-}
-
-.invoice-pending-text{
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 200px;
-  font-style: italic;
-  color: #B12B3D;
-  margin-top: 16px;
-
-}
-
-.invoice-partial-text{
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 200px;
-  font-style: italic;
-  color: #45229F;
-  margin-top: 16px;
-
-}
-
-.page-title{
+.page-title {
   font-family: 'Inter', sans-serif;
   font-size: 18px;
   font-weight: bold;
   color: var(--main-text-color);
   opacity: 0.5;
-  padding: 8px;
+ 
 }
 
 .custom-main-text-normal{
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: normal;
+  color: var(--main-text-color);
+}
+
+.custom-main-white-text-normal{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--background-color2);
 }
