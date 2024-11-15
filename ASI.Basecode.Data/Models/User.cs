@@ -16,5 +16,6 @@ namespace ASI.Basecode.Data.Models
         public string Fname { get; set; }
         public string Lname { get; set; }
         public string Contact { get; set; }
+        public string Status { get; set; }
     }
 }

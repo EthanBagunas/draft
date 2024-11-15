@@ -9,5 +9,6 @@ namespace ASI.Basecode.Data.Models
         public string Roomname { get; set; }
         public int? MaxCapacity { get; set; }
         public int? Price { get; set; }
+        public string Status { get; set; }
     }
 }
