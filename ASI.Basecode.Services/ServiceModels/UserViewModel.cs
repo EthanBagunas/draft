@@ -23,7 +23,12 @@ namespace ASI.Basecode.Services.ServiceModels
         [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         public string ConfirmPassword { get; set; }
 
-        
+        public int Id { get; set; }
+        public string Fname { get; set; }
+        public string Lname { get; set; }
+        public string Contact { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public string CreatedBy { get; set; }
     }
     public class EditUserViewModel 
     
