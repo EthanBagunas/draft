@@ -78,7 +78,7 @@ namespace ASI.Basecode.Services.Services
                     user.UpdatedTime = DateTime.Now;
                     user.CreatedBy = System.Environment.UserName;
                     user.UpdatedBy = System.Environment.UserName;
-
+                   
                     _repository.AddUser(user);
                 }
 
@@ -101,8 +101,14 @@ namespace ASI.Basecode.Services.Services
         }
         public void DeleteUser(UserViewModel model)
         {
-    
-            _repository.DeleteUser(model.UserId);
+
+            var user = _repository.GetUsers().FirstOrDefault(x => x.UserId == model.UserId);
+            if (user == null)
+            {
+                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+            }
+            user.Status = "INACTIVE";
+            _repository.UpdateUser(user);
         }
         public void UpdateUser(EditUserViewModel model)
         {
