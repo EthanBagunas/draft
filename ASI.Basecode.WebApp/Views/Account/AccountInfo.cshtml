@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/customtable.css" />
-    <link rel="stylesheet" href="~/css/homepage.css" />
-     <link rel="stylesheet" href="~/css/admin-info.css" />
+    <link rel="stylesheet" href="~/css/admin-info.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
+<!--copy ang script-->
 @section Scripts {
     <script src="~/js/modal.js"></script> <!-- Reference to the external JS file -->
     <script>
@@ -72,7 +72,7 @@
    <!--search -->
   <div class = "custom-search-filter-container">
     <div class="custom-box">
-      <input type="text" placeholder="Search...">
+      <input type1="text" placeholder="Search...">
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
@@ -91,6 +91,8 @@
     
          
     </div>
+
+<!--crud html, copy ni-->
 </div>
 
     <div class="custom-toolbar-container">
@@ -149,43 +151,44 @@
     </div>
     </table>
   <!--end-->
-  <!-- Modal Structure -->
+
+  <!--modal html, copy ni-->
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-           <div class="logo-container">
-                <img src="~/img/logo2.svg" style="width: 150px; color: 65558F; " alt="logo">
+           <div class="logo-container1">
+                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
             </div>
-        <div class="modal-header">
+        <div class="modal-header1">
             <h2>Add User</h2>
         </div>
         <form id="addUserForm">
             <div class="form-section">
                 <h3>Personal Information</h3>
-                <label for="firstName">First Name *</label>
+                <label for="firstName">First Name </label>
                 <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
 
-                <label for="lastName">Last Name *</label>
+                <label for="lastName">Last Name </label>
                 <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
 
-                <label for="contactNumber">Contact Number *</label>
+                <label for="contactNumber">Contact Number </label>
                 <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
             </div>
 
             <div class="form-section">
                 <h3>Company Information</h3>
-                <label for="username">Username *</label>
+                <label for="username">Username </label>
                 <input type="text" id="username" name="username" placeholder="Enter username" required>
-                 <label for="password">Password *</label>
+                 <label for="password">Password </label>
                 <input type="password" id="password" name="password" placeholder="Enter password" required>
 
-                <label for="confirmPassword">Confirm Password *</label>
+                <label for="confirmPassword">Confirm Password </label>
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="cancel-button" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="submit-button">Submit</button>
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
             </div>
         </form>
     </div>

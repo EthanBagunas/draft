@@ -8,7 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
-
+<!--copy ang script-->
+@section Scripts {
+    <script src="~/js/modal.js"></script>  
+}
 @{
     ViewBag.LoginView = true;
     ViewData["Title"] = "Dashboard";
@@ -20,7 +23,7 @@
   <!--search -->
   <div class = "custom-search-filter-container">
     <div class="custom-box">
-      <input type="text" placeholder="Search...">
+      <input type1="text" placeholder="Search...">
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
@@ -55,10 +58,14 @@
         <span>Vacant:</span>
         <span>Occupied:</span>
         <span>Reserved:</span>
-      </div>--> 
-    </div> 
-  </div>
-  <!--end-->
+      </div>
+      <div class="custom-add-container">
+        <button class = "add-booking-btn custom-main-text-normal" onclick="openModal()">
+          <span>Add Booking</span>
+        </button>
+      </div>
+    </div>
+
 
   <!--home table-->
   <div class="custom-table-container">
@@ -100,63 +107,45 @@
       </div>
     </div>
 
-  <!-- Modal -->
-  <div id="bookingModal" class="custom-modal">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h2>Add New Booking</h2>
-              <span class="close-modal">&times;</span>
-          </div>
-          <div class="modal-body">
-              <!-- Add your form elements here -->
-              <form id="bookingForm">
-                  <!-- Form content will go here -->
-              </form>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="cancel-btn">Cancel</button>
-              <button type="button" class="submit-btn">Submit</button>
-          </div>
-      </div>
-  </div>
+ <!--modal html, copy ni-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+           <div class="logo-container1">
+                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
+            </div>
+        <div class="modal-header1">
+            <h2>Add Booking</h2>
+        </div>
+        <form id="addUserForm">
+            <div class="form-section">
+                <h3>Room Information</h3>
+                <label for="roomName">Room Name </label>
+                <input type="text" id="roomName" name="roomName" placeholder="Enter room name" required>
 
-  @section Scripts {
-    <script>
-        // Get modal elements
-        const modal = document.getElementById('bookingModal');
-        const addBookingBtn = document.querySelector('.add-booking-btn');
-        const closeBtn = document.querySelector('.close-modal');
-        const cancelBtn = document.querySelector('.cancel-btn');
+                <label for="capacity">Capacity </label>
+                <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
 
-        // Open modal
-        addBookingBtn.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
+                <label for="hourlyRate">Hourly Rate </label>
+                <input type="text" id="hourlyRate" name="hourlyRate" placeholder="Enter hourly rate" required>
+            </div>
 
-        // Close modal functions
-        function closeModal() {
-            modal.style.display = 'none';
-        }
+            <div class="form-section">
+                <h3>Guest Information</h3>
+                <label for="GuestName">Guest Name </label>
+                <input type="text" id="GuestName" name="GuestName" placeholder="Enter name" required>
+                 <label for="ContactNumber">Contact Number </label>
+                <input type="password" id="ContactNumber" name="ContactNumber" placeholder="Enter contact number" required>
+            </div>
 
-        // Close modal when clicking close button
-        closeBtn.addEventListener('click', closeModal);
-        cancelBtn.addEventListener('click', closeModal);
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-
-        // Prevent modal from closing when clicking inside modal content
-        modal.querySelector('.modal-content').addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
-    </script>
-  }
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
+    </div>
 </div>
- 
-      
 
 
+
+  
