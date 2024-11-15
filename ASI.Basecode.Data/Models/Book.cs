@@ -6,7 +6,7 @@ namespace ASI.Basecode.Data.Models
     public partial class Book
     {
         public int Id { get; set; }
-        public int? CustomerIdFk { get; set; }
+        public string CustomerName { get; set; }
         public int? RoomId { get; set; }
         public DateTime? BookingDate { get; set; }
         public TimeSpan? TimeIn { get; set; }

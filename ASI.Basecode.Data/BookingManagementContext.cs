@@ -41,7 +41,9 @@ namespace ASI.Basecode.Data
                     .HasColumnType("date")
                     .HasColumnName("booking_date");
 
-                entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
+                entity.Property(e => e.CustomerName)
+                    .HasMaxLength(50)
+                    .HasColumnName("customer_name");
 
                 entity.Property(e => e.Duration).HasColumnName("duration");
 
@@ -53,7 +55,8 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)
-                    .HasColumnName("status");
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("(N'Pending')");
 
                 entity.Property(e => e.TimeIn)
                     .HasColumnType("time(0)")
@@ -130,6 +133,7 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)
                     .HasColumnName("status")
+                    .HasDefaultValueSql("(N'ACTIVE')")
                     .IsFixedLength();
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
