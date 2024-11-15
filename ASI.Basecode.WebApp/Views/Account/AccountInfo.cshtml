@@ -1,5 +1,4 @@
 @model IEnumerable<ASI.Basecode.Data.Models.User>
-@model LoginViewModel
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
@@ -211,6 +210,28 @@
     cursor: not-allowed;
 }
 </style>
+
+<script>
+function openModal() {
+    const modal = document.getElementById('myModal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+</script>
 
 
 
