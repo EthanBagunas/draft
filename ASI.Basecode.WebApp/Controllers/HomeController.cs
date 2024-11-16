@@ -112,6 +112,13 @@ namespace ASI.Basecode.WebApp.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        public IActionResult UpdateBook([FromQuery] int bookid)
+        {
+            _bookService.UpdateBook(bookid);
+            return Ok();
+        }
+        [HttpPost]
+        [AllowAnonymous]
         public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
 
         {
