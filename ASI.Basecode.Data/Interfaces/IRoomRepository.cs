@@ -11,6 +11,7 @@ namespace ASI.Basecode.Data.Interfaces
     {
         void AddRoom(Room room);
         void UpdateRoom(Room room);
+
         IEnumerable<Room> GetAll();
     }
 }

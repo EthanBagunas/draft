@@ -43,6 +43,18 @@ namespace ASI.Basecode.Services.Services
             }
 
         }
+        public IEnumerable<Book> GetAllBooksbyId(int roomid)
+        {
+            return _repository.GetAllBooks().Where(x=> x.RoomId == roomid);
+        }
+
+        /*public async Task<Room> GetRoomWithBookingsAsync(int roomId)
+
+        {
+
+            return await _repository.GetRoomWithBookingsAsync(roomId);
+        }
+        */
         public void UpdateBook(BookViewModel model)
         {
             /*var book = new Book();

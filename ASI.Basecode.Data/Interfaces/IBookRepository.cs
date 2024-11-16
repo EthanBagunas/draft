@@ -15,5 +15,7 @@ namespace ASI.Basecode.Data.Interfaces
         //bool UserExists(string userId);
         void CreateBook(Book book);
         void UpdateBook(Book book);
+        IEnumerable<Book> GetAllBooks();
+       // Task<Room> GetRoomWithBookingsAsync(int roomId);
     }
 }

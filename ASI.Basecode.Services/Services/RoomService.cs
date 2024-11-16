@@ -42,6 +42,16 @@ namespace ASI.Basecode.Services.Services
         {
 
         }
+        public void DeleteRoom(RoomViewModel room) 
+        {/*
+            var room = _repository.
+            if (user == null)
+            {
+                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+            }
+            user.Status = "INACTIVE";
+            _repository.UpdateRoom();*/
+        }
         
         public IEnumerable<Room> GetAllRooms()
         {

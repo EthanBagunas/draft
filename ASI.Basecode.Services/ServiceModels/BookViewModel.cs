@@ -10,7 +10,7 @@ namespace ASI.Basecode.Services.ServiceModels
     public class BookViewModel
     {
         public int Id { get; set; }
-        public int? CustomerIdFk { get; set; }
+        public string CustomerName { get; set; }
         public int? RoomId { get; set; }
         public DateTime? BookingDate { get; set; }
         public TimeSpan? TimeIn { get; set; }
