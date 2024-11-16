@@ -110,14 +110,15 @@ namespace ASI.Basecode.WebApp.Controllers
             }
             return Ok(book);
         }
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
 
         {
+            var books = _bookService.GetAllBooksbyId(roomid);
+
             
-            var book = _bookService.GetAllBooksbyId(roomid);
-            return Ok(book); // Return the room with its bookings
+            return Json(books);
 
         }
 

@@ -45,7 +45,7 @@ namespace ASI.Basecode.Services.Services
         }
         public IEnumerable<Book> GetAllBooksbyId(int roomid)
         {
-            return _repository.GetAllBooks().Where(x=> x.RoomId == roomid);
+            return _repository.GetAllBooks().Where(x=> x.RoomId == roomid).ToList(); ;
         }
 
         /*public async Task<Room> GetRoomWithBookingsAsync(int roomId)
