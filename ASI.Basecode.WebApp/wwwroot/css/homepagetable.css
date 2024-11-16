@@ -1,0 +1,100 @@
+/* HOMEPAGE*/
+
+/* Container styles */
+.custom-table-container {
+    width: 100%;
+    margin-top: 40px;
+    border-radius: 20px;
+    position: relative;
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    scroll-behavior: smooth; 
+}
+
+.dash-table {
+    width: 100%;
+    padding-bottom: 10px;
+    max-height: 460px;
+    overflow-x: auto; 
+}
+
+.dash-table table,
+.dash-table table th,
+.dash-table table td {
+    text-align: center !important;
+}
+
+/* Table styles */
+table {
+    table-layout: auto; 
+    width: 100%; 
+    border-collapse: separate; 
+    text-align: center;
+    border-spacing: 0;
+}
+
+table th, table td {
+    min-width: 100px; 
+    max-width: 300px; 
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    transition: all 0.2s ease-in-out; 
+}
+table td{
+    padding: 16px 20px;
+
+}
+
+table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    padding: 14px 20px;
+}
+
+table tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+table tbody tr:hover {
+    background-color: rgba(220, 212, 243, 0.1);
+    cursor: pointer;
+}
+
+.status {
+    padding: 2px 12px;
+    border-radius: 30px;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.status-vacant { background-color: #E6FFB0; }
+.status-occupied { background-color: #FFE1B0; }
+.status-reserved { background-color: #DCD4F3; }
+
+@media screen and (max-width: 1400px) {
+    table th,
+    table td {
+        font-size: 0.85rem;
+        padding: 6px 4px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .custom-table-container {
+        max-height: 440px;
+        overflow-y: auto;
+    }
+    
+    table th,
+    table td {
+        font-size: 0.8rem;
+        padding: 4px 2px;
+    }
+}

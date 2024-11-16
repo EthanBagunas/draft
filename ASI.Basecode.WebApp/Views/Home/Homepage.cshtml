@@ -4,18 +4,19 @@
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/homepage.css" />
-    <link rel="stylesheet" href="~/css/customtable.css" />
+    <link rel="stylesheet" href="~/css/homepagetable.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
-<!--gwapa ko so much-->
-<!--gwapa ko so much-->
-<!--gwapa ko so much-->
+
 @{
     ViewBag.LoginView = true;
     ViewData["Title"] = "Dashboard";
 }
 <div class= "custom-main-container">
+  <div class= "home-page-title">
+   <span class="page-title">Dashboard</span>
+  </div>
   <!--search -->
   <div class = "custom-search-filter-container">
     <div class="custom-box">
@@ -23,9 +24,9 @@
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
-    <!-- Filter -->
+    <!-- Filter and show all -->
     <div class="custom-filter-box">
-        <span class="custom-main-text-normal">Filter</span>
+       <!-- filter-->
         <span class="custom-main-text-normal">Sort by:</span>
         <div class="custom-filter-select custom-main-text-normal" id="dropdown">
           <span>Date Reserved</span>
@@ -36,16 +37,12 @@
             <li class="custom-filter-options-li">Point of Contact</li>
             <li class="custom-filter-options-li">Room Name</li>
         </ul>
-        </div>    
-    </div>
-  </div>
-  <!--end-->
-
-  <!--show dropdown -->
-    <div class="show-box custom-main-text-normal"> <span>Show</span>
-      <div class="custom-show-select custom-main-text-normal" id="dropdown">
-      <span>All</span>
-      <button><i class="fa-solid fa-caret-down"></i></button>
+        </div> 
+        <!-- show  -->
+        <div class= "show-box custom-main-text-normal"><span>Show:</span>
+        <div class="custom-show-select custom-main-text-normal" id="dropdown">
+        <span>All</span>
+        <button><i class="fa-solid fa-caret-down"></i></button>
         <ul class="custom-show-options custom-main-text-normal"> 
             <li class="custom-show-options-li">All</li>
             <li class="custom-show-options-li">Vacant</li>
@@ -53,18 +50,15 @@
             <li class="custom-show-options-li">Reserved</li>
         </ul>   
       </div>
-      <div class="custom-data-grid custom-main-text-normal">
+      </div>
+      <!--ayaw sa nis elements add-booking-btn kay medyo samok <div class="stat custom-data-grid custom-main-text-normal">
         <span>Vacant:</span>
         <span>Occupied:</span>
         <span>Reserved:</span>
-      </div>
-      <div class="custom-add-container">
-        <button class = "add-booking-btn custom-main-text-normal">
-          <span>Add Booking</span>
-        </button>
-      </div>
-    </div>
-
+      </div>--> 
+    </div> 
+  </div>
+  <!--end-->
 
   <!--home table-->
   <div class="custom-table-container">
@@ -78,7 +72,6 @@
                 <th>Capacity</th>
                 <th>Hourly Rate</th>
                 <th>Total Amount</th>
-                <th>Invoice Status</th>
                 <th>Guest Name</th>
                 <th>Contact Number</th>
                 <th>Email Address</th>
