@@ -110,7 +110,7 @@ namespace ASI.Basecode.WebApp.Controllers
 
                     return Json(new { 
                         success = true, 
-                        redirectUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : Url.Action("AdminRoom", "Account") 
+                        redirectUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : Url.Action("Homepage", "Home") 
                     });
                 }
                 
