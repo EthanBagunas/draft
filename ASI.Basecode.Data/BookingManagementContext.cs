@@ -26,8 +26,8 @@ namespace ASI.Basecode.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//                 optionsBuilder.UseSqlServer("Addr=(localdb)\\MSSqlLocalDb; database= BookingManagement; Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Addr=(localdb)\\MSSqlLocalDb; database= BookingManagement; Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
             }
         }
 
@@ -41,7 +41,9 @@ namespace ASI.Basecode.Data
                     .HasColumnType("date")
                     .HasColumnName("booking_date");
 
-                entity.Property(e => e.CustomerIdFk).HasColumnName("customer_ID_FK");
+                entity.Property(e => e.CustomerName)
+                    .HasMaxLength(50)
+                    .HasColumnName("customer_name");
 
                 entity.Property(e => e.Duration).HasColumnName("duration");
 
@@ -53,7 +55,8 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)
-                    .HasColumnName("status");
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("(N'Pending')");
 
                 entity.Property(e => e.TimeIn)
                     .HasColumnType("time(0)")
@@ -101,6 +104,12 @@ namespace ASI.Basecode.Data
                     .HasMaxLength(10)
                     .HasColumnName("roomname")
                     .IsFixedLength();
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(10)
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("(N'ACTIVE')")
+                    .IsFixedLength();
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -120,6 +129,12 @@ namespace ASI.Basecode.Data
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(50);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(10)
+                    .HasColumnName("status")
+                    .HasDefaultValueSql("(N'ACTIVE')")
+                    .IsFixedLength();
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(50);
 
