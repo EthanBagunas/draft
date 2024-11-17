@@ -54,20 +54,62 @@
                 }
             });
         });
+
+        // Add form submission handler
+        $('#addUserForm').on('submit', function(e) {
+            e.preventDefault();
+            
+            if ($('#password').val() !== $('#confirmPassword').val()) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const formData = new FormData(this);
+            // Combine Fname and Lname into Name
+            const firstName = formData.get('Fname');
+            const lastName = formData.get('Lname');
+            formData.append('Name', `${firstName} ${lastName}`);
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        closeModal();
+                        window.location.reload();
+                    } else {
+                        alert('Error creating user');
+                    }
+                },
+                error: function(error) {
+                    alert('Error creating user: ' + error.responseText);
+                }
+            });
+        });
+    });
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
-
+    
 @{
     ViewBag.LoginView = true;
     ViewData["Title"] = "Account Information";
 }
 
-<div class="custom-main-container">
-    <div class="custom-back">
-        <button class="custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
-        <span class="page-title">Account Information</span>
+<div class= "custom-main-container">
+  <div class="custom-back">
+    <button class = "custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
+    <span class="page-title">Account Information</span>
+  </div>
+   <!--search -->
+  <div class = "custom-search-filter-container">
+    <div class="custom-box">
+      <input type1="text" placeholder="Search...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <!--search -->
     <div class="custom-search-filter-container">
@@ -95,20 +137,106 @@
         <!--crud html, copy ni-->
     </div>
 
+<!--crud html, copy ni-->
+</div>
+
     <div class="custom-toolbar-container">
-        <div class="toolbar">
-            <button class="toolbar-button" id="add-button" onclick="openModal()">
-                <i class="fa-solid fa-circle-plus" style="color: #8A70A4;"></i>
-            </button>
-            <button class="toolbar-button" id="edit-button">
-                <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
-            </button>
-            <button class="toolbar-button" id="delete-button">
-                <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
-            </button>
+    <div class="toolbar">
+        <button class="toolbar-button" id="add-button" onclick="openModal()">
+        <i class="fa-solid fa-circle-plus" style="color: #8A70A4;"></i> 
+        </button>
+        <button class="toolbar-button" id="edit-button">
+            <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
+        </button>
+        <button class="toolbar-button" id="delete-button">
+           <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
+        </button>
+    </div> 
+
+
+</div>
+      <!--table-->
+  <div class="custom-roomtable-container">
+    <div class="room-table">
+      <table>
+          <thead class = "th-text">
+            <tr>
+                    <th>   </th>
+                    <th>Profile</th>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Password</th>
+          </tr>
+          </thead>
+          <!--start sa content sa table-->
+        <tbody class="td-text">
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" class="employee-checkbox" data-user-id="@user.Id" />
+                    </td>
+                    <td>
+                        <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
+                    </td>
+                    <td>@user.Id</td>
+                    <td>@user.UserId</td>
+                    <td>@user.Lname</td>
+                    <td>@user.Fname</td>
+                    <td>@user.Name</td>
+                    <td>@user.Contact</td>
+                    <td>***********</td>
+                </tr>
+            }
+        </tbody>
+    </div>
+    </table>
+  <!--end-->
+
+  <!--modal html, copy ni-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+           <div class="logo-container1">
+                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
+            </div>
+        <div class="modal-header1">
+            <h2>Add User</h2>
         </div>
+        <form id="addUserForm" method="post" action="@Url.Action("CreateUser", "Account")">
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <label for="firstName">First Name </label>
+                <input type="text" id="firstName" name="Fname" placeholder="Enter first name" required>
 
+                <label for="lastName">Last Name </label>
+                <input type="text" id="lastName" name="Lname" placeholder="Enter last name" required>
 
+                <label for="contactNumber">Contact Number </label>
+                <input type="text" id="contactNumber" name="Contact" placeholder="Enter contact number" required>
+            </div>
+
+            <div class="form-section">
+                <h3>Company Information</h3>
+                <label for="username">Username </label>
+                <input type="text" id="username" name="UserId" placeholder="Enter username" required>
+                
+                <label for="password">Password </label>
+                <input type="password" id="password" name="Password" placeholder="Enter password" required>
+
+                <label for="confirmPassword">Confirm Password </label>
+                <input type="password" id="confirmPassword" name="ConfirmPassword" placeholder="Confirm password" required>
+            </div>
+
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
     </div>
     <!--table-->
     <div class="custom-roomtable-container">
@@ -181,14 +309,28 @@
                         <label for="password">Password </label>
                         <input type="password" id="password" name="password" placeholder="Enter password" required>
 
-                        <label for="confirmPassword">Confirm Password </label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
-                    </div>
+<script>
+function openModal() {
+    const modal = document.getElementById('myModal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
 
-                    <div class="modal-footer1">
-                        <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                        <button type="submit" class="submit-bttn">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+function closeModal() {
+    const modal = document.getElementById('myModal');
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('myModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+</script>
+
+
+
+

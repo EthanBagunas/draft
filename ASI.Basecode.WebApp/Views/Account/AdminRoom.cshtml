@@ -4,11 +4,7 @@
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-<<<<<<< Updated upstream
-    <link rel="stylesheet" href="~/css/customtable.css" />
-=======
     <link rel="stylesheet" href="~/css/homepage.css" />
->>>>>>> Stashed changes
     <link rel="stylesheet" href="~/css/adminroom.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
@@ -22,7 +18,6 @@
     ViewData["Title"] = "Account Information";
 }
 
-<<<<<<< Updated upstream
 <div class="custom-main-container">
     <div class="custom-back">
         <button class="custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
@@ -109,7 +104,6 @@
                         <h3>Room Information</h3>
                         <label for="roomID">Room Id </label>
                         <input type="text" id="roomID" name="roomID" placeholder="Enter room ID" required>
-=======
 <div class= "custom-main-container">
     <!--search -->
   <div class="custom-room-search-box">
@@ -137,7 +131,24 @@
     </div>
   </div>
   
-  
+  <!--crud html, copy ni-->
+</div>
+
+    <div class="custom-toolbar-container">
+    <div class="toolbar">
+        <button class="toolbar-button" id="add-button" onclick="openModal()">
+        <i class="fa-solid fa-circle-plus" style="color: #8A70A4;"></i> 
+        </button>
+        <button class="toolbar-button" id="edit-button">
+            <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
+        </button>
+        <button class="toolbar-button" id="delete-button">
+           <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
+        </button>
+    </div> 
+
+
+</div>
     <!--table-->
   <div class="custom-roomtable-container">
     <div class="room-table">
@@ -202,23 +213,36 @@
     </div>
     </table>
   </div>
-  <!--end-->
->>>>>>> Stashed changes
-
-                        <label for="roomNumber">Room Number </label>
-                        <input type="text" id="roomNumber" name="roomNumber" placeholder="Enter room number" required>
-
-                        <label for="capacity">Capacity</label>
-                        <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
-
-                        <label for="hourlyRate">Hourly Rate</label>
-                        <input type="text" id="hourlyRate" name="hourlyRate" placeholder="Enter Hourly Rate" required>
-                    </div>
-
-                    <div class="modal-footer1">
-                        <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                        <button type="submit" class="submit-bttn">Submit</button>
-                    </div>
-                </form>
+<!--modal html, copy ni-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+           <div class="logo-container1">
+                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
             </div>
+        <div class="modal-header1">
+            <h2>Add Room</h2>
         </div>
+        <form id="addUserForm">
+            <div class="form-section">
+                <h3>Room Information</h3>
+                <label for="roomID">Room Id </label>
+                <input type="text" id="roomID" name="roomID" placeholder="Enter room ID" required>
+
+                <label for="roomNumber">Room Number </label>
+                <input type="text" id="roomNumber" name="roomNumber" placeholder="Enter room number" required>
+
+                <label for="capacity">Capacity</label>
+                <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
+
+               <label for="hourlyRate">Hourly Rate</label>
+                <input type="text" id="hourlyRate" name="hourlyRate" placeholder="Enter Hourly Rate" required>
+            </div>
+
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -240,5 +240,29 @@ namespace ASI.Basecode.WebApp.Controllers
             await this._signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult CreateUser(UserViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    model.Name = $"{model.Fname} {model.Lname}";
+                    model.CreatedTime = DateTime.Now;
+                    model.CreatedBy = User.Identity?.Name ?? "System";
+
+                    _userService.AddUser(model);
+                    return Json(new { success = true });
+                }
+                return BadRequest(ModelState);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating user");
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

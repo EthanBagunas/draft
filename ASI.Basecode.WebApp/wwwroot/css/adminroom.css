@@ -628,3 +628,62 @@ img.Logo {
     height: 33px;
     object-fit: contain;
 }
+.submit-bttn:focus {
+    border: 1.5px solid #5B4497; 
+    background-color:#8A70A4;
+    outline: none; 
+}
+.cancel-bttn:focus{
+    border: 1.5px solid #5B4497; 
+    background-color: rgb(227, 227, 227);
+    outline: none; 
+
+}
+
+.cancel-bttn {
+    background-color: #ffffff; 
+    color: #5B4497; 
+  
+}
+
+.submit-bttn {
+    background-color: #5B4497; 
+    color: #fff; 
+   
+}
+
+.close {
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold; 
+    margin-bottom: 0px;
+}
+
+.close:hover,
+.close:focus {
+    color: black; 
+    text-decoration: none; 
+    cursor: pointer; 
+}
+/*logo*/
+.logo-container1 
+  {  
+    width: 100%; 
+    display: flex;
+    justify-content: center; 
+    margin-top: 0;
+    
+  }
+    
+  img.Logo {
+    width: 30px;
+    height: 33px;
+    object-fit: contain; 
+}
+/*end*/
+
+
+
+
+

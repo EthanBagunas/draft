@@ -1,4 +1,5 @@
-﻿using ASI.Basecode.Services.ServiceModels;
+﻿using ASI.Basecode.Data.Models;
+using ASI.Basecode.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,12 @@ namespace ASI.Basecode.Services.Interfaces
     public interface IBookService
     {
         void AddBook(BookViewModel model);
-        void UpdateBook(BookViewModel model);
+        void UpdateBook(int  bookid);
+
+        IEnumerable<Book> GetAllBooksbyId(int roomid);
+
+
+       // IEnumerable<Book> GetRoomWithBookingsAsync(int roomid);
 
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 namespace ASI.Basecode.WebApp.Controllers
 {
     /// <summary>
@@ -36,7 +37,7 @@ namespace ASI.Basecode.WebApp.Controllers
                                 IRoomService roomService,
                                 IBookService bookService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
         {
-            this._roomService = roomService; 
+            this._roomService = roomService;
             this._bookService = bookService;
         }
 
@@ -53,7 +54,6 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             return View();
         }
-        
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Homepage()
@@ -76,10 +76,35 @@ namespace ASI.Basecode.WebApp.Controllers
             }
             return Ok(room);
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult DeleteRoom(RoomViewModel model)
+        {
+            var room = new Room();
+            try
+            {
+                _roomService.DeleteRoom(model);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured:" + ex);
+            }
+            return Ok();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult<IEnumerable<Room>> GetAllRooms()
+        {
+            var rooms = _roomService.GetAllRooms();
+            return Ok(rooms); // Returns a 200 OK response with the list of rooms
+        }
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult NewBook(BookViewModel model) {
+        public IActionResult NewBook(BookViewModel model)
+        {
             var book = new Book();
             try
             {
@@ -91,15 +116,24 @@ namespace ASI.Basecode.WebApp.Controllers
             }
             return Ok(book);
         }
-
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
-        public ActionResult<IEnumerable<Room>> GetAllRooms()
+        public IActionResult UpdateBook([FromQuery] int bookid)
         {
-            var rooms = _roomService.GetAllRooms();
-            return Ok(rooms); // Returns a 200 OK response with the list of rooms
+            _bookService.UpdateBook(bookid);
+            return Ok();
         }
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
 
+        {
+            var books = _bookService.GetAllBooksbyId(roomid);
+
+            
+            return Json(books);
+
+        }
 
     }
 }

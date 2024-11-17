@@ -1,6 +1,7 @@
 ﻿using ASI.Basecode.Data.Interfaces;
 using ASI.Basecode.Data.Models;
 using Basecode.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,9 @@ namespace ASI.Basecode.Data.Repositories
     {
         public BookRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-
         }
 
-        public IQueryable<Book> GetBookings()
-        {
-            return this.GetDbSet<Book>();
-        }
-
+       
         public bool UserExists(string userId)
         {
             return this.GetDbSet<User>().Any(x => x.UserId == userId);
@@ -36,6 +32,14 @@ namespace ASI.Basecode.Data.Repositories
             this.GetDbSet<Book>().Update(book);
             UnitOfWork.SaveChanges();
         }
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return this.GetDbSet<Book>();
+        }
+        /*public async Task<Room> GetRoomWithBookingsAsync(int roomId)
+        {
+          
+        }*/
 
     }
 }
