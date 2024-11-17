@@ -11,10 +11,11 @@ using System.Linq;
 using System.Text;
 using static ASI.Basecode.Resources.Constants.Enums;
 using System.Timers;
+using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.Services
 {
-    public  class BookService: IBookService
+    public  class BookService: IBookService, ITimedBookService
     {
         private readonly IBookRepository _repository;
         private readonly IMapper _mapper;
@@ -25,8 +26,8 @@ namespace ASI.Basecode.Services.Services
             _mapper = mapper;
             _repository = repository;
         }
-        public void DoWork()
-        {
+       public void DoWork()
+    {
             Console.WriteLine("MyHostedService is working.");
         }
         public void AddBook(BookViewModel model)
@@ -45,6 +46,8 @@ namespace ASI.Basecode.Services.Services
             }
 
         }
+
+        
 
         
         public IEnumerable<Book> GetAllBooksbyId(int roomid)
