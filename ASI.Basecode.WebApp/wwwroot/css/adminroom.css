@@ -1,52 +1,23 @@
-* {
+
+*{
     margin: 0;
     padding: 0;
 }
-/*--gwapa ko so much--*/
-.custom-back {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content:flex-start;
+
+/*for page title*/
+.room-page-title {
+    text-align: center;
     margin-left: 10px;
 }
 
-.custom-main-container {
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    justify-content: center;
-    padding: 20px;
-    box-shadow: none;
-    position: fixed;
-    top: 65px;
-    left: 0;
-    z-index: 1000;
+.custom-room-search-filter-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+   margin-top: 20px;
 }
 
-/*for search bar */
-.custom-search-filter-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-    gap: 20px;
-}
-
-.custom-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 300px;
-    padding: 10px;
-    background-color: var(--background-color1);
-    border-radius: 30px;
-    border: none;
-    outline: none;
-}
-.custom-room-search-box {
+.custom-room-box { 
     display: flex;
     height: 40px;
     align-items: center;
@@ -56,17 +27,18 @@
     padding: 10px;
     background-color: var(--background-color1);
     border-radius: 30px;
+    margin-left: 0;
     border: none;
     outline: none;
-    margin-left: 0;
     margin-top: 20px;
 }
-.custom-room-search-box:focus-within { 
+
+.custom-room-box:focus-within { 
     border: 2px solid var(--secondary-color); 
     border-radius: 30px;
 }
 
-.custom-room-search-box > button { 
+.custom-room-box > button { 
     border-radius: 50%;
     width: 32px;
     height: 32px;
@@ -79,13 +51,13 @@
     cursor: pointer;
 }
 
-.custom-room-search-box > button:hover { 
+.custom-room-box > button:hover { 
     border: none;
     outline: none;
     background-color: var(--background-color2);
 }
 
-.custom-room-search-box > button > i {
+.custom-room-box > button > i { 
     width: 30px;
     height: 30px;
     color: var(--primary-color);
@@ -94,7 +66,7 @@
     justify-content: center;  
 }
 
-.custom-room-search-box > input { 
+.custom-room-box > input { 
     flex: 1;
     height: 30px;
     border: none;
@@ -106,313 +78,99 @@
     background-color: var(--background-color1);
 }
 
-.custom-room-search-box > input:focus { 
+.custom-room-box > input:focus { 
     border: none; 
     outline: none;
 }
 
-    .custom-box:focus-within {
-        border: 2px solid var(--secondary-color);
-        border-radius: 30px;
-    }
-
-
-    .custom-box > button {
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        cursor: pointer;
-    }
-
-        .custom-box > button:hover {
-            border: none;
-            outline: none;
-            background-color: var(--background-color2);
-        }
-
-        .custom-box > button > i {
-            width: 30px;
-            height: 30px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-    .custom-box > input {
-        flex: 1;
-        height: 30px;
-        border: none;
-        outline: none;
-        font-size: 16px;
-        color: var(--main-text-color);
-        padding-left: 10px;
-        padding-right: 5px;
-        background-color: var(--background-color1);
-    }
-
-        .custom-box > input:focus {
-            border: none;
-            outline: none;
-        }
-/*end sa search bar */
-
-
-/*filter */
-.custom-filter-box {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+/* filter */
+.custom-room-filter-box {
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
 }
 
-.custom-filter-select {
+.custom-room-select {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background-color: #f5f5f5;
-    border-radius: 30px;
-    cursor: pointer;
-    min-width: 150px;
-    border: none;
-    outline: none;
-    background-color: var(--background-color1);
-    position: relative;
-}
-
-    .custom-filter-select > button {
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 26px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        cursor: pointer;
-    }
-
-        .custom-filter-select > button:hover {
-            border: none;
-            outline: none;
-            background-color: var(--background-color2);
-        }
-
-        .custom-filter-select > button > i {
-            width: 16px;
-            height: 16px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-.custom-filter-options {
-    width: 160px;
-    list-style: none;
-    padding: 14px;
-    background-color: var(--background-color1);
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    z-index: 1000;
-    display: none;
-}
-
-.custom-filter-select:focus-within .custom-filter-options {
-    display: block;
-}
-
-.custom-filter-options-li {
-    padding: 4px;
-    margin: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-    .custom-filter-options-li:hover {
-        background-color: var(--hover-color1);
-    }
-
-    .custom-filter-options-li:focus {
-        background-color: var(--hover-color1);
-    }
-/*end sa filter */
-
-
-/*show dropdown*/
-.show-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px 20px;
-    gap: 30px;
-}
-
-.custom-show-select {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background-color: #f5f5f5;
-    border-radius: 30px;
-    cursor: pointer;
-    min-width: 150px;
-    border: none;
-    outline: none;
-    background-color: var(--background-color1);
-    position: relative;
-}
-
-    .custom-show-select > button {
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-left: 60px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        cursor: pointer;
-    }
-
-        .custom-show-select > button:hover {
-            border: none;
-            outline: none;
-            background-color: var(--background-color2);
-        }
-
-        .custom-show-select > button > i {
-            width: 16px;
-            height: 16px;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-.custom-show-options {
-    width: 160px;
-    list-style: none;
-    padding: 14px;
-    background-color: var(--background-color1);
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    z-index: 1000;
-    display: none;
-}
-
-.custom-show-select:focus-within .custom-show-options {
-    display: block;
-}
-
-.custom-show-options {
-    width: 120px;
-    list-style: none;
     padding: 10px;
-    background-color: var(--background-color1);
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    cursor: pointer;
+    min-width: 150px;
     border: none;
     outline: none;
-    border-radius: 10px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 10px;
-    z-index: 1000;
-}
-
-    .custom-show-options.show {
-        display: block;
-    }
-
-.custom-show-options-li {
-    padding: 4px;
-    margin: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-    .custom-show-options-li:hover {
-        background-color: var(--hover-color1);
-    }
-
-    .custom-show-options-li:focus {
-        background-color: var(--hover-color1);
-    }
-
-/*copy here*/
-/*crud*/
-.custom-toolbar-container {
-    display: flex;
+    background-color: var(--background-color1);
+    position: relative;
     justify-content: flex-end;
-    margin-right: 25px;
+    margin: 0;
 }
-
-.toolbar-button {
+.custom-room-select> button{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;  
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: transparent;
+    margin-left: 10px;
     border: none;
     outline: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-    .toolbar-button > i {
-        font-size: 22px;
-        color: var(--primary-color);
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        line-height: 40px;
-    }
-
-    .toolbar-button:hover {
-        background-color: var(--background-color1);
-    }
-
-    .toolbar-button:focus {
-        border: none;
-        outline: none;
-        background-color: var(--background-color1);
-    }
-/*end sa copy, naa pa sa ubos*/
-
-.custom-back {
-    width: 100%;
-    height: auto;
+.custom-room-select> button:hover{
+    border: none;
+    outline: none;
+    background-color: var(--background-color2);
+}
+.custom-room-select> button> i{
+    width: 16px;
+    height: 16px;
+    color: var(--primary-color);
     display: flex;
-    margin-top: 10px;
-    margin-left: 0;
-    padding-left: 0;
+    align-items: center;  
+    justify-content: center;  
+
 }
+.custom-room-options{
+    width: 160px;
+    list-style: none;
+    padding: 14px;
+    background-color: var(--background-color1);
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    margin-top: 10px;
+    z-index: 1000;
+    display: none;
+    
+}
+
+.custom-room-select:focus-within .custom-room-options {
+    display: block; 
+}
+
+.custom-room-options-li{
+    padding: 4px;
+    margin: 0;
+    border-radius: 10px;
+    cursor:pointer;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+}
+.custom-room-options-li:hover{
+    background-color: var(--hover-color1);
+}
+.custom-room-options-li:focus{
+    background-color: var(--hover-color1);
+}
+/*end sa filter */
 
 .custom-btn-top {
     width: 40px;
@@ -420,35 +178,201 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%; 
+    background-color: transparent; 
+    border: none;
+    outline: none;
+}
+
+.custom-btn-top > i {
+    font-size: 20px; 
+    color: var(--primary-color); 
+    width: 100%; 
+    height: 100%; 
+    text-align: center; 
+    line-height: 40px; 
+}
+
+.custom-btn-top:hover{
+    background-color: var(--background-color1);
+}
+
+.custom-btn-top:focus{
+    border: none;
+    outline: none;
+    background-color: var(--background-color1);
+}
+
+/*new room table adjustments*/
+.custom-room-table-container{
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 20px;
+    position: relative;
+    overflow-x: auto; 
+    overflow-y: auto; 
+    scroll-behavior: smooth; 
+}
+.room-table {
+    width: 100%;
+    padding-bottom: 10px;
+    max-height: 460px;
+    overflow-x: auto; 
+}
+
+.room-table table,
+.room-table table th,
+.room-table table td {
+    text-align: center !important;
+}
+
+/* Table styles */
+.room-table table {
+    table-layout: auto; 
+    width: 100%; 
+    border-collapse: separate; 
+    text-align: center;
+    border-spacing: 0;
+}
+
+.room-table table th, table td {
+    min-width: 100px; 
+    max-width: 300px; 
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    transition: all 0.2s ease-in-out; 
+}
+.room-table table td{
+    padding: 16px 20px;
+
+}
+
+.room-table table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    padding: 14px 20px;
+}
+@media screen and (max-width: 1400px){
+    .room-table table th,
+    .room-table table td{
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .room-table table th,
+    .room-table table td{
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/*end table*/
+
+.admin-page-title{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.custom-main-container{
+    padding: 0 30px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* edit and delete btns*/
+.grid-toolbar-container{
+    display: grid;
+    grid-template-columns: repeat(2, auto);  
+    gap: 16px;  
+    align-items: center;
+    background-color: transparent;
+    justify-content: end;
+    width: 100%;
+}
+
+.grid-toolbar-button {
+    align-items: center;
+    justify-content: flex-end;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: transparent;
     border: none;
     outline: none;
 }
+.grid-toolbar-button > i {
+    font-size: 18px;
+    color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 28px;
+}
 
-    .custom-btn-top > i {
-        font-size: 20px;
-        color: var(--primary-color);
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        line-height: 40px;
-    }
+.grid-toolbar-button> i:hover {
+   color: var(--accent-color);
+}
 
-    .custom-btn-top:hover {
-        background-color: var(--background-color1);
-    }
+.grid-toolbar-button> i:focus {
+    color: var(--accent-color);
+    border: none;
+    outline: none;
+}
 
-    .custom-btn-top:focus {
-        border: none;
-        outline: none;
-        background-color: var(--background-color1);
-    }
+.grid-toolbar-button:focus{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+/* end edit and delete btns*/
+
+
+
+/*add new room*/
+.custom-room-add-container{
+    margin: 0;
+    justify-content: flex-end;
+    display: flex;  
+}
+.room-add-booking-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+    margin-top: 28px;
+}
+
+.room-add-booking-btn:hover{
+    background-color: var(--primary-color);
+    border: none;
+    outline: none;
+    opacity: 0.7;
+}
+.room-add-booking-btn:focus{
+    background-color: var(--primary-color);
+    border: none;
+    outline: none;
+    opacity: 0.7;
+}
+/*end of add btn*/
 
 /*room table*/
 .custom-roomtable-container {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 10px;
     border-radius: 20px;
     position: relative;
     overflow-x: auto; 
@@ -461,21 +385,21 @@
     max-height: 480px;
 }
 
-    .room-table table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: auto;
-    }
+.room-table table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+}
 
-        .room-table table th,
-        .room-table table td {
-            padding: 12px 20px;
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.9rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+.room-table table th,
+.room-table table td {
+    padding: 12px 20px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .room-table table th{
     position: sticky;
@@ -485,10 +409,10 @@
     font-weight: 500;
 }
 
-    .room-table tbody tr {
-        transition: background-color 0.2s ease;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
+.room-table tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
 
 .room-table tbody tr:hover{
     background-color: rgba(140, 122, 193, 0.1); 
@@ -615,7 +539,8 @@ input::placeholder {
         text-decoration: none;
         cursor: pointer;
     }
-/*logo*/
+
+    /*logo*/
 .logo-container1 {
     width: 100%;
     display: flex;

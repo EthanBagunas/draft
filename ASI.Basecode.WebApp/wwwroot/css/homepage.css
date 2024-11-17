@@ -44,9 +44,10 @@
     padding: 10px;
     background-color: var(--background-color1);
     border-radius: 30px;
+    margin-left: 0;
     border: none;
     outline: none;
-    margin-left: 0;
+
 }
 .custom-box:focus-within {
     border: 2px solid var(--secondary-color); 
