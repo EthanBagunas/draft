@@ -38,6 +38,7 @@ namespace ASI.Basecode.WebApp
             this._services.AddScoped<IUserService, UserService>();
             this._services.AddScoped<IBookService, BookService>();
             this._services.AddScoped<IRoomService, RoomService>();
+            this._services.AddScoped<ITimedBookService, BookService>();
             this._services.AddHostedService<TimedHostedService>();
 
             // Repositories
