@@ -53,6 +53,10 @@ namespace ASI.Basecode.WebApp.Controllers
         {
             return View();
         }
+<<<<<<< Updated upstream
+=======
+        
+>>>>>>> Stashed changes
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Homepage()

@@ -7,7 +7,14 @@
     width: 100%;
     height: auto;
     display: flex;
+<<<<<<< Updated upstream
     margin-top: 20px;
+=======
+    align-items: center;
+    gap: 10px;
+    justify-content:flex-start;
+    margin-left: 10px;
+>>>>>>> Stashed changes
 }
 
 .custom-main-container {
@@ -41,6 +48,70 @@
     background-color: var(--background-color1);
     border-radius: 30px;
     border: none;
+    outline: none;
+}
+.custom-room-search-box {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 10px;
+    min-width: 400px;
+    width: 300px;
+    padding: 10px;
+    background-color: var(--background-color1);
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    margin-left: 0;
+    margin-top: 20px;
+}
+.custom-room-search-box:focus-within { 
+    border: 2px solid var(--secondary-color); 
+    border-radius: 30px;
+}
+
+.custom-room-search-box > button { 
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.custom-room-search-box > button:hover { 
+    border: none;
+    outline: none;
+    background-color: var(--background-color2);
+}
+
+.custom-room-search-box > button > i {
+    width: 30px;
+    height: 30px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;  
+    justify-content: center;  
+}
+
+.custom-room-search-box > input { 
+    flex: 1;
+    height: 30px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: var(--main-text-color);
+    padding-left: 10px;
+    padding-right: 5px;
+    background-color: var(--background-color1);
+}
+
+.custom-room-search-box > input:focus { 
+    border: none; 
     outline: none;
 }
 
@@ -384,9 +455,15 @@
     margin-top: 40px;
     border-radius: 20px;
     position: relative;
+<<<<<<< Updated upstream
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
+=======
+    overflow-x: auto; 
+    overflow-y: auto; 
+    scroll-behavior: smooth; 
+>>>>>>> Stashed changes
 }
 
 .room-table {
@@ -410,6 +487,7 @@
             text-overflow: ellipsis;
         }
 
+<<<<<<< Updated upstream
             .room-table table th:nth-child(1),
             .room-table table td:nth-child(1) {
                 width: 15%;
@@ -442,16 +520,32 @@
             background-color: var(--secondary-color);
             font-weight: 500;
         }
+=======
+.room-table table th{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--secondary-color);
+    font-weight: 500;
+}
+>>>>>>> Stashed changes
 
     .room-table tbody tr {
         transition: background-color 0.2s ease;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 
+<<<<<<< Updated upstream
         .room-table tbody tr:hover {
             background-color: rgba(220, 212, 243, 0.1);
             cursor: pointer;
         }
+=======
+.room-table tbody tr:hover{
+    background-color: rgba(140, 122, 193, 0.1); 
+    cursor: pointer;
+}
+>>>>>>> Stashed changes
 
 @media screen and (max-width: 1400px) {
     .room-table table th,
@@ -469,6 +563,7 @@
     }
 }
 
+<<<<<<< Updated upstream
 .custom-roomtable-container::-webkit-scrollbar {
     width: 8px;
 }
@@ -511,6 +606,9 @@
 }
 
 .modal-header1 h2 {
+=======
+.custom-back{
+>>>>>>> Stashed changes
     display: flex;
     justify-content: center;
     align-items: center;

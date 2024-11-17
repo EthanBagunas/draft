@@ -19,6 +19,7 @@
     align-items: center;
     gap: 10px;
     justify-content:flex-start;
+    margin-left: 10px;
 }
 
 /*for search bar */
@@ -39,6 +40,7 @@
     align-items: center;
     gap: 10px;
     min-width: 400px;
+    width: 300px;
     padding: 10px;
     background-color: var(--background-color1);
     border-radius: 30px;
@@ -312,7 +314,9 @@
 
 /*add booking btn*/
 .custom-add-container{
-    margin-left: auto;
+    margin: 0;
+    justify-content: flex-end;
+    display: flex;  
 }
 .add-booking-btn{
     display: flex;

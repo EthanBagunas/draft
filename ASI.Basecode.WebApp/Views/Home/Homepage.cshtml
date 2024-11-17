@@ -14,16 +14,15 @@
     ViewData["Title"] = "Dashboard";
 }
 <div class= "custom-main-container">
-  <div class= "home-page-title">
-   <span class="page-title">Dashboard</span>
-  </div>
-  <!--search -->
-  <div class = "custom-search-filter-container">
+    <!--search -->
     <div class="custom-box">
-      <input type="text" placeholder="Search...">
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    <input type="text" placeholder="Search...">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
-
+  <div class = "custom-search-filter-container">
+    <div class= "home-page-title">
+    <span class="page-title">Dashboard</span>
+  </div>
     <!-- Filter and show all -->
     <div class="custom-filter-box">
        <!-- filter-->
@@ -51,11 +50,6 @@
         </ul>   
       </div>
       </div>
-      <!--ayaw sa nis elements add-booking-btn kay medyo samok <div class="stat custom-data-grid custom-main-text-normal">
-        <span>Vacant:</span>
-        <span>Occupied:</span>
-        <span>Reserved:</span>
-      </div>--> 
     </div> 
   </div>
   <!--end-->
@@ -67,14 +61,9 @@
           <thead class = "th-text">
             <tr>
                 <th>Status</th>
-                <th>Room ID</th>
                 <th>Room Name</th>
                 <th>Capacity</th>
-                <th>Hourly Rate</th>
-                <th>Total Amount</th>
                 <th>Guest Name</th>
-                <th>Contact Number</th>
-                <th>Email Address</th>
                 <th>Date Reserved</th>
                 <th>Start Session</th>
                 <th>End Session</th>
@@ -87,15 +76,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class= "invoice invoice-paid invoice-paid-text">Paid</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -106,15 +89,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-paid invoice-paid-text">Paid</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -126,72 +103,48 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
                  </tr>
                 </tbody>
-                                <tbody class="td-text">
+                <tbody class="td-text">
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
                  </tr>
                 </tbody>
-                                <tbody class="td-text">
+                <tbody class="td-text">
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>--</td>
-                        <td><p>--</p></td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
                         <td>--</td>
-                        <td>--</td>
-                        <td>--</td>                  
                  </tr>
                 </tbody>
                 <tbody class="td-text">
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-partial invoice-partial-text">Partial</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -202,15 +155,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-partial invoice-partial-text">Partial</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -221,15 +168,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-partial invoice-partial-text">Partial</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -240,15 +181,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-partial invoice-partial-text">Partial</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -259,15 +194,9 @@
                   <tr>
                     <!-- sample only, iconnect pa nis database-->
                         <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>123</td>
                         <td>Conference Room</td>
                         <td>10</td>
-                        <td>₱900</td>
-                        <td>₱1800</td>
-                        <td><p class="invoice invoice-partial invoice-partial-text">Partial</p></td>
                         <td>Slater Young</td>
-                        <td>+634782561</td>
-                        <td>slateryoung@lite.ph</td>
                         <td>10/26/2024</td>
                         <td>8:00 AM</td>
                         <td>10:00 AM</td>
@@ -276,6 +205,9 @@
                 </tbody>                   
       </table>
     </div>
+  </div>
+  <div class="custom-add-container">
+    <button class="add-booking-btn custom-main-white-text-normal"><span>Add booking</span></button>
   </div>
 
   <!-- Modal -->

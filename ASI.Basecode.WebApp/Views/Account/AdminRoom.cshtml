@@ -4,7 +4,11 @@
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/style.css" />
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="~/css/customtable.css" />
+=======
+    <link rel="stylesheet" href="~/css/homepage.css" />
+>>>>>>> Stashed changes
     <link rel="stylesheet" href="~/css/adminroom.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
@@ -18,6 +22,7 @@
     ViewData["Title"] = "Account Information";
 }
 
+<<<<<<< Updated upstream
 <div class="custom-main-container">
     <div class="custom-back">
         <button class="custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
@@ -104,6 +109,101 @@
                         <h3>Room Information</h3>
                         <label for="roomID">Room Id </label>
                         <input type="text" id="roomID" name="roomID" placeholder="Enter room ID" required>
+=======
+<div class= "custom-main-container">
+    <!--search -->
+  <div class="custom-room-search-box">
+    <input type="text" placeholder="Search...">
+    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+  </div>
+
+  <!-- page-title -->
+  <div class = "custom-search-filter-container">
+  <div class= "room-page-title">
+    <span class="page-title">Room Information</span>
+  </div>
+    <!-- Filter and show all -->
+    <div class="custom-room-box">
+       <!-- filter-->
+        <span class="custom-main-text-normal">Sort by:</span>
+        <div class="custom-room-select custom-main-text-normal" id="dropdown">
+          <span>Room Name</span>
+          <button><i class="fa-solid fa-caret-down"></i></button>
+          <ul class="custom-room-options custom-main-text-normal"> 
+            <li class="custom-room-options-li">Room Name</li>
+            <li class="custom-room-options-li">Capacity</li>
+        </ul>
+        </div> 
+    </div>
+  </div>
+  
+  
+    <!--table-->
+  <div class="custom-roomtable-container">
+    <div class="room-table">
+      <table>
+          <thead class = "th-text">
+            <tr>
+                <th>Room Number</th>
+                <th>Room Name</th>
+                <th>Capacity</th>
+          </tr>
+          </thead>
+
+        <!--start sa content sa table-->
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+        <tbody class="td-text">
+            <tr>
+               <!-- sample only, iconnect pa nis database-->
+                <td>#698</td>
+                <td>Conference Room</td>
+                <td>10</td>
+            </tr>
+        </tbody>
+    </div>
+    </table>
+  </div>
+  <!--end-->
+>>>>>>> Stashed changes
 
                         <label for="roomNumber">Room Number </label>
                         <input type="text" id="roomNumber" name="roomNumber" placeholder="Enter room number" required>
