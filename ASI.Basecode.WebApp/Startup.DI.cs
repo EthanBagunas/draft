@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Org.BouncyCastle.Asn1.Cms;
 
 namespace ASI.Basecode.WebApp
 {
@@ -37,6 +38,7 @@ namespace ASI.Basecode.WebApp
             this._services.AddScoped<IUserService, UserService>();
             this._services.AddScoped<IBookService, BookService>();
             this._services.AddScoped<IRoomService, RoomService>();
+            this._services.AddHostedService<TimedHostedService>();
 
             // Repositories
             this._services.AddScoped<IUserRepository, UserRepository>();

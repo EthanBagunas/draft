@@ -25,7 +25,10 @@ namespace ASI.Basecode.Services.Services
             _mapper = mapper;
             _repository = repository;
         }
-
+        public void DoWork()
+        {
+            Console.WriteLine("MyHostedService is working.");
+        }
         public void AddBook(BookViewModel model)
         {
            var book = new Book();
@@ -36,13 +39,14 @@ namespace ASI.Basecode.Services.Services
                 book.Duration = (int)(model.TimeOut.Value - model.TimeIn.Value).TotalHours;
                 _repository.CreateBook(book);
             }
-
             catch (Exception ex)
             {
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
             }
 
         }
+
+        
         public IEnumerable<Book> GetAllBooksbyId(int roomid)
         {
             return _repository.GetAllBooks().Where(x=> x.RoomId == roomid).ToList(); ;
