@@ -84,3 +84,18 @@
   font-weight: normal;
   color: var(--background-color2);
 }
+
+.custom-text-placeholder{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--background-color2);
+  opacity: 0.8;
+}
+
+.custom-text-label{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--background-color2);
+}
