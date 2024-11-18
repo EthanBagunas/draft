@@ -15,11 +15,10 @@ namespace ASI.Basecode.Services.Interfaces
 
         IEnumerable<Book> GetAllBooksbyId(int roomid);
 
-
        // IEnumerable<Book> GetRoomWithBookingsAsync(int roomid);
     }
     public interface ITimedBookService
     {
-        void DoWork();  
+        void UpdateCompletedBooks();  
     }
 }

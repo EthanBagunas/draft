@@ -12,6 +12,8 @@ using System.Text;
 using static ASI.Basecode.Resources.Constants.Enums;
 using System.Timers;
 using System.Threading.Tasks;
+using ASI.Basecode.Data;
+using CsvHelper.TypeConversion;
 
 namespace ASI.Basecode.Services.Services
 {
@@ -25,10 +27,6 @@ namespace ASI.Basecode.Services.Services
         {
             _mapper = mapper;
             _repository = repository;
-        }
-       public void DoWork()
-    {
-            Console.WriteLine("MyHostedService is working.");
         }
         public void AddBook(BookViewModel model)
         {
@@ -76,52 +74,36 @@ namespace ASI.Basecode.Services.Services
                 Console.WriteLine("An unexpected exception occurred: " + ex.Message);
             }
         }
-        protected void Application_Start()
+        public void  UpdateCompletedBooks()
         {
-            // Other startup code...
-            _timer = new Timer(60000); // Set interval to 1 minute (60000 milliseconds)
-            _timer.Elapsed += UpdateCompletedBooks;
-            _timer.Start();
-        }
-
-
-        private void UpdateCompletedBooks(object sender, ElapsedEventArgs e)
-
-        {
-            var books = _repository.GetAllBooks();
-            var currentTime = DateTime.Now;
-
+            var current = DateTime.Now;
+            TimeSpan currentTime = current.TimeOfDay;
+            /*
+            string datestring = current.Date.ToString("yyyy-MM-dd");
+            DateTime date = DateTime.Parse(datestring);
+            Console.WriteLine(datestring);
+            Console.WriteLine(currentTime);
+            */
+            var books = _repository.GetAllBooks().Where(x => x.TimeOut < currentTime). ToList();
+            Console.WriteLine(books);
             foreach (var book in books)
-
             {
-                if (book.BookingDate == currentTime.Date)
+                /// if book.BookingDate = current date
+                if (currentTime > book.TimeOut)
                 {
-
-                    if (book.TimeOut > currentTime.TimeOfDay)
-
-                    {
-
-                        book.Status = "Completed";
-
-                        _repository.UpdateBook(book);
-
-                    }
-
+                    book.Status = "Completed";
+                    _repository.UpdateBook(book);
                 }
-
+                else if (currentTime < book.TimeIn)
+                {
+                    book.Status = "Pending";
+                    _repository.UpdateBook(book);
+                }
+                // book.Status = "Completed"
+                // else book.Status = "Cancelled"
+                // update book in db
+                        
             }
-
-        }
-
-
-        protected void Application_End()
-
-        {
-
-            _timer?.Stop();
-
-            _timer?.Dispose();
-
         }
     }
 }
