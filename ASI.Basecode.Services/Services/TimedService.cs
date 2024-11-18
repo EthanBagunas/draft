@@ -37,7 +37,7 @@ namespace ASI.Basecode.Services.Services
     public Task StartAsync(CancellationToken cancellationToken)
     {
         _logger.LogInformation("Timed Hosted Service running.");
-        _timer = new Timer(Runthis, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+        _timer = new Timer(Runthis, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
         return Task.CompletedTask;
     }
         public Task StartAsync(CancellationToken stoppingToken)
@@ -54,10 +54,8 @@ namespace ASI.Basecode.Services.Services
         {
             using (var scope = _serviceScopeFactory.CreateScope())
             {
-            _logger.LogInformation("DoWork2 is starting.");
             var timedBookService = scope.ServiceProvider.GetRequiredService<ITimedBookService>();
-            timedBookService.DoWork();
-            _logger.LogInformation("DoWork2 completed successfully.");
+            timedBookService.UpdateCompletedBooks();
             }
         }
 
