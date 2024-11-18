@@ -1,4 +1,6 @@
-@model LoginViewModel
+@model ASI.Basecode.Services.ServiceModels.HomepageViewModel
+@using ASI.Basecode.Data.Models
+@using System.Linq
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
@@ -75,126 +77,26 @@
 
                 <!--start sa content sa table-->
                 <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
+                  @foreach (var room in Model.Rooms)
+                  {
+                      var booking = Model.Bookings.FirstOrDefault(b => b.RoomId == room.Id);
+                      var status = Model.RoomStatuses[room.Id];
+                      
+                      <tr onclick="openBookingModal(@room.Id)">
+                          <td>
+                              <p class="status status-@status.ToLower()-text status-@status.ToLower()">
+                                  @status
+                              </p>
+                          </td>
+                          <td>@room.Roomname</td>
+                          <td>@room.MaxCapacity</td>
+                          <td>@(booking?.Customer?.Custfname ?? "--")</td>
+                          <td>@(booking?.BookingDate?.ToString("MM/dd/yyyy") ?? "--")</td>
+                          <td>@(booking?.TimeIn?.ToString() ?? "--")</td>
+                          <td>@(booking?.TimeOut?.ToString() ?? "--")</td>
+                      </tr>
+                  }
                 </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>
-
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                 </tr>
-                </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                 </tr>
-                </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                        <td>--</td>
-                 </tr>
-                </tbody>
-                <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>   
-                 <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>      
-                 <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>      
-                 <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>      
-                 <tbody class="td-text">
-                  <tr>
-                    <!-- sample only, iconnect pa nis database-->
-                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
-                        <td>Conference Room</td>
-                        <td>10</td>
-                        <td>Slater Young</td>
-                        <td>10/26/2024</td>
-                        <td>8:00 AM</td>
-                        <td>10:00 AM</td>
-                 </tr>
-                </tbody>                   
       </table>
     </div>
   </div>
@@ -209,22 +111,35 @@
         <div class="modal-header1">
             <h2>Add Booking</h2>
         </div>
-        <form id="addUserForm">
+        <form id="bookingForm" onsubmit="addBooking(event)">
             <div class="form-section">
                 <h3>Room Information</h3>
-                <label for="roomName">Room Name </label>
-                <input type="text" id="roomName" name="roomName" placeholder="Enter room name" required>
+                <label for="roomSelect">Room</label>
+                <select id="roomSelect" name="roomId" required>
+                    <!-- Will be populated via JavaScript -->
+                </select>
 
-                <label for="capacity">Number of Guests </label>
-                <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
+                <label for="bookingDate">Reservation Date</label>
+                <input type="date" id="bookingDate" name="bookingDate" required>
+
+                <label for="timeIn">Start Time</label>
+                <select id="timeIn" name="timeIn" required>
+                    <!-- Will be populated via JavaScript -->
+                </select>
+
+                <label for="timeOut">End Time</label>
+                <select id="timeOut" name="timeOut" required>
+                    <!-- Will be populated via JavaScript -->
+                </select>
             </div>
 
             <div class="form-section">
                 <h3>Guest Information</h3>
-                <label for="GuestName">Guest Name </label>
-                <input type="text" id="GuestName" name="GuestName" placeholder="Enter name" required>
-                 <label for="ContactNumber">Contact Number </label>
-                <input type="password" id="ContactNumber" name="ContactNumber" placeholder="Enter contact number" required>
+                <label for="guestName">Guest Name</label>
+                <input type="text" id="guestName" name="guestName" required>
+                
+                <label for="contactNumber">Contact Number</label>
+                <input type="tel" id="contactNumber" name="contactNumber" required>
             </div>
 
             <div class="modal-footer1">

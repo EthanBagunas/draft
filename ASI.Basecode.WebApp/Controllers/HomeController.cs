@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 namespace ASI.Basecode.WebApp.Controllers
 {
     /// <summary>
@@ -58,7 +59,18 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult Homepage()
         {
-            return View();
+            var rooms = _roomService.GetAllRooms();
+            var bookings = _bookService.GetAllBooks();
+            var statuses = _roomService.GetCurrentRoomStatuses();
+
+            var viewModel = new HomepageViewModel
+            {
+                Rooms = rooms.ToList(),
+                Bookings = bookings.ToList(),
+                RoomStatuses = statuses
+            };
+
+            return View(viewModel);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -103,16 +115,15 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult NewBook(BookViewModel model)
         {
-            var book = new Book();
             try
             {
                 _bookService.AddBook(model);
+                return Json(new { success = true, message = "Booking added successfully" });
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured:" + ex);
+                return Json(new { success = false, message = ex.Message });
             }
-            return Ok(book);
         }
         [HttpPost]
         [AllowAnonymous]

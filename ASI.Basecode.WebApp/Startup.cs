@@ -17,6 +17,11 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IO;
 using System.Text;
+using ASI.Basecode.Services.Services;
+using ASI.Basecode.Services.Interfaces;
+using ASI.Basecode.Data.Interfaces;
+using ASI.Basecode.Data.Repositories;
+using Basecode.Data.Repositories;
 
 namespace ASI.Basecode.WebApp
 {
@@ -119,6 +124,11 @@ namespace ASI.Basecode.WebApp
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IBookService, BookService>();
         }
 
         /// <summary>

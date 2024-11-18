@@ -17,13 +17,13 @@ namespace ASI.Basecode.Services.Services
     public  class BookService: IBookService
     {
         private readonly IBookRepository _repository;
-        private readonly IMapper _mapper;
+        private readonly IRoomService _roomService;
         private static Timer _timer;
 
-        public BookService(IBookRepository repository, IMapper mapper ) 
+        public BookService(IBookRepository repository, IRoomService roomService) 
         {
-            _mapper = mapper;
             _repository = repository;
+            _roomService = roomService;
         }
         public void DoWork()
         {
@@ -31,19 +31,37 @@ namespace ASI.Basecode.Services.Services
         }
         public void AddBook(BookViewModel model)
         {
-           var book = new Book();
-            try 
+            // TimeSpan validation
+            if (model.TimeIn < TimeSpan.FromHours(8) || 
+                model.TimeOut > TimeSpan.FromHours(21))
             {
-                _mapper.Map(model, book);
-                book.ReservationDate= DateTime.Now;
-                book.Duration = (int)(model.TimeOut.Value - model.TimeIn.Value).TotalHours;
-                _repository.CreateBook(book);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("An unexpected exception occurred: " + ex.Message);
+                throw new ArgumentException("Booking times must be between 8:00 AM and 9:00 PM");
             }
 
+            // Check for existing bookings
+            var existingBooking = _repository.GetAllBooks()
+                .Any(b => b.RoomId == model.RoomId && 
+                          b.BookingDate.HasValue && 
+                          b.BookingDate.Value.Date == model.BookingDate.Date && 
+                          b.TimeIn == model.TimeIn);
+
+            if (existingBooking)
+            {
+                throw new InvalidOperationException("This time slot is already booked");
+            }
+
+            var book = new Book
+            {
+                RoomId = model.RoomId,
+                BookingDate = model.BookingDate,
+                TimeIn = model.TimeIn,
+                TimeOut = model.TimeOut,
+                Status = "RESERVED",
+                Duration = (int)(model.TimeOut - model.TimeIn).TotalHours,
+                ReservationDate = DateTime.Now.Date
+            };
+
+            _repository.CreateBook(book);
         }
 
         
@@ -119,6 +137,45 @@ namespace ASI.Basecode.Services.Services
 
             _timer?.Dispose();
 
+        }
+
+        public Dictionary<int, string> GetCurrentRoomStatuses()
+        {
+            var currentTime = DateTime.Now;
+            var statuses = new Dictionary<int, string>();
+            var rooms = _roomService.GetAllRooms();
+
+            foreach (var room in rooms)
+            {
+                var currentBooking = _repository.GetAllBooks()
+                    .Where(b => b.RoomId == room.Id && 
+                           b.BookingDate.HasValue && 
+                           b.BookingDate.Value.Date == currentTime.Date)
+                    .OrderBy(b => b.TimeIn)
+                    .FirstOrDefault();
+
+                if (currentBooking == null)
+                {
+                    statuses[room.Id] = "Vacant";
+                    continue;
+                }
+
+                if (currentBooking.TimeIn.HasValue && currentTime.TimeOfDay < currentBooking.TimeIn.Value)
+                    statuses[room.Id] = "Reserved";
+                else if (currentBooking.TimeIn.HasValue && currentBooking.TimeOut.HasValue && 
+                         currentTime.TimeOfDay >= currentBooking.TimeIn.Value && 
+                         currentTime.TimeOfDay <= currentBooking.TimeOut.Value)
+                    statuses[room.Id] = "Occupied";
+                else
+                    statuses[room.Id] = "Vacant";
+            }
+
+            return statuses;
+        }
+
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return _repository.GetAllBooks();
         }
     }
 }
