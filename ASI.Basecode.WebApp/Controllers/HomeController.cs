@@ -133,5 +133,21 @@ namespace ASI.Basecode.WebApp.Controllers
 
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetRoom(int id)
+        {
+            try
+            {
+                var room = _roomService.GetRoomById(id);
+                return Json(new { success = true, data = room });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error getting room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to get room: {ex.Message}" });
+            }
+        }
+
     }
 }

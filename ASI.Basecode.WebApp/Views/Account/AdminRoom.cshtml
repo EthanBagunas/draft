@@ -1,4 +1,4 @@
-@model LoginViewModel
+@model IEnumerable<ASI.Basecode.Data.Models.Room>
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
@@ -61,22 +61,24 @@
 
         <!--start sa content sa table-->
         <tbody class="td-text">
-            <tr>
-             <!-- sample only, iconnect pa nis database-->
-             <td>#698</td>
-             <td>Conference Room</td>
-             <td>10</td>
-             <td>
-                <div class="grid-item-toolbar">
-                    <button class="grid-toolbar-button" id="edit-button">
-                        <i class="fa-regular fa-pen-to-square"></i>
-                    </button>
-                    <button class="grid-toolbar-button" id="delete-button">
-                        <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
-                    </button>
-                </div>
-            </td>
-            </tr>
+            @foreach (var room in Model)
+            {
+                <tr>
+                    <td>#@room.RoomNumber</td>
+                    <td>@room.Roomname</td>
+                    <td>@room.MaxCapacity</td>
+                    <td>
+                        <div class="grid-item-toolbar">
+                            <button class="grid-toolbar-button" onclick="editRoom(@room.Id)">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                            <button class="grid-toolbar-button" onclick="deleteRoom(@room.Id)">
+                                <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
         </tbody>    
     </div>
     </table>

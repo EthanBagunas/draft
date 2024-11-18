@@ -29,6 +29,7 @@ namespace ASI.Basecode.WebApp.Controllers
         private readonly TokenProviderOptionsFactory _tokenProviderOptionsFactory;
         private readonly IConfiguration _appConfiguration;
         private readonly IUserService _userService;
+        private readonly IRoomService _roomService;
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
@@ -41,6 +42,7 @@ namespace ASI.Basecode.WebApp.Controllers
         /// <param name="mapper">The mapper.</param>
         /// <param name="tokenValidationParametersFactory">The token validation parameters factory.</param>
         /// <param name="tokenProviderOptionsFactory">The token provider options factory.</param>
+        /// <param name="roomService">The room service.</param>
         public AccountController(
                             SignInManager signInManager,
                             IHttpContextAccessor httpContextAccessor,
@@ -49,7 +51,8 @@ namespace ASI.Basecode.WebApp.Controllers
                             IMapper mapper,
                             IUserService userService,
                             TokenValidationParametersFactory tokenValidationParametersFactory,
-                            TokenProviderOptionsFactory tokenProviderOptionsFactory) : base(httpContextAccessor, loggerFactory, configuration, mapper)
+                            TokenProviderOptionsFactory tokenProviderOptionsFactory,
+                            IRoomService roomService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
         {
             this._sessionManager = new SessionManager(this._session);
             this._signInManager = signInManager;
@@ -57,6 +60,7 @@ namespace ASI.Basecode.WebApp.Controllers
             this._tokenValidationParametersFactory = tokenValidationParametersFactory;
             this._appConfiguration = configuration;
             this._userService = userService;
+            this._roomService = roomService;
 
 
         }
@@ -158,7 +162,8 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult AdminRoom()
         {
-            return View();
+            var rooms = _roomService.GetAllRooms();
+            return View(rooms);
         }
 
         

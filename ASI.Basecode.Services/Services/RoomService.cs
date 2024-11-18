@@ -96,7 +96,10 @@ namespace ASI.Basecode.Services.Services
             return _repository.GetAll().ToList();
         }
 
-       
+        public Room GetRoomById(int id)
+        {
+            return _repository.GetAll().FirstOrDefault(r => r.Id == id);
+        }
     }
     
 

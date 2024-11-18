@@ -39,4 +39,27 @@ function deleteRoom(roomId) {
             }
         });
     }
+}
+
+function editRoom(roomId) {
+    // First fetch the room details
+    $.ajax({
+        url: `/Home/GetRoom/${roomId}`,
+        type: 'GET',
+        success: function(room) {
+            // Populate the modal with room details
+            document.getElementById('roomName').value = room.roomname;
+            document.getElementById('capacity').value = room.maxCapacity;
+            
+            // Store the room ID for the update operation
+            document.getElementById('addUserForm').dataset.roomId = roomId;
+            
+            // Open the modal
+            openModal();
+        },
+        error: function(error) {
+            console.error('Error fetching room details:', error);
+            alert('Failed to fetch room details. Please try again.');
+        }
+    });
 } 

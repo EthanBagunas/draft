@@ -14,6 +14,6 @@ namespace ASI.Basecode.Services.Interfaces
         void UpdateRoom(RoomViewModel model);
         void DeleteRoom(int roomId);
         IEnumerable<Room> GetAllRooms();
-
+        Room GetRoomById(int id);
     }
 }
