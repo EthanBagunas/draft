@@ -10,6 +10,5 @@ namespace ASI.Basecode.Services.ServiceModels
     {
         public string Roomname { get; set; }
         public string MaxCapacity { get; set; }
-        public string Price { get; set; }
     }
 }

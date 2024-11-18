@@ -27,39 +27,79 @@ namespace ASI.Basecode.Services.Services
         }
         public void AddRoom(RoomViewModel model)
         {
+            if (string.IsNullOrEmpty(model.Roomname))
+                throw new ArgumentException("Room name cannot be empty");
+
+            if (!int.TryParse(model.MaxCapacity, out int capacity))
+                throw new ArgumentException("Invalid capacity value");
+
             var room = new Room();
             try 
             {
-                _mapper.Map(model, room);
+                var maxRoomNumber = _repository.GetAll()
+                    .Select(r => r.RoomNumber)
+                    .DefaultIfEmpty(0)
+                    .Max();
+
+                room.RoomNumber = maxRoomNumber + 1;
+                room.Roomname = model.Roomname;
+                room.MaxCapacity = capacity;
+                room.Status = "ACTIVE";
+                
+                Console.WriteLine($"Attempting to add room: {room.Roomname} with number {room.RoomNumber}");
                 _repository.AddRoom(room);
+                Console.WriteLine("Room added successfully");
             }
             catch (Exception ex) 
             {
-               Console.WriteLine(ex.Message);
+                Console.WriteLine($"Failed to add room: {ex.Message}");
+                throw new Exception($"Failed to add room: {ex.Message}", ex);
             }
         }
         public void UpdateRoom(RoomViewModel model)
         {
-
+            // Implementation for update
         }
-        public void DeleteRoom(RoomViewModel room) 
-        {/*
-            var room = _repository.
-            if (user == null)
+        public void DeleteRoom(int roomId)
+        {
+            try
             {
-                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+                var room = _repository.GetAll().FirstOrDefault(r => r.Id == roomId);
+                if (room != null)
+                {
+                    var deletedRoomNumber = room.RoomNumber;
+                    
+                    // Delete the room
+                    _repository.UpdateRoom(room); // Set status to inactive or delete
+
+                    // Reorder remaining room numbers
+                    var roomsToUpdate = _repository.GetAll()
+                        .Where(r => r.RoomNumber > deletedRoomNumber)
+                        .OrderBy(r => r.RoomNumber)
+                        .ToList();
+
+                    foreach (var r in roomsToUpdate)
+                    {
+                        r.RoomNumber--;
+                        _repository.UpdateRoom(r);
+                    }
+                }
             }
-            user.Status = "INACTIVE";
-            _repository.UpdateRoom();*/
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         
         public IEnumerable<Room> GetAllRooms()
         {
-            // Replace this with your actual data retrieval logic
             return _repository.GetAll().ToList();
         }
 
-       
+        public Room GetRoomById(int id)
+        {
+            return _repository.GetAll().FirstOrDefault(r => r.Id == id);
+        }
     }
     
 

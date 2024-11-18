@@ -1,7 +1,11 @@
 ﻿@model LoginViewModel
 @using static ASI.Basecode.Resources.Views.Screen
 @section styles {
-    <link rel="stylesheet" href="~/css/login.css" />
+    <!--<link rel="stylesheet" href="~/css/login.css"> -->
+    <link rel="stylesheet" href="~/css/newlogin.css">
+    <link rel="stylesheet" href="~/css/texts.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
 @{
     ViewBag.LoginView = true;
@@ -10,7 +14,7 @@
 <div>
     @Html.AntiForgeryToken()
 </div>
-<div class="bg-image">
+<!--<div class="bg-image">
     <div class="login-form">
         <div class="login-form-container">
             <div class="logo-container">
@@ -43,6 +47,42 @@
             </form>
         </div>
     </div>
+</div> -->
+
+<div class="custom-main-container">
+    <form method="post" action="/Account/Login" id="loginForm">
+        <div class="custom-form-container">
+            <h1>Welcome Back!</h1>
+            <div class="custom-input-box">
+                <label class="form-label" for="form2Example11">@UserId</label>
+                <input 
+                    class="custom-text-placeholder" 
+                    type="text" 
+                    placeholder="Enter email" 
+                    id="form2Example11" 
+                    asp-for="UserId"/>  
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="custom-input-box">
+                <label class="form-label" for="form2Example22">@Password</label>
+                <input  
+                    class="custom-text-placeholder" 
+                    type="password" 
+                    id="form2Example22" 
+                    asp-for="Password" 
+                    placeholder="Enter password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            
+            <div class="custom-submit">
+                <button type="submit" class="button">@Login</button>
+            </div>
+            <div class="custom-register-link">
+                <p>Don't have an account? <a href="/Account/Register">Register here</a></p>
+            </div>
+        </div>  
+    </form>
 </div>
 
 @section scripts {

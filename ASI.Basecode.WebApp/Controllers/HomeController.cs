@@ -64,33 +64,31 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult NewRoom(RoomViewModel model)
         {
-            var room = new Room();
             try
             {
                 _roomService.AddRoom(model);
-                return RedirectToAction("Index", "Home");
+                return Json(new { success = true, message = "Room added successfully" });
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured:" + ex);
+                _logger.LogError($"Error adding room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to add room: {ex.Message}" });
             }
-            return Ok(room);
         }
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult DeleteRoom(RoomViewModel model)
+        public IActionResult DeleteRoom(int roomId)
         {
-            var room = new Room();
             try
             {
-                _roomService.DeleteRoom(model);
-                return Ok();
+                _roomService.DeleteRoom(roomId);
+                return Json(new { success = true, message = "Room deleted successfully" });
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured:" + ex);
+                _logger.LogError($"Error deleting room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to delete room: {ex.Message}" });
             }
-            return Ok();
         }
 
         [HttpGet]
@@ -133,6 +131,22 @@ namespace ASI.Basecode.WebApp.Controllers
             
             return Json(books);
 
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetRoom(int id)
+        {
+            try
+            {
+                var room = _roomService.GetRoomById(id);
+                return Json(new { success = true, data = room });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error getting room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to get room: {ex.Message}" });
+            }
         }
 
     }

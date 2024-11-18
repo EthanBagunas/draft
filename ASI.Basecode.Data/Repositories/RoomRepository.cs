@@ -15,8 +15,18 @@ namespace ASI.Basecode.Data.Repositories
 
         public void  AddRoom(Room room)
         {
-            this.GetDbSet<Room>().Add(room);
-            UnitOfWork.SaveChanges();
+            try
+            {
+                Console.WriteLine($"Adding room: Name={room.Roomname}, Number={room.RoomNumber}");
+                this.GetDbSet<Room>().Add(room);
+                UnitOfWork.SaveChanges();
+                Console.WriteLine("Room added successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding room: {ex.Message}");
+                throw;
+            }
         }
         public void UpdateRoom(Room room)
 
@@ -27,7 +37,18 @@ namespace ASI.Basecode.Data.Repositories
         }
         public IEnumerable<Room> GetAll()
         {
-            return this.GetDbSet<Room>();
+            try
+            {
+                Console.WriteLine("Fetching all rooms");
+                var rooms = this.GetDbSet<Room>().ToList();
+                Console.WriteLine($"Found {rooms.Count} rooms");
+                return rooms;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching rooms: {ex.Message}");
+                throw;
+            }
         }
     }
 }

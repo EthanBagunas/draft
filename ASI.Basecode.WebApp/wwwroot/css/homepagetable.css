@@ -3,11 +3,11 @@
 /* Container styles */
 .custom-table-container {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 20px;
     border-radius: 20px;
     position: relative;
-    overflow-x: auto; 
-    overflow-y: hidden; 
+    overflow-y: hidden;
+    overflow-x: hidden; 
     scroll-behavior: smooth; 
 }
 
@@ -16,6 +16,7 @@
     padding-bottom: 10px;
     max-height: 460px;
     overflow-x: auto; 
+
 }
 
 .dash-table table,
@@ -60,9 +61,8 @@ table tbody tr {
     transition: background-color 0.2s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
-table tbody tr:hover {
-    background-color: rgba(220, 212, 243, 0.1);
+table tbody tr:hover{
+    background-color: rgba(140, 122, 193, 0.1); 
     cursor: pointer;
 }
 

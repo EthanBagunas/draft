@@ -62,12 +62,14 @@
 
 .page-title {
   font-family: 'Inter', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: var(--main-text-color);
   opacity: 0.5;
+  padding: 8px
  
 }
+
 
 .custom-main-text-normal{
   font-family: 'Inter', sans-serif;
@@ -77,6 +79,21 @@
 }
 
 .custom-main-white-text-normal{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--background-color2);
+}
+
+.custom-text-placeholder{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--background-color2);
+  opacity: 0.8;
+}
+
+.custom-text-label{
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: normal;
