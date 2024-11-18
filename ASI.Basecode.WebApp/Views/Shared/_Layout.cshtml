@@ -10,12 +10,22 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/headerfinal.css"/>
+    <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    @Html.Partial("_CustomHeader")
+    @{
+        var currentAction = ViewContext.RouteData.Values["action"].ToString();
+        var currentController = ViewContext.RouteData.Values["controller"].ToString();
+    }
+
+    @if (!(currentAction == "Login" && currentController == "Account") &&
+    !(currentAction == "Register" && currentController == "Account"))
+    {
+        @Html.Partial("_CustomHeader")
+    }
+
     <div class="container">
         <main role="main">
             @RenderBody()
@@ -23,7 +33,7 @@
     </div>
     <!-- <footer class="border-top footer text-muted">
         <div class="container">
-            @Copyright
+    @Copyright
         </div>
     </footer> -->
 

@@ -11,47 +11,48 @@
 }
 <!--copy ang script-->
 @section Scripts {
-    <script src="~/js/modal.js"></script> <!-- Reference to the external JS file -->
+    <script src="~/js/modal.js"></script>
     <script>
-    $(document).ready(function() {
-        // Handle checkbox selection
-        $('.employee-checkbox').on('change', function() {
-            var selectedCount = $('.employee-checkbox:checked').length;
-            
-            // Enable/disable edit and delete buttons based on selection
-            if (selectedCount === 1) {
-                $('#edit-button').prop('disabled', false);
-                $('#delete-button').prop('disabled', false);
-            } else if (selectedCount > 1) {
-                $('#edit-button').prop('disabled', true);
-                $('#delete-button').prop('disabled', false);
-            } else {
-                $('#edit-button').prop('disabled', true);
-                $('#delete-button').prop('disabled', true);
-            }
-        });
+        $(document).ready(function () {
+            // Handle checkbox selection
+            $('.employee-checkbox').on('change', function () {
+                var selectedCount = $('.employee-checkbox:checked').length;
 
-        // Handle delete button click
-        $('#delete-button').click(function() {
-            var selectedUsers = $('.employee-checkbox:checked').map(function() {
-                return $(this).data('user-id');
-            }).get();
+                // Enable/disable edit and delete buttons based on selection
+                if (selectedCount === 1) {
+                    $('#edit-button').prop('disabled', false);
+                    $('#delete-button').prop('disabled', false);
+                } else if (selectedCount > 1) {
+                    $('#edit-button').prop('disabled', true);
+                    $('#delete-button').prop('disabled', false);
+                } else {
+                    $('#edit-button').prop('disabled', true);
+                    $('#delete-button').prop('disabled', true);
+                }
+            });
 
-            if (confirm('Are you sure you want to delete the selected user(s)?')) {
-                selectedUsers.forEach(function(userId) {
-                    $.ajax({
-                        url: '@Url.Action("DeleteUser", "Account")',
-                        type: 'POST',
-                        data: { id: userId },
-                        success: function() {
-                            location.reload();
-                        },
-                        error: function(error) {
-                            console.error('Error deleting user:', error);
-                        }
+            // Handle delete button click
+            $('#delete-button').click(function () {
+                var selectedUsers = $('.employee-checkbox:checked').map(function () {
+                    return $(this).data('user-id');
+                }).get();
+
+                if (confirm('Are you sure you want to delete the selected user(s)?')) {
+                    selectedUsers.forEach(function (userId) {
+                        $.ajax({
+                            url: '@Url.Action("DeleteUser", "Account")',
+                            type: 'POST',
+                            data: { id: userId },
+                            success: function () {
+                                location.reload();
+                            },
+                            error: function (error) {
+                                console.error('Error deleting user:', error);
+                            }
+                        });
                     });
-                });
-            }
+                }
+            });
         });
 
         // Add form submission handler
@@ -110,21 +111,30 @@
       <input type1="text" placeholder="Search...">
       <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
+    <!--search -->
+    <div class="custom-search-filter-container">
+        <div class="custom-box">
+            <input type1="text" placeholder="Search...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
 
-    <!-- Filter -->
-    <div class="custom-filter-box">
-        <span class="custom-main-text-normal">Filter</span>
-        <span class="custom-main-text-normal">Role</span>
-        <div class="custom-filter-select custom-main-text-normal" id="dropdown">
-          <span>Administrator</span>
-          <button><i class="fa-solid fa-caret-down"></i></button>
-          <ul class="custom-filter-options custom-main-text-normal"> 
-            <li class="custom-filter-options-li">Administrator</li>
-            <li class="custom-filter-options-li">Employee</li>
-        </ul>
-     </div>   
-    
-         
+        <!-- Filter -->
+        <div class="custom-filter-box">
+            <span class="custom-main-text-normal">Filter</span>
+            <span class="custom-main-text-normal">Role</span>
+            <div class="custom-filter-select custom-main-text-normal" id="dropdown">
+                <span>Administrator</span>
+                <button><i class="fa-solid fa-caret-down"></i></button>
+                <ul class="custom-filter-options custom-main-text-normal">
+                    <li class="custom-filter-options-li">Administrator</li>
+                    <li class="custom-filter-options-li">Employee</li>
+                </ul>
+            </div>
+
+
+        </div>
+
+        <!--crud html, copy ni-->
     </div>
 
 <!--crud html, copy ni-->
@@ -228,27 +238,77 @@
             </div>
         </form>
     </div>
-</div>
+    <!--table-->
+    <div class="custom-roomtable-container">
+        <div class="room-table">
+            <table>
+                <thead class="th-text">
+                    <tr>
+                        <th>   </th>
+                        <th>Profile</th>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Last Name</th>
+                        <th>First Name</th>
+                        <th>Name</th>
+                        <th>Contact Number</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <!--start sa content sa table-->
+                <tbody class="td-text">
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="employee-checkbox" data-user-id="@user.Id" />
+                            </td>
+                            <td>
+                                <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
+                            </td>
+                            <td>@user.Id</td>
+                            <td>@user.UserId</td>
+                            <td>@user.Lname</td>
+                            <td>@user.Fname</td>
+                            <td>@user.Name</td>
+                            <td>@user.Contact</td>
+                            <td>***********</td>
+                        </tr>
+                    }
+                </tbody>
+        </div>
+        </table>
+        <!--end-->
+        <!--modal html, copy ni-->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="logo-container1">
+                    <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
+                </div>
+                <div class="modal-header1">
+                    <h2>Add User</h2>
+                </div>
+                <form id="addUserForm">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <label for="firstName">First Name </label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
 
-<style>
-.employee-checkbox {
-    width: 18px;
-    height: 18px;
-    cursor: pointer;
-}
+                        <label for="lastName">Last Name </label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
 
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+                        <label for="contactNumber">Contact Number </label>
+                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+                    </div>
 
-.toolbar-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-</style>
+                    <div class="form-section">
+                        <h3>Company Information</h3>
+                        <label for="username">Username </label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" required>
+                        <label for="password">Password </label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </form>
 
 <script>
 function openModal() {
