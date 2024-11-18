@@ -96,9 +96,12 @@ namespace ASI.Basecode.Data
             {
                 entity.ToTable("Room");
 
-                entity.Property(e => e.MaxCapacity).HasColumnName("max_capacity");
+                entity.Property(e => e.RoomNumber)
+                    .HasColumnName("RoomNumber")
+                    .IsRequired();
 
-                entity.Property(e => e.Price).HasColumnName("price");
+                entity.Property(e => e.MaxCapacity)
+                    .HasColumnName("max_capacity");
 
                 entity.Property(e => e.Roomname)
                     .HasMaxLength(10)

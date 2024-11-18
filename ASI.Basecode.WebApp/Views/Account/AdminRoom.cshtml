@@ -12,6 +12,7 @@
 <!--copy ang script-->
 @section Scripts {
     <script src="~/js/modal.js"></script>
+    <script src="~/js/room-operations.js"></script>
 }
 @{
     ViewBag.LoginView = true;
@@ -94,18 +95,14 @@
         <div class="modal-header1">
             <h2>Add Room</h2>
         </div>
-        <form id="addUserForm">
+        <form id="addUserForm" onsubmit="addRoom(event)">
             <div class="form-section">
                 <h3>Room Information</h3>
-                <label for="roomID">Room Name </label>
-                <input type="text" id="roomID" name="roomName" placeholder="Enter room name" required>
-
-                <label for="roomNumber">Room Number </label>
-                <input type="text" id="roomNumber" name="roomNumber" placeholder="Enter room number" required>
+                <label for="roomName">Room Name </label>
+                <input type="text" id="roomName" name="roomName" placeholder="Enter room name" required>
 
                 <label for="capacity">Capacity</label>
                 <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
-
             </div>
 
             <div class="modal-footer1">
