@@ -190,5 +190,42 @@ namespace ASI.Basecode.Services.Services
         {
             return _repository.GetAllBooks();
         }
+
+        public void UpdateBookingStatuses()
+        {
+            var currentTime = DateTime.Now;
+            var bookings = _repository.GetAllBooks()
+                .Where(b => b.Status != "COMPLETED" && b.Status != "CANCELLED")
+                .ToList();
+
+            foreach (var booking in bookings)
+            {
+                if (booking.BookingDate?.Date == currentTime.Date)
+                {
+                    // Convert TimeSpan to DateTime for comparison
+                    var bookingStart = booking.BookingDate.Value.Date.Add(booking.TimeIn ?? TimeSpan.Zero);
+                    var bookingEnd = booking.BookingDate.Value.Date.Add(booking.TimeOut ?? TimeSpan.Zero);
+
+                    if (currentTime >= bookingEnd)
+                    {
+                        booking.Status = "COMPLETED";
+                        _repository.UpdateBook(booking);
+                    }
+                    else if (currentTime >= bookingStart && currentTime < bookingEnd)
+                    {
+                        if (booking.Status != "OCCUPIED")
+                        {
+                            booking.Status = "OCCUPIED";
+                            _repository.UpdateBook(booking);
+                        }
+                    }
+                }
+                else if (booking.BookingDate?.Date < currentTime.Date)
+                {
+                    booking.Status = "COMPLETED";
+                    _repository.UpdateBook(booking);
+                }
+            }
+        }
     }
 }

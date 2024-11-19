@@ -11,8 +11,9 @@ namespace ASI.Basecode.Services.Interfaces
     public interface IBookService
     {
         void AddBook(BookViewModel model);
-        void UpdateBook(int bookId);
+        IEnumerable<Book> GetAllBooksbyId(int roomid);
+        void UpdateBook(int bookid);
+        void UpdateBookingStatuses();
         IEnumerable<Book> GetAllBooks();
-        IEnumerable<Book> GetAllBooksbyId(int roomId);
     }
 }

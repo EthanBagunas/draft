@@ -81,7 +81,12 @@
                 <tbody class="td-text">
                   @foreach (var room in Model.Rooms)
                   {
-                      var booking = Model.Bookings.FirstOrDefault(b => b.RoomId == room.Id);
+                      var booking = Model.Bookings
+                          .Where(b => b.RoomId == room.Id && b.Status != "COMPLETED" && b.Status != "CANCELLED")
+                          .OrderBy(b => b.BookingDate)
+                          .ThenBy(b => b.TimeIn)
+                          .FirstOrDefault();
+                      
                       var status = Model.RoomStatuses[room.Id];
                       
                       <tr onclick="openBookingModal(@room.Id)">
@@ -92,10 +97,10 @@
                           </td>
                           <td>@room.Roomname</td>
                           <td>@room.MaxCapacity</td>
-                          <td>@(booking?.Customer?.Custfname ?? "--")</td>
-                          <td>@(booking?.BookingDate?.ToString("MM/dd/yyyy") ?? "--")</td>
-                          <td>@(booking?.TimeIn?.ToString(@"hh\:mm") ?? "--")</td>
-                          <td>@(booking?.TimeOut?.ToString(@"hh\:mm") ?? "--")</td>
+                          <td>@(booking != null ? booking.Customer?.Custfname : "--")</td>
+                          <td>@(booking != null ? booking.BookingDate?.ToString("MM/dd/yyyy") : "--")</td>
+                          <td>@(booking != null ? booking.TimeIn?.ToString(@"hh\:mm") : "--")</td>
+                          <td>@(booking != null ? booking.TimeOut?.ToString(@"hh\:mm") : "--")</td>
                       </tr>
                   }
                 </tbody>
