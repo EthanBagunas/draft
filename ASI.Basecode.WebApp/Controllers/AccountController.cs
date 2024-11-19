@@ -292,5 +292,21 @@ namespace ASI.Basecode.WebApp.Controllers
                 return Json(new { success = false, message = "Failed to fetch bookings" });
             }
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult NewRoom(RoomViewModel model)
+        {
+            try
+            {
+                _roomService.AddRoom(model);
+                return Json(new { success = true, message = "Room added successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to add room: {ex.Message}" });
+            }
+        }
     }
 }

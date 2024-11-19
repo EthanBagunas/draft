@@ -6,14 +6,19 @@ function addRoom(event) {
     };
 
     $.ajax({
-        url: '/Home/NewRoom',
+        url: '/Account/NewRoom',
         type: 'POST',
         data: roomData,
         success: function(response) {
-            console.log('Room added successfully:', response);
-            alert('Room added successfully!');
-            closeModal();
-            location.reload();
+            if (response.success) {
+                console.log('Room added successfully:', response);
+                alert('Room added successfully!');
+                closeModal();
+                location.reload();
+            } else {
+                console.error('Error adding room:', response.message);
+                alert(response.message || 'Failed to add room');
+            }
         },
         error: function(error) {
             console.error('Error adding room:', error);
