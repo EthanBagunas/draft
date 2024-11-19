@@ -1,4 +1,5 @@
 @model IEnumerable<ASI.Basecode.Data.Models.User>
+@using System.Collections.Generic
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
@@ -24,7 +25,7 @@
                     $('#delete-button').prop('disabled', false);
                 } else if (selectedCount > 1) {
                     $('#edit-button').prop('disabled', true);
-                    $('#delete-button').prop('disabled', false);
+                    $('#delete-button').prop('disabled', true);
                 } else {
                     $('#edit-button').prop('disabled', true);
                     $('#delete-button').prop('disabled', true);
@@ -42,7 +43,7 @@
                         $.ajax({
                             url: '@Url.Action("DeleteUser", "Account")',
                             type: 'POST',
-                            data: { id: userId },
+                            data: { UserId: userId },
                             success: function () {
                                 location.reload();
                             },
@@ -148,7 +149,7 @@
         <button class="toolbar-button" id="edit-button">
             <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
         </button>
-        <button class="toolbar-button" id="delete-button">
+        <button class="toolbar-button" id="delete-button" onclick="DeleteUser()">
            <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
         </button>
     </div> 
@@ -178,7 +179,7 @@
             {
                 <tr>
                     <td>
-                        <input type="checkbox" class="employee-checkbox" data-user-id="@user.Id" />
+                        <input type="checkbox" class="employee-checkbox" data-user-id="@user.UserId" />
                     </td>
                     <td>
                         <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
@@ -189,7 +190,6 @@
                     <td>@user.Fname</td>
                     <td>@user.Name</td>
                     <td>@user.Contact</td>
-                    <td>***********</td>
                 </tr>
             }
         </tbody>
@@ -261,7 +261,7 @@
                     {
                         <tr>
                             <td>
-                                <input type="checkbox" class="employee-checkbox" data-user-id="@user.Id" />
+                                <input type="checkbox" class="employee-checkbox" data-user-id="@user.UserId" />
                             </td>
                             <td>
                                 <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
@@ -272,7 +272,6 @@
                             <td>@user.Fname</td>
                             <td>@user.Name</td>
                             <td>@user.Contact</td>
-                            <td>***********</td>
                         </tr>
                     }
                 </tbody>
@@ -308,9 +307,42 @@
                         <input type="text" id="username" name="username" placeholder="Enter username" required>
                         <label for="password">Password </label>
                         <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
+    function DeleteUser() {
+    var selectedUsers = $('.employee-checkbox:checked').map(function () {
+        return $(this).data('user-UserId');
+    }).get();
+
+    if (selectedUsers.length === 0) {;
+        alert('Please select at least one user to delete.');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete the selected user(s)?')) {
+        selectedUsers.forEach(function (userId) {
+            alert(userId);
+            $.ajax({
+                url: 'https://localhost:52564/Account/DeleteUser/',
+                type: 'POST',
+                data: { UserId: userId },
+                success: function () {
+                    console.log('User deleted successfully');
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error('Error deleting user:', error);
+                }
+            });
+        });
+    }
+}
 function openModal() {
     const modal = document.getElementById('myModal');
     modal.classList.add('show');
