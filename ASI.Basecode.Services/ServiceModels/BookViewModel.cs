@@ -14,6 +14,10 @@ namespace ASI.Basecode.Services.ServiceModels
         public TimeSpan TimeIn { get; set; }
         [Required]
         public TimeSpan TimeOut { get; set; }
+        [Required]
+        public string GuestName { get; set; }
+        [Required]
+        public string ContactNumber { get; set; }
         public int? CustomerId { get; set; }
         public int? Duration { get; set; }
         public string Status { get; set; }

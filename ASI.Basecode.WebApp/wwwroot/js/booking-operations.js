@@ -83,6 +83,11 @@ function addBooking(event) {
         return;
     }
 
+    if (!formData.guestName || !formData.contactNumber) {
+        alert('Please fill in all guest information');
+        return;
+    }
+
     $.ajax({
         url: '/Home/NewBook',
         type: 'POST',

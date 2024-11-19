@@ -19,11 +19,13 @@ namespace ASI.Basecode.Services.Services
         private readonly IBookRepository _repository;
         private readonly IRoomService _roomService;
         private static Timer _timer;
+        private readonly ICustomerRepository _customerRepository;
 
-        public BookService(IBookRepository repository, IRoomService roomService) 
+        public BookService(IBookRepository repository, IRoomService roomService, ICustomerRepository customerRepository) 
         {
             _repository = repository;
             _roomService = roomService;
+            _customerRepository = customerRepository;
         }
         public void DoWork()
         {
@@ -50,8 +52,21 @@ namespace ASI.Basecode.Services.Services
                 throw new InvalidOperationException("This time slot is already booked");
             }
 
+            // Create customer first
+            var customer = new Customer
+            {
+                Custfname = model.GuestName,
+                Status = "ACTIVE",
+                Contact = model.ContactNumber,
+                Address = "", // Set default or get from form
+                Custlname = "" // Set default or get from form
+            };
+
+            _customerRepository.CreateCustomer(customer);
+
             var book = new Book
             {
+                CustomerId = customer.Id,
                 RoomId = model.RoomId,
                 BookingDate = model.BookingDate,
                 TimeIn = model.TimeIn,

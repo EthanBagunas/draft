@@ -68,6 +68,31 @@ namespace ASI.Basecode.Data
                     .HasConstraintName("FK_Book_Room");
             });
 
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.ToTable("Customer");
+
+                entity.Property(e => e.Custfname)
+                    .HasColumnName("custfname")
+                    .HasMaxLength(10);
+                
+                entity.Property(e => e.Custlname)
+                    .HasColumnName("custlname")
+                    .HasMaxLength(10);
+                
+                entity.Property(e => e.Address)
+                    .HasColumnName("address")
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(10);
+                
+                entity.Property(e => e.Contact)
+                    .HasColumnName("Contact")
+                    .HasMaxLength(20);
+            });
+
             modelBuilder.Entity<Room>(entity =>
             {
                 entity.ToTable("Room");
