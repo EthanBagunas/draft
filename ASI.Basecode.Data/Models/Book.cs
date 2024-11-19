@@ -35,7 +35,10 @@ namespace ASI.Basecode.Data.Models
         public DateTime? ReservationDate { get; set; }
 
         // Navigation properties
+        [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
+        
+        [ForeignKey("RoomId")]
         public virtual Room Room { get; set; }
     }
 }

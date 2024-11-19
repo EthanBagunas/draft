@@ -94,8 +94,8 @@
                           <td>@room.MaxCapacity</td>
                           <td>@(booking?.Customer?.Custfname ?? "--")</td>
                           <td>@(booking?.BookingDate?.ToString("MM/dd/yyyy") ?? "--")</td>
-                          <td>@(booking?.TimeIn?.ToString() ?? "--")</td>
-                          <td>@(booking?.TimeOut?.ToString() ?? "--")</td>
+                          <td>@(booking?.TimeIn?.ToString(@"hh\:mm") ?? "--")</td>
+                          <td>@(booking?.TimeOut?.ToString(@"hh\:mm") ?? "--")</td>
                       </tr>
                   }
                 </tbody>

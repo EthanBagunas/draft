@@ -18,7 +18,10 @@ namespace ASI.Basecode.Data.Repositories
 
         public IEnumerable<Book> GetAllBooks()
         {
-            return this.GetDbSet<Book>();
+            return this.GetDbSet<Book>()
+                .Include(b => b.Customer)
+                .Include(b => b.Room)
+                .ToList();
         }
 
         public void CreateBook(Book book)

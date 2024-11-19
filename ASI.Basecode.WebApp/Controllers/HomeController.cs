@@ -60,13 +60,13 @@ namespace ASI.Basecode.WebApp.Controllers
         public IActionResult Homepage()
         {
             var rooms = _roomService.GetAllRooms();
-            var bookings = _bookService.GetAllBooks();
+            var bookings = _bookService.GetAllBooks().ToList();
             var statuses = _roomService.GetCurrentRoomStatuses();
 
             var viewModel = new HomepageViewModel
             {
                 Rooms = rooms.ToList(),
-                Bookings = bookings.ToList(),
+                Bookings = bookings,
                 RoomStatuses = statuses
             };
 
