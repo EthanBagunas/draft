@@ -1,0 +1,124 @@
+.booking-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.booking-modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form-section {
+    margin-bottom: 25px;
+}
+
+.booking-form-section h3 {
+    color: #65558F;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.booking-form-group {
+    margin-bottom: 15px;
+}
+
+.booking-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+.booking-select,
+.booking-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1.5px solid #BFA6D0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+.booking-select:focus,
+.booking-input:focus {
+    border-color: #65558F;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(101, 85, 143, 0.1);
+}
+
+.booking-btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.booking-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.booking-btn-cancel {
+    background-color: #fff;
+    border: 1.5px solid #BFA6D0;
+    color: #65558F;
+}
+
+.booking-btn-submit {
+    background-color: #65558F;
+    border: none;
+    color: #fff;
+}
+
+.booking-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.booking-close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+}
+
+.booking-select option {
+    padding: 8px;
+}
+
+.booking-select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+/* Style for date input */
+.booking-input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    padding: 10px 15px;
+}
+
+.booking-input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 5px;
+    filter: invert(0.5);
+}

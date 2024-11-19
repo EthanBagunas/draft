@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/homepage.css" />
     <link rel="stylesheet" href="~/css/homepagetable.css" />
+    <link rel="stylesheet" href="~/css/booking-modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
 <!--copy ang script-->
 @section Scripts {
     <script src="~/js/modal.js"></script>  
+    <script src="~/js/booking-operations.js"></script>
 }
 @{
     ViewBag.LoginView = true;
@@ -105,48 +107,58 @@
   </div>
 
  <!--modal html, copy ni-->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <div class="modal-header1">
-            <h2>Add Booking</h2>
+<div id="myModal" class="booking-modal">
+    <div class="booking-modal-content">
+        <span class="booking-close" onclick="closeModal()">&times;</span>
+        <div class="booking-form-section">
+            <h3>Add New Booking</h3>
+            <form id="bookingForm" onsubmit="addBooking(event)">
+                <div class="booking-form-group">
+                    <label class="booking-label">Room</label>
+                    <select id="roomSelect" name="roomId" class="booking-select" required>
+                        <option value="">Select a room</option>
+                    </select>
+                </div>
+
+                <div class="booking-form-group">
+                    <label class="booking-label">Date</label>
+                    <input type="date" id="bookingDate" name="bookingDate" 
+                           class="booking-input" required>
+                </div>
+
+                <div class="booking-form-group">
+                    <label class="booking-label">Start Time</label>
+                    <select id="timeIn" name="timeIn" class="booking-select" required>
+                        <option value="">Select start time</option>
+                    </select>
+                </div>
+
+                <div class="booking-form-group">
+                    <label class="booking-label">End Time</label>
+                    <select id="timeOut" name="timeOut" class="booking-select" required>
+                        <option value="">Select end time</option>
+                    </select>
+                </div>
+
+                <div class="booking-form-group">
+                    <label class="booking-label">Guest Name</label>
+                    <input type="text" id="guestName" name="guestName" 
+                           class="booking-input" required>
+                </div>
+
+                <div class="booking-form-group">
+                    <label class="booking-label">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" 
+                           class="booking-input" required>
+                </div>
+
+                <div class="booking-btn-group">
+                    <button type="button" class="booking-btn booking-btn-cancel" 
+                            onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="booking-btn booking-btn-submit">Submit</button>
+                </div>
+            </form>
         </div>
-        <form id="bookingForm" onsubmit="addBooking(event)">
-            <div class="form-section">
-                <h3>Room Information</h3>
-                <label for="roomSelect">Room</label>
-                <select id="roomSelect" name="roomId" required>
-                    <!-- Will be populated via JavaScript -->
-                </select>
-
-                <label for="bookingDate">Reservation Date</label>
-                <input type="date" id="bookingDate" name="bookingDate" required>
-
-                <label for="timeIn">Start Time</label>
-                <select id="timeIn" name="timeIn" required>
-                    <!-- Will be populated via JavaScript -->
-                </select>
-
-                <label for="timeOut">End Time</label>
-                <select id="timeOut" name="timeOut" required>
-                    <!-- Will be populated via JavaScript -->
-                </select>
-            </div>
-
-            <div class="form-section">
-                <h3>Guest Information</h3>
-                <label for="guestName">Guest Name</label>
-                <input type="text" id="guestName" name="guestName" required>
-                
-                <label for="contactNumber">Contact Number</label>
-                <input type="tel" id="contactNumber" name="contactNumber" required>
-            </div>
-
-            <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="submit-bttn">Submit</button>
-            </div>
-        </form>
     </div>
 </div>
 
