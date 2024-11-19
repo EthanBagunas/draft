@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 namespace ASI.Basecode.WebApp.Controllers
 {
     /// <summary>
@@ -58,7 +59,18 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult Homepage()
         {
-            return View();
+            var rooms = _roomService.GetAllRooms();
+            var bookings = _bookService.GetAllBooks().ToList();
+            var statuses = _roomService.GetCurrentRoomStatuses();
+
+            var viewModel = new HomepageViewModel
+            {
+                Rooms = rooms.ToList(),
+                Bookings = bookings,
+                RoomStatuses = statuses
+            };
+
+            return View(viewModel);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -103,16 +115,15 @@ namespace ASI.Basecode.WebApp.Controllers
         [AllowAnonymous]
         public IActionResult NewBook(BookViewModel model)
         {
-            var book = new Book();
             try
             {
                 _bookService.AddBook(model);
+                return Json(new { success = true, message = "Booking added successfully" });
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception occured:" + ex);
+                return Json(new { success = false, message = ex.Message });
             }
-            return Ok(book);
         }
         [HttpPost]
         [AllowAnonymous]
@@ -124,13 +135,13 @@ namespace ASI.Basecode.WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
-
         {
-            var books = _bookService.GetAllBooksbyId(roomid);
-
+            var books = _bookService.GetAllBooksbyId(roomid)
+                                   .Where(b => b.Status == "RESERVED" || b.Status == "VACANT")
+                                   .OrderBy(b => b.BookingDate)
+                                   .ThenBy(b => b.TimeIn);
             
             return Json(books);
-
         }
 
         [HttpGet]
@@ -147,6 +158,33 @@ namespace ASI.Basecode.WebApp.Controllers
                 _logger.LogError($"Error getting room: {ex.Message}");
                 return Json(new { success = false, message = $"Failed to get room: {ex.Message}" });
             }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetBookingsForRoom(int roomId, DateTime date)
+        {
+            var bookings = _bookService.GetAllBooksbyId(roomId)
+                .Where(b => b.BookingDate?.Date == date.Date)
+                .Select(b => new {
+                    timeIn = b.TimeIn?.ToString(@"hh\:mm"),
+                    timeOut = b.TimeOut?.ToString(@"hh\:mm")
+                });
+            
+            return Json(bookings);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CheckTimeSlotAvailability(int roomId, DateTime date, string time)
+        {
+            var timeSpan = TimeSpan.Parse(time);
+            var isBooked = _bookService.GetAllBooksbyId(roomId)
+                .Any(b => b.BookingDate?.Date == date.Date &&
+                          timeSpan >= b.TimeIn &&
+                          timeSpan < b.TimeOut);
+            
+            return Json(new { isBooked });
         }
 
     }

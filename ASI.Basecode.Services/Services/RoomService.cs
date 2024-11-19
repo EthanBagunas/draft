@@ -20,10 +20,12 @@ namespace ASI.Basecode.Services.Services
     {
         private readonly IRoomRepository _repository;
         private readonly IMapper _mapper;
-        public RoomService(IRoomRepository repository, IMapper mapper)
+        private readonly IBookRepository _bookRepository;
+        public RoomService(IRoomRepository repository, IMapper mapper, IBookRepository bookRepository)
         {
             _mapper = mapper;
             _repository = repository;
+            _bookRepository = bookRepository;
         }
         public void AddRoom(RoomViewModel model)
         {
@@ -46,13 +48,10 @@ namespace ASI.Basecode.Services.Services
                 room.MaxCapacity = capacity;
                 room.Status = "ACTIVE";
                 
-                Console.WriteLine($"Attempting to add room: {room.Roomname} with number {room.RoomNumber}");
                 _repository.AddRoom(room);
-                Console.WriteLine("Room added successfully");
             }
             catch (Exception ex) 
             {
-                Console.WriteLine($"Failed to add room: {ex.Message}");
                 throw new Exception($"Failed to add room: {ex.Message}", ex);
             }
         }
@@ -67,27 +66,13 @@ namespace ASI.Basecode.Services.Services
                 var room = _repository.GetAll().FirstOrDefault(r => r.Id == roomId);
                 if (room != null)
                 {
-                    var deletedRoomNumber = room.RoomNumber;
-                    
-                    // Delete the room
-                    _repository.UpdateRoom(room); // Set status to inactive or delete
-
-                    // Reorder remaining room numbers
-                    var roomsToUpdate = _repository.GetAll()
-                        .Where(r => r.RoomNumber > deletedRoomNumber)
-                        .OrderBy(r => r.RoomNumber)
-                        .ToList();
-
-                    foreach (var r in roomsToUpdate)
-                    {
-                        r.RoomNumber--;
-                        _repository.UpdateRoom(r);
-                    }
+                    room.Status = "INACTIVE";
+                    _repository.UpdateRoom(room);
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new Exception($"Failed to delete room: {ex.Message}", ex);
             }
         }
         
@@ -99,6 +84,39 @@ namespace ASI.Basecode.Services.Services
         public Room GetRoomById(int id)
         {
             return _repository.GetAll().FirstOrDefault(r => r.Id == id);
+        }
+
+        public Dictionary<int, string> GetCurrentRoomStatuses()
+        {
+            var currentTime = DateTime.Now;
+            var statuses = new Dictionary<int, string>();
+            var rooms = GetAllRooms();
+
+            foreach (var room in rooms)
+            {
+                var currentBooking = _bookRepository.GetAllBooks()
+                    .Where(b => b.RoomId == room.Id && 
+                           b.BookingDate.HasValue && 
+                           b.BookingDate.Value.Date == currentTime.Date)
+                    .OrderBy(b => b.TimeIn)
+                    .FirstOrDefault();
+
+                if (currentBooking == null)
+                {
+                    statuses[room.Id] = "Vacant";
+                    continue;
+                }
+
+                if (currentTime.TimeOfDay < currentBooking.TimeIn)
+                    statuses[room.Id] = "Reserved";
+                else if (currentTime.TimeOfDay >= currentBooking.TimeIn && 
+                         currentTime.TimeOfDay <= currentBooking.TimeOut)
+                    statuses[room.Id] = "Occupied";
+                else
+                    statuses[room.Id] = "Vacant";
+            }
+
+            return statuses;
         }
     }
     

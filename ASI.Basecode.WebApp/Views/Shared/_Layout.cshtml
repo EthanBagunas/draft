@@ -23,7 +23,7 @@
     @if (!(currentAction == "Login" && currentController == "Account") &&
     !(currentAction == "Register" && currentController == "Account"))
     {
-        @Html.Partial("_CustomHeader")
+        <partial name="_CustomHeader" />
     }
 
     <div class="container">

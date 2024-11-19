@@ -11,8 +11,102 @@
 }
 <!--copy ang script-->
 @section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/modal.js"></script>
     <script src="~/js/room-operations.js"></script>
+    <script>
+        console.log('Loading room operations scripts...');
+
+        function showBookings(roomId) {
+            console.log('showBookings called with roomId:', roomId);
+            
+            $.ajax({
+                url: `/Account/GetBookingsbyRoomid?roomid=${roomId}`,
+                type: 'POST',
+                success: function(bookings) {
+                    console.log('Received bookings data:', bookings);
+                    
+                    if (Array.isArray(bookings)) {
+                        populateBookingsTable(bookings);
+                        openBookingsModal();
+                    } else {
+                        console.error('Invalid response format:', bookings);
+                        alert('Failed to fetch bookings');
+                    }
+                },
+                error: function(error) {
+                    console.error('Error fetching bookings:', error);
+                    alert('Failed to fetch bookings');
+                }
+            });
+        }
+
+        function populateBookingsTable(bookings) {
+            console.log('Populating bookings table with:', bookings);
+            
+            const tbody = document.getElementById('bookingsTableBody');
+            if (!tbody) {
+                console.error('Bookings table body not found!');
+                return;
+            }
+            
+            tbody.innerHTML = '';
+
+            if (bookings.length === 0) {
+                console.log('No bookings found');
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="6" style="text-align: center;">No bookings found</td>';
+                tbody.appendChild(row);
+                return;
+            }
+
+            bookings.forEach(booking => {
+                if (booking.status === 'RESERVED' || booking.status === 'VACANT') {
+                    console.log('Processing booking:', booking);
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.customer?.custfname || '--'}</td>
+                        <td>${booking.customer?.contact || '--'}</td>
+                        <td>${booking.bookingDate ? new Date(booking.bookingDate).toLocaleDateString() : '--'}</td>
+                        <td>${booking.timeIn ? new Date('1970-01-01T' + booking.timeIn).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
+                        <td>${booking.timeOut ? new Date('1970-01-01T' + booking.timeOut).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
+                        <td>${booking.status}</td>
+                    `;
+                    tbody.appendChild(row);
+                }
+            });
+        }
+
+        function openBookingsModal() {
+            console.log('Opening bookings modal');
+            const modal = document.getElementById('bookingsModal');
+            if (modal) {
+                modal.style.display = 'block';
+                console.log('Modal opened successfully');
+            } else {
+                console.error('Bookings modal element not found!');
+            }
+        }
+
+        function closeBookingsModal() {
+            console.log('Closing bookings modal');
+            const modal = document.getElementById('bookingsModal');
+            if (modal) {
+                modal.style.display = 'none';
+                console.log('Modal closed successfully');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingsModal');
+            if (event.target === modal) {
+                closeBookingsModal();
+            }
+        }
+
+        console.log('Room operations scripts loaded successfully');
+    </script>
 }
 @{
     ViewBag.LoginView = true;
@@ -75,6 +169,9 @@
                             <button class="grid-toolbar-button" onclick="deleteRoom(@room.Id)">
                                 <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
                             </button>
+                            <button class="grid-toolbar-button" onclick="showBookings(@room.Id)">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -97,7 +194,7 @@
         <div class="modal-header1">
             <h2>Add Room</h2>
         </div>
-        <form id="addUserForm" onsubmit="addRoom(event)">
+        <form id="addRoomForm" onsubmit="addRoom(event)">
             <div class="form-section">
                 <h3>Room Information</h3>
                 <label for="roomName">Room Name </label>
@@ -112,5 +209,30 @@
                 <button type="submit" class="submit-bttn">Submit</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="bookingsModal" class="modal">
+    <div class="modal-content" style="width: 80%;">
+        <span class="close" onclick="closeBookingsModal()">&times;</span>
+        <div class="modal-header1">
+            <h2>Room Bookings</h2>
+        </div>
+        <div class="bookings-table-container">
+            <table class="bookings-table">
+                <thead class="th-text">
+                    <tr>
+                        <th>Guest Name</th>
+                        <th>Contact Number</th>
+                        <th>Booking Date</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTableBody" class="td-text">
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
