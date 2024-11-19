@@ -1,20 +1,16 @@
-@model ASI.Basecode.Services.ServiceModels.HomepageViewModel
-@using ASI.Basecode.Data.Models
-@using System.Linq
+@model LoginViewModel
 @using static ASI.Basecode.Resources.Views.Screen
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/homepage.css" />
     <link rel="stylesheet" href="~/css/homepagetable.css" />
-    <link rel="stylesheet" href="~/css/booking-modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
 <!--copy ang script-->
 @section Scripts {
     <script src="~/js/modal.js"></script>  
-    <script src="~/js/booking-operations.js"></script>
 }
 @{
     ViewBag.LoginView = true;
@@ -79,31 +75,126 @@
 
                 <!--start sa content sa table-->
                 <tbody class="td-text">
-                  @foreach (var room in Model.Rooms)
-                  {
-                      var booking = Model.Bookings
-                          .Where(b => b.RoomId == room.Id && b.Status != "COMPLETED" && b.Status != "CANCELLED")
-                          .OrderBy(b => b.BookingDate)
-                          .ThenBy(b => b.TimeIn)
-                          .FirstOrDefault();
-                      
-                      var status = Model.RoomStatuses[room.Id];
-                      
-                      <tr onclick="openBookingModal(@room.Id)">
-                          <td>
-                              <p class="status status-@status.ToLower()-text status-@status.ToLower()">
-                                  @status
-                              </p>
-                          </td>
-                          <td>@room.Roomname</td>
-                          <td>@room.MaxCapacity</td>
-                          <td>@(booking != null ? booking.Customer?.Custfname : "--")</td>
-                          <td>@(booking != null ? booking.BookingDate?.ToString("MM/dd/yyyy") : "--")</td>
-                          <td>@(booking != null ? booking.TimeIn?.ToString(@"hh\:mm") : "--")</td>
-                          <td>@(booking != null ? booking.TimeOut?.ToString(@"hh\:mm") : "--")</td>
-                      </tr>
-                  }
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
                 </tbody>
+                <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-occupied-text status-occupied">Occupied</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>
+
+                <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                 </tr>
+                </tbody>
+                <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                 </tr>
+                </tbody>
+                <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-vacant-text status-vacant">Vacant</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>--</td>
+                 </tr>
+                </tbody>
+                <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>   
+                 <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>      
+                 <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>      
+                 <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>      
+                 <tbody class="td-text">
+                  <tr>
+                    <!-- sample only, iconnect pa nis database-->
+                        <td><p class="status status-reserved-text status-reserved">Reserved</p></td>
+                        <td>Conference Room</td>
+                        <td>10</td>
+                        <td>Slater Young</td>
+                        <td>10/26/2024</td>
+                        <td>8:00 AM</td>
+                        <td>10:00 AM</td>
+                 </tr>
+                </tbody>                   
       </table>
     </div>
   </div>
@@ -112,58 +203,35 @@
   </div>
 
  <!--modal html, copy ni-->
-<div id="myModal" class="booking-modal">
-    <div class="booking-modal-content">
-        <span class="booking-close" onclick="closeModal()">&times;</span>
-        <div class="booking-form-section">
-            <h3>Add New Booking</h3>
-            <form id="bookingForm" onsubmit="addBooking(event)">
-                <div class="booking-form-group">
-                    <label class="booking-label">Room</label>
-                    <select id="roomSelect" name="roomId" class="booking-select" required>
-                        <option value="">Select a room</option>
-                    </select>
-                </div>
-
-                <div class="booking-form-group">
-                    <label class="booking-label">Date</label>
-                    <input type="date" id="bookingDate" name="bookingDate" 
-                           class="booking-input" required>
-                </div>
-
-                <div class="booking-form-group">
-                    <label class="booking-label">Start Time</label>
-                    <select id="timeIn" name="timeIn" class="booking-select" required>
-                        <option value="">Select start time</option>
-                    </select>
-                </div>
-
-                <div class="booking-form-group">
-                    <label class="booking-label">End Time</label>
-                    <select id="timeOut" name="timeOut" class="booking-select" required>
-                        <option value="">Select end time</option>
-                    </select>
-                </div>
-
-                <div class="booking-form-group">
-                    <label class="booking-label">Guest Name</label>
-                    <input type="text" id="guestName" name="guestName" 
-                           class="booking-input" required>
-                </div>
-
-                <div class="booking-form-group">
-                    <label class="booking-label">Contact Number</label>
-                    <input type="tel" id="contactNumber" name="contactNumber" 
-                           class="booking-input" required>
-                </div>
-
-                <div class="booking-btn-group">
-                    <button type="button" class="booking-btn booking-btn-cancel" 
-                            onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="booking-btn booking-btn-submit">Submit</button>
-                </div>
-            </form>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-header1">
+            <h2>Add Booking</h2>
         </div>
+        <form id="addUserForm">
+            <div class="form-section">
+                <h3>Room Information</h3>
+                <label for="roomName">Room Name </label>
+                <input type="text" id="roomName" name="roomName" placeholder="Enter room name" required>
+
+                <label for="capacity">Number of Guests </label>
+                <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
+            </div>
+
+            <div class="form-section">
+                <h3>Guest Information</h3>
+                <label for="GuestName">Guest Name </label>
+                <input type="text" id="GuestName" name="GuestName" placeholder="Enter name" required>
+                 <label for="ContactNumber">Contact Number </label>
+                <input type="password" id="ContactNumber" name="ContactNumber" placeholder="Enter contact number" required>
+            </div>
+
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
 

@@ -16,12 +16,10 @@ namespace ASI.Basecode.Data.Repositories
         {
         }
 
-        public IEnumerable<Book> GetAllBooks()
+       
+        public bool UserExists(string userId)
         {
-            return this.GetDbSet<Book>()
-                .Include(b => b.Customer)
-                .Include(b => b.Room)
-                .ToList();
+            return this.GetDbSet<User>().Any(x => x.UserId == userId);
         }
 
         public void CreateBook(Book book)
@@ -29,11 +27,19 @@ namespace ASI.Basecode.Data.Repositories
             this.GetDbSet<Book>().Add(book);
             UnitOfWork.SaveChanges();
         }
-
         public void UpdateBook(Book book)
         {
             this.GetDbSet<Book>().Update(book);
             UnitOfWork.SaveChanges();
         }
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return this.GetDbSet<Book>();
+        }
+        /*public async Task<Room> GetRoomWithBookingsAsync(int roomId)
+        {
+          
+        }*/
+
     }
 }

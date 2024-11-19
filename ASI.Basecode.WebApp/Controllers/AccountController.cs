@@ -30,7 +30,6 @@ namespace ASI.Basecode.WebApp.Controllers
         private readonly IConfiguration _appConfiguration;
         private readonly IUserService _userService;
         private readonly IRoomService _roomService;
-        private readonly IBookService _bookService;
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountController"/> class.
         /// </summary>
@@ -44,7 +43,6 @@ namespace ASI.Basecode.WebApp.Controllers
         /// <param name="tokenValidationParametersFactory">The token validation parameters factory.</param>
         /// <param name="tokenProviderOptionsFactory">The token provider options factory.</param>
         /// <param name="roomService">The room service.</param>
-        /// <param name="bookService">The book service.</param>
         public AccountController(
                             SignInManager signInManager,
                             IHttpContextAccessor httpContextAccessor,
@@ -54,8 +52,7 @@ namespace ASI.Basecode.WebApp.Controllers
                             IUserService userService,
                             TokenValidationParametersFactory tokenValidationParametersFactory,
                             TokenProviderOptionsFactory tokenProviderOptionsFactory,
-                            IRoomService roomService,
-                            IBookService bookService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
+                            IRoomService roomService) : base(httpContextAccessor, loggerFactory, configuration, mapper)
         {
             this._sessionManager = new SessionManager(this._session);
             this._signInManager = signInManager;
@@ -64,7 +61,6 @@ namespace ASI.Basecode.WebApp.Controllers
             this._appConfiguration = configuration;
             this._userService = userService;
             this._roomService = roomService;
-            this._bookService = bookService;
 
 
         }
@@ -270,42 +266,6 @@ namespace ASI.Basecode.WebApp.Controllers
             {
                 _logger.LogError(ex, "Error creating user");
                 return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
-        {
-            try
-            {
-                var books = _bookService.GetAllBooksbyId(roomid)
-                                       .Where(b => b.Status == "RESERVED" || b.Status == "VACANT")
-                                       .OrderBy(b => b.BookingDate)
-                                       .ThenBy(b => b.TimeIn);
-                
-                return Json(books);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error fetching bookings: {ex.Message}");
-                return Json(new { success = false, message = "Failed to fetch bookings" });
-            }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public IActionResult NewRoom(RoomViewModel model)
-        {
-            try
-            {
-                _roomService.AddRoom(model);
-                return Json(new { success = true, message = "Room added successfully" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error adding room: {ex.Message}");
-                return Json(new { success = false, message = $"Failed to add room: {ex.Message}" });
             }
         }
     }

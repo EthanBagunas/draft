@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using ASI.Basecode.Services.Services;
-using ASI.Basecode.Services.Interfaces;
 
 var appBuilder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
@@ -28,9 +25,6 @@ appBuilder.Logging
 
 var configurer = new StartupConfigurer(appBuilder.Configuration);
 configurer.ConfigureServices(appBuilder.Services);
-
-appBuilder.Services.AddHostedService<TimedHostedService>();
-appBuilder.Services.AddScoped<IBookService, BookService>();
 
 var app = appBuilder.Build();
 
