@@ -74,14 +74,6 @@ namespace ASI.Basecode.Data
 
                 entity.Property(e => e.Custfname)
                     .HasColumnName("custfname")
-                    .HasMaxLength(10);
-                
-                entity.Property(e => e.Custlname)
-                    .HasColumnName("custlname")
-                    .HasMaxLength(10);
-                
-                entity.Property(e => e.Address)
-                    .HasColumnName("address")
                     .HasMaxLength(50);
                 
                 entity.Property(e => e.Status)

@@ -1,15 +1,97 @@
-function populateTimeSlots() {
+function populateTimeSlots(selectedDate) {
     const timeIn = document.getElementById('timeIn');
     const timeOut = document.getElementById('timeOut');
+    const roomId = document.getElementById('roomSelect').value;
+    
+    // Clear existing options
     timeIn.innerHTML = '<option value="">Select start time</option>';
     timeOut.innerHTML = '<option value="">Select end time</option>';
+    timeOut.disabled = true; // Disable end time until start time is selected
 
-    // Generate time slots from 8 AM to 9 PM
-    for (let hour = 8; hour <= 21; hour++) {
-        const time = `${hour.toString().padStart(2, '0')}:00`;
-        timeIn.add(new Option(time, time));
-        timeOut.add(new Option(time, time));
+    // Get current date and time
+    const now = new Date();
+    const selectedDateTime = new Date(selectedDate);
+    const isToday = selectedDateTime.toDateString() === now.toDateString();
+    
+    // Get existing bookings for the selected room and date
+    $.get('/Home/GetBookingsForRoom', { 
+        roomId: roomId,
+        date: selectedDate 
+    }, function(bookings) {
+        // Generate available time slots
+        for (let hour = 8; hour <= 21; hour++) {
+            const timeSlot = `${hour.toString().padStart(2, '0')}:00`;
+            
+            // For today's bookings, don't show past times
+            if (isToday && hour <= now.getHours()) {
+                continue;
+            }
+
+            // Check if this time slot is already booked
+            const isBooked = bookings.some(booking => {
+                const bookingStart = new Date(`2000/01/01 ${booking.timeIn}`);
+                const bookingEnd = new Date(`2000/01/01 ${booking.timeOut}`);
+                const slotTime = new Date(`2000/01/01 ${timeSlot}`);
+                return slotTime >= bookingStart && slotTime < bookingEnd;
+            });
+
+            if (!isBooked) {
+                timeIn.add(new Option(timeSlot, timeSlot));
+            }
+        }
+    });
+}
+
+function updateEndTimeOptions() {
+    const timeIn = document.getElementById('timeIn');
+    const timeOut = document.getElementById('timeOut');
+    const selectedStartTime = timeIn.value;
+
+    if (!selectedStartTime) {
+        timeOut.disabled = true;
+        timeOut.innerHTML = '<option value="">Select end time</option>';
+        return;
     }
+
+    timeOut.disabled = false;
+    timeOut.innerHTML = '<option value="">Select end time</option>';
+
+    // Convert selected start time to Date object for comparison
+    const startHour = parseInt(selectedStartTime.split(':')[0]);
+    
+    // Populate end time options (must be at least 1 hour after start time)
+    for (let hour = startHour + 1; hour <= 21; hour++) {
+        const timeSlot = `${hour.toString().padStart(2, '0')}:00`;
+        
+        // Check if this end time slot is available
+        const isAvailable = !isTimeSlotBooked(timeSlot);
+        if (isAvailable) {
+            timeOut.add(new Option(timeSlot, timeSlot));
+        }
+    }
+}
+
+function isTimeSlotBooked(timeSlot) {
+    const roomId = document.getElementById('roomSelect').value;
+    const selectedDate = document.getElementById('bookingDate').value;
+    let isBooked = false;
+
+    // Synchronous AJAX call to check if time slot is booked
+    $.ajax({
+        url: '/Home/CheckTimeSlotAvailability',
+        type: 'GET',
+        async: false,
+        data: {
+            roomId: roomId,
+            date: selectedDate,
+            time: timeSlot
+        },
+        success: function(response) {
+            isBooked = response.isBooked;
+        }
+    });
+
+    return isBooked;
 }
 
 function populateRooms() {
@@ -123,3 +205,18 @@ function closeModal() {
     document.getElementById('myModal').style.display = 'none';
     document.getElementById('bookingForm').reset();
 }
+
+// Event listeners
+document.getElementById('bookingDate').addEventListener('change', function() {
+    if (document.getElementById('roomSelect').value) {
+        populateTimeSlots(this.value);
+    }
+});
+
+document.getElementById('roomSelect').addEventListener('change', function() {
+    if (document.getElementById('bookingDate').value) {
+        populateTimeSlots(document.getElementById('bookingDate').value);
+    }
+});
+
+document.getElementById('timeIn').addEventListener('change', updateEndTimeOptions);

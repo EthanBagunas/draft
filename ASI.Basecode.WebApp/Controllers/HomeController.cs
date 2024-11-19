@@ -160,5 +160,32 @@ namespace ASI.Basecode.WebApp.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetBookingsForRoom(int roomId, DateTime date)
+        {
+            var bookings = _bookService.GetAllBooksbyId(roomId)
+                .Where(b => b.BookingDate?.Date == date.Date)
+                .Select(b => new {
+                    timeIn = b.TimeIn?.ToString(@"hh\:mm"),
+                    timeOut = b.TimeOut?.ToString(@"hh\:mm")
+                });
+            
+            return Json(bookings);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult CheckTimeSlotAvailability(int roomId, DateTime date, string time)
+        {
+            var timeSpan = TimeSpan.Parse(time);
+            var isBooked = _bookService.GetAllBooksbyId(roomId)
+                .Any(b => b.BookingDate?.Date == date.Date &&
+                          timeSpan >= b.TimeIn &&
+                          timeSpan < b.TimeOut);
+            
+            return Json(new { isBooked });
+        }
+
     }
 }

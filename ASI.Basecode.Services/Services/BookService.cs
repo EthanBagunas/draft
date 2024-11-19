@@ -57,9 +57,7 @@ namespace ASI.Basecode.Services.Services
             {
                 Custfname = model.GuestName,
                 Status = "ACTIVE",
-                Contact = model.ContactNumber,
-                Address = "", // Set default or get from form
-                Custlname = "" // Set default or get from form
+                Contact = model.ContactNumber
             };
 
             _customerRepository.CreateCustomer(customer);
