@@ -62,4 +62,76 @@ function editRoom(roomId) {
             alert('Failed to fetch room details. Please try again.');
         }
     });
+}
+
+function showBookings(roomId) {
+    $.ajax({
+        url: `/Account/GetBookingsbyRoomid?roomid=${roomId}`,
+        type: 'POST',
+        success: function(bookings) {
+            if (Array.isArray(bookings)) {
+                populateBookingsTable(bookings);
+                openBookingsModal();
+            } else {
+                console.error('Invalid response format:', bookings);
+                alert('Failed to fetch bookings');
+            }
+        },
+        error: function(error) {
+            console.error('Error fetching bookings:', error);
+            alert('Failed to fetch bookings');
+        }
+    });
+}
+
+function populateBookingsTable(bookings) {
+    const tbody = document.getElementById('bookingsTableBody');
+    tbody.innerHTML = '';
+
+    if (bookings.length === 0) {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td colspan="6" style="text-align: center;">No bookings found</td>';
+        tbody.appendChild(row);
+        return;
+    }
+
+    bookings.forEach(booking => {
+        // Only show bookings with status 'RESERVED' or 'VACANT'
+        if (booking.status === 'RESERVED' || booking.status === 'VACANT') {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${booking.customer?.custfname || '--'}</td>
+                <td>${booking.customer?.contact || '--'}</td>
+                <td>${booking.bookingDate ? new Date(booking.bookingDate).toLocaleDateString() : '--'}</td>
+                <td>${booking.timeIn ? new Date('1970-01-01T' + booking.timeIn).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
+                <td>${booking.timeOut ? new Date('1970-01-01T' + booking.timeOut).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
+                <td>${booking.status}</td>
+            `;
+            tbody.appendChild(row);
+        }
+    });
+}
+
+function openBookingsModal() {
+    const modal = document.getElementById('bookingsModal');
+    if (modal) {
+        modal.style.display = 'block';
+    } else {
+        console.error('Bookings modal not found');
+    }
+}
+
+function closeBookingsModal() {
+    const modal = document.getElementById('bookingsModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('bookingsModal');
+    if (event.target === modal) {
+        closeBookingsModal();
+    }
 } 

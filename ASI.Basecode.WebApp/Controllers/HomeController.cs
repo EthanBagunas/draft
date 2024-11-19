@@ -135,13 +135,13 @@ namespace ASI.Basecode.WebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         public IActionResult GetBookingsbyRoomid([FromQuery] int roomid)
-
         {
-            var books = _bookService.GetAllBooksbyId(roomid);
-
+            var books = _bookService.GetAllBooksbyId(roomid)
+                                   .Where(b => b.Status == "RESERVED" || b.Status == "VACANT")
+                                   .OrderBy(b => b.BookingDate)
+                                   .ThenBy(b => b.TimeIn);
             
             return Json(books);
-
         }
 
         [HttpGet]
