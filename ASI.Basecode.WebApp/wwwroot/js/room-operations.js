@@ -362,4 +362,131 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.addEventListener('keyup', debouncedFilterRoomTable);
         searchInput.addEventListener('search', debouncedFilterRoomTable); // For clear button
     }
-}); 
+});
+
+// Add these pagination variables
+let currentPage = 1;
+const rowsPerPage = 10;
+let totalPages = 1;
+
+function setupPagination(totalItems) {
+    totalPages = Math.ceil(totalItems / rowsPerPage);
+    
+    // Update pagination UI
+    const paginationContainer = document.querySelector('.custom-pagination-btn');
+    if (paginationContainer) {
+        let html = `
+            <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+        `;
+
+        // Add page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+        }
+
+        html += `
+            <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+            <button onclick="goToPage(totalPages)" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
+        `;
+
+        paginationContainer.innerHTML = html;
+    }
+
+    // Update results info
+    const resultsInfo = document.querySelector('.results-info');
+    if (resultsInfo) {
+        const startItem = (currentPage - 1) * rowsPerPage + 1;
+        const endItem = Math.min(currentPage * rowsPerPage, totalItems);
+        resultsInfo.textContent = `Showing ${startItem} to ${endItem} out of ${totalItems} results`;
+    }
+}
+
+function goToPage(page) {
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    displayRoomTableRows();
+}
+
+function displayRoomTableRows() {
+    const table = document.querySelector('.room-table table tbody');
+    const rows = table.getElementsByTagName('tr');
+    const totalItems = rows.length;
+    
+    // Calculate start and end indices for current page
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+    
+    // Hide all rows first
+    for (let i = 0; i < totalItems; i++) {
+        rows[i].style.display = 'none';
+    }
+    
+    // Show rows for current page
+    for (let i = startIndex; i < endIndex; i++) {
+        if (i < totalItems) {
+            rows[i].style.display = '';
+        }
+    }
+
+    // Add empty rows if needed
+    const existingEmptyRows = table.querySelectorAll('.empty-row');
+    existingEmptyRows.forEach(row => row.remove());
+
+    const visibleRows = endIndex - startIndex;
+    if (visibleRows < rowsPerPage) {
+        const emptyRowsNeeded = rowsPerPage - visibleRows;
+        for (let i = 0; i < emptyRowsNeeded; i++) {
+            const emptyRow = document.createElement('tr');
+            emptyRow.className = 'empty-row';
+            emptyRow.innerHTML = `
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            `;
+            table.appendChild(emptyRow);
+        }
+    }
+
+    setupPagination(totalItems);
+}
+
+// Update the existing room table population logic
+function populateRoomTable(rooms) {
+    const tbody = document.querySelector('.room-table table tbody');
+    tbody.innerHTML = '';
+
+    rooms.forEach(room => {
+        const row = document.createElement('tr');
+        // Your existing row population code
+    });
+
+    // Initialize pagination
+    currentPage = 1;
+    displayRoomTableRows();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing DOMContentLoaded code
+    
+    // Initialize pagination
+    displayRoomTableRows();
+});
+
+// Update your add room success handler
+function handleAddRoomSuccess() {
+    // Your existing success handling code
+    
+    // Reset to first page and refresh table
+    currentPage = 1;
+    displayRoomTableRows();
+} 
