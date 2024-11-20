@@ -17,7 +17,7 @@
     <script>
         console.log('Loading room operations scripts...');
 
-        function showBookings(roomId) {
+        function showBookings(Roomid) {
             console.log('showBookings called with roomId:', roomId);
             
             $.ajax({
@@ -105,7 +105,24 @@
             }
         }
 
-        console.log('Room operations scripts loaded successfully');
+    function openEditModal(roomId) 
+    {
+            // Open the edit modal
+            const modal = document.getElementById('editModal');
+            document.getElementById('Roomid').value = roomId;
+
+            if (modal) {
+                modal.style.display = 'block';
+                console.log('Edit modal opened successfully');
+            } else {
+                console.error('Edit modal element not found!');
+            }
+    }
+
+        function closeEditModal() {
+            document.getElementById("editModal").style.display = "none";
+        }
+        
     </script>
 }
 @{
@@ -163,7 +180,7 @@
                     <td>@room.MaxCapacity</td>
                     <td>
                         <div class="grid-item-toolbar">
-                            <button class="grid-toolbar-button" onclick="editRoom(@room.Id)">
+                            <button class="grid-toolbar-button" onclick="openEditModal(@room.Id)">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </button>
                             <button class="grid-toolbar-button" onclick="deleteRoom(@room.Id)">
@@ -234,5 +251,34 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+           <div class="logo-container1">
+                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
+            </div>
+        <div class="modal-header1">
+            <h2>Edit Room</h2>
+        </div>
+        <form id="editRoomForm" >
+            <div class="form-section">
+                <h3>Room Information</h3>
+                <label for="Roomid">Room Id </label>
+                <input type="text" id="Roomid" name="Roomid" readonly>
+                <label for="Roomname">Room Name </label>
+                <input type="text" id="Roomname" name="Roomname" placeholder="Enter room name" required>
+
+                <label for="MaxCapacity">Capacity</label>
+                <input type="text" id="MaxCapacity" name="MaxCapacity" placeholder="Enter capacity" required>
+            </div>
+
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
     </div>
 </div>

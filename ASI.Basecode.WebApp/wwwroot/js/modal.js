@@ -8,6 +8,7 @@ function closeModal() {
     document.getElementById("myModal").style.display = "none";
 }
 
+
 // Close the modal when clicking outside of it
 window.onclick = function(event) {
     const modal = document.getElementById("myModal");
@@ -15,5 +16,12 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+window.onclick = function(event) {
+    const modal = document.getElementById("editModal");
+    if (event.target == modal) {
+        closeEditModal();
+    }
+}
+
 
 
