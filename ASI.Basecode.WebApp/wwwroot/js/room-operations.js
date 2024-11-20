@@ -282,4 +282,84 @@ window.onclick = function(event) {
     if (event.target === allBookingsModal) {
         closeAllBookingsModal();
     }
-} 
+}
+
+function filterRoomTable() {
+    const searchInput = document.getElementById('roomSearchInput');
+    const filter = searchInput.value.toLowerCase().trim();
+    const table = document.querySelector('.room-table table');
+    const rows = table.getElementsByTagName('tr');
+    let visibleCount = 0;
+
+    // Skip header row
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        let shouldShow = false;
+
+        if (filter === '') {
+            // Show all rows if search is empty
+            shouldShow = true;
+        } else {
+            // Search through each cell in the row
+            for (let j = 0; j < cells.length; j++) {
+                const cell = cells[j];
+                if (cell) {
+                    const text = cell.textContent || cell.innerText;
+                    // Check if cell text contains search term
+                    if (text.toLowerCase().indexOf(filter) > -1) {
+                        shouldShow = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Show/hide the row based on search match
+        if (shouldShow) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    }
+
+    // Show/hide no results message
+    const noResultsMessage = document.querySelector('.no-results-message');
+    if (noResultsMessage) {
+        if (visibleCount === 0 && filter !== '') {
+            noResultsMessage.style.display = 'block';
+            noResultsMessage.textContent = `No rooms found matching "${filter}"`;
+        } else {
+            noResultsMessage.style.display = 'none';
+        }
+    }
+
+    // Log search results for debugging
+    console.log(`Search: "${filter}" - Found ${visibleCount} matches`);
+}
+
+// Add debounce function to improve performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Replace the original filterRoomTable with debounced version
+const debouncedFilterRoomTable = debounce(filterRoomTable, 300);
+
+// Update the search input event listener
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('roomSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', debouncedFilterRoomTable);
+        searchInput.addEventListener('search', debouncedFilterRoomTable); // For clear button
+    }
+}); 

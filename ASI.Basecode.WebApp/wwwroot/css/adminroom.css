@@ -75,11 +75,11 @@
     padding-left: 10px;
     padding-right: 5px;
     background-color: var(--background-color1);
+    transition: all 0.3s ease;
 }
 
 .custom-room-box > input:focus { 
-    border: none; 
-    outline: none;
+    background-color: var(--background-color2);
 }
 
 /* filter */
@@ -825,6 +825,20 @@ img.Logo {
 
 .status-completed {
     color: #73A110;
+}
+
+/* Add a "no results" message style */
+.no-results-message {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: var(--main-text-color);
+    font-style: italic;
+}
+
+/* Animation for filtering */
+.room-table tbody tr {
+    transition: all 0.3s ease;
 }
 
 
