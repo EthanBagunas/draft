@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ASI.Basecode.Services.ServiceModels
 {
-    public class RoomViewModel
-    {
-        public string Roomname { get; set; }
-        public string MaxCapacity { get; set; }
-    }
+        public class RoomViewModel
+        {
+            public int roomid {get; set; }  
+            public string Roomname { get; set; }
+            public string MaxCapacity { get; set; }
+        }
 }
