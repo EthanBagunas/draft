@@ -55,9 +55,18 @@ namespace ASI.Basecode.Services.Services
                 throw new Exception($"Failed to add room: {ex.Message}", ex);
             }
         }
-        public void UpdateRoom(RoomViewModel model)
+        public void UpdateRoom(EditRoomViewModel model)
         {
-            // Implementation for update
+            var room =  _repository.GetAll().FirstOrDefault(r => r.Id ==model.Roomid);
+            try
+            {
+                _mapper.Map(model, room);
+                _repository.UpdateRoom(room);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to update room: {ex.Message}", ex);
+            }
         }
         public void DeleteRoom(int roomId)
         {
@@ -78,7 +87,7 @@ namespace ASI.Basecode.Services.Services
         
         public IEnumerable<Room> GetAllRooms()
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll().Where(r => r.Status != "INACTIVE").ToList();
         }
 
         public Room GetRoomById(int id)

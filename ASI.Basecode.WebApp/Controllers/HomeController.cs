@@ -89,6 +89,21 @@ namespace ASI.Basecode.WebApp.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        public IActionResult UpdateRoom(EditRoomViewModel model)
+        {
+            try
+            {
+                _roomService.UpdateRoom(model);
+                return Json(new { success = true, message = "Room updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error adding room: {ex.Message}");
+                return Json(new { success = false, message = $"Failed to updateroom: {ex.Message}" });
+            }
+        }
+        [HttpPost]
+        [AllowAnonymous]
         public IActionResult DeleteRoom(int roomId)
         {
             try

@@ -8,8 +8,11 @@ namespace ASI.Basecode.Services.ServiceModels
 {
         public class RoomViewModel
         {
-            public int roomid {get; set; }  
             public string Roomname { get; set; }
             public string MaxCapacity { get; set; }
+        }
+        public class EditRoomViewModel : RoomViewModel
+        {
+            public int Roomid { get; set; }
         }
 }
