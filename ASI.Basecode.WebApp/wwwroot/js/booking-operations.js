@@ -232,19 +232,16 @@ function filterHomepageTable() {
     // Skip header row
     for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
-        const roomNameCell = row.getElementsByTagName('td')[1]; // Index 1 is Room Name column
+        const roomNameCell = row.getElementsByTagName('td')[1];
         let shouldShow = false;
 
         if (filter === '') {
-            // Show all rows if search is empty
             shouldShow = true;
         } else if (roomNameCell) {
             const roomName = roomNameCell.textContent || roomNameCell.innerText;
-            // Check if room name contains search term
             shouldShow = roomName.toLowerCase().indexOf(filter) > -1;
         }
 
-        // Show/hide the row based on search match
         if (shouldShow) {
             row.style.display = '';
             visibleCount++;
@@ -253,11 +250,9 @@ function filterHomepageTable() {
         }
     }
 
-    // Show/hide no results message
-    updateNoResultsMessage(visibleCount, filter);
-
-    // Log search results for debugging
-    console.log(`Search: "${filter}" - Found ${visibleCount} matches`);
+    // Reset to first page when filtering
+    currentPage = 1;
+    displayTableRows();
 }
 
 function updateNoResultsMessage(visibleCount, filter) {
@@ -302,4 +297,104 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.addEventListener('keyup', debouncedFilterHomepage);
         searchInput.addEventListener('search', debouncedFilterHomepage); // For clear button
     }
+});
+
+// Pagination variables
+let currentPage = 1;
+const rowsPerPage = 10;
+let totalPages = 1;
+
+function setupPagination(totalItems) {
+    totalPages = Math.ceil(totalItems / rowsPerPage);
+    
+    const paginationContainer = document.querySelector('.custom-pagination-btn');
+    if (paginationContainer) {
+        let html = `
+            <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+        `;
+
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+        }
+
+        html += `
+            <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+            <button onclick="goToPage(totalPages)" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
+        `;
+
+        paginationContainer.innerHTML = html;
+    }
+
+    const resultsInfo = document.querySelector('.results-info');
+    if (resultsInfo) {
+        const startItem = (currentPage - 1) * rowsPerPage + 1;
+        const endItem = Math.min(currentPage * rowsPerPage, totalItems);
+        resultsInfo.textContent = `Showing ${startItem} to ${endItem} out of ${totalItems} results`;
+    }
+}
+
+function goToPage(page) {
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    displayTableRows();
+}
+
+function displayTableRows() {
+    const table = document.querySelector('.dash-table table tbody');
+    const rows = table.getElementsByTagName('tr');
+    const totalItems = rows.length;
+    
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+    
+    // Hide all rows first
+    for (let i = 0; i < totalItems; i++) {
+        rows[i].style.display = 'none';
+    }
+    
+    // Show rows for current page
+    for (let i = startIndex; i < endIndex; i++) {
+        if (i < totalItems) {
+            rows[i].style.display = '';
+        }
+    }
+
+    // Add empty rows if needed
+    const existingEmptyRows = table.querySelectorAll('.empty-row');
+    existingEmptyRows.forEach(row => row.remove());
+
+    const visibleRows = endIndex - startIndex;
+    if (visibleRows < rowsPerPage) {
+        const emptyRowsNeeded = rowsPerPage - visibleRows;
+        for (let i = 0; i < emptyRowsNeeded; i++) {
+            const emptyRow = document.createElement('tr');
+            emptyRow.className = 'empty-row';
+            emptyRow.innerHTML = `
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            `;
+            table.appendChild(emptyRow);
+        }
+    }
+
+    setupPagination(totalItems);
+}
+
+// Add event listener for DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    displayTableRows();
 });
