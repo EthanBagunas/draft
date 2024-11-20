@@ -305,21 +305,20 @@ const rowsPerPage = 7; // Adjust this based on your needs
 let totalPages = 1;
 
 function setupPagination(totalItems) {
-    totalPages = Math.ceil(totalItems / rowsPerPage);
-    
-    // Update pagination UI
+    const totalPages = Math.ceil(totalItems / rowsPerPage);
     const paginationContainer = document.querySelector('.custom-pagination-btn');
+
     if (paginationContainer) {
         let html = `
             <button class="custom-pagination-btn" onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
                 <i class="fa-solid fa-angles-left"></i>
             </button>
-            <button class="custom-pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+            <button "custom-pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
                 <i class="fa-solid fa-angle-left"></i>
             </button>
         `;
 
-        // Pagination logic for pages
+        // Handle pagination logic for pages
         if (totalPages <= 3) {
             // Show all pages if total pages are 3 or fewer
             for (let i = 1; i <= totalPages; i++) {
@@ -337,15 +336,22 @@ function setupPagination(totalItems) {
                 html += `<a href="#" onclick="goToPage(2)" class="active">2</a>`;
                 html += `<a href="#" onclick="goToPage(3)">3</a>`;
                 html += `<a href="#" onclick="goToPage(4)">4</a>`;
-            } else if (currentPage === totalPages) {
-                // Last Page: Show ... 3 4 (Next/Last disabled)
+            } else if (currentPage === 3) {
+                // Page 3: Show ... 3 4 (No ellipsis, Next/Last disabled)
                 html += `<span class="ellipsis">...</span>`;
-                html += `<a href="#" onclick="goToPage(${totalPages - 1})">${totalPages - 1}</a>`;
-                html += `<a href="#" onclick="goToPage(${totalPages})" class="active">${totalPages}</a>`;
+                html += `<a href="#" onclick="goToPage(3)" class="active">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)">4</a>`;
+            } else if (currentPage === totalPages) {
+                // Last Page (Page 4): Show ... 3 4 (Next/Last buttons disabled)
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(3)">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)" class="active">4</a>`;
             } else {
                 // Middle Pages: Show ... currentPage-1 currentPage currentPage+1 ...
-                html += `<a href="#" onclick="goToPage(1)">1</a>`;
-                html += `<span class="ellipsis">...</span>`;
+                if (currentPage > 2) {
+                    html += `<a href="#" onclick="goToPage(1)">1</a>`;
+                    html += `<span class="ellipsis">...</span>`;
+                }
                 html += `<a href="#" onclick="goToPage(${currentPage - 1})">${currentPage - 1}</a>`;
                 html += `<a href="#" onclick="goToPage(${currentPage})" class="active">${currentPage}</a>`;
                 html += `<a href="#" onclick="goToPage(${currentPage + 1})">${currentPage + 1}</a>`;
@@ -369,7 +375,6 @@ function setupPagination(totalItems) {
         paginationContainer.innerHTML = html;
     }
 
-    // Update results info
     const resultsInfo = document.querySelector('.results-info');
     if (resultsInfo) {
         const startItem = (currentPage - 1) * rowsPerPage + 1;
@@ -379,33 +384,56 @@ function setupPagination(totalItems) {
 }
 
 function goToPage(page) {
-    if (page < 1 || page > totalPages) return;
-    currentPage = page;
-    displayBookingTableRows(); // Call your function to display the relevant rows
+    const totalPages = Math.ceil(document.querySelectorAll('.dash-table table tbody tr:not(.empty-row)').length / rowsPerPage);
+
+    if (page < 1 || page > totalPages) return; // Prevent navigation to invalid pages
+    currentPage = page; // Update current page
+    displayRoomTableRows(); // Refresh displayed rows
+    setupPagination(totalItems); // Refresh pagination UI
 }
 
-function displayBookingTableRows() {
-    const table = document.querySelector('.custom-table-container .dash-table table tbody'); // Update selector for booking table
+function displayRoomTableRows() {
+    const table = document.querySelector('.dash-table table tbody');
     const rows = table.getElementsByTagName('tr');
-    const totalItems = rows.length; // Count all rows, including empty ones
+    const totalItems = Array.from(rows).filter(row => !row.classList.contains('empty-row')).length;
 
-    // Calculate start and end indices for current page
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
-    
-    // Hide all rows first
+
     for (let i = 0; i < rows.length; i++) {
         rows[i].style.display = 'none';
     }
-    
-    // Show rows for current page
-    for (let i = startIndex; i < endIndex; i++) {
-        if (i < totalItems) {
-            rows[i].style.display = ''; // Show the row
+
+    let displayedRows = 0;
+    for (let i = 0; i < rows.length; i++) {
+        if (!rows[i].classList.contains('empty-row')) {
+            if (displayedRows >= startIndex && displayedRows < endIndex) {
+                rows[i].style.display = '';
+            }
+            displayedRows++;
         }
     }
 
-    setupPagination(totalItems); // Update pagination UI
+    const existingEmptyRows = table.querySelectorAll('.empty-row');
+    existingEmptyRows.forEach(row => row.remove());
+
+    const visibleRows = endIndex - startIndex;
+    if (visibleRows < rowsPerPage) {
+        const emptyRowsNeeded = rowsPerPage - visibleRows;
+        for (let i = 0; i < emptyRowsNeeded; i++) {
+            const emptyRow = document.createElement('tr');
+            emptyRow.className = 'empty-row';
+            emptyRow.innerHTML = `
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            `;
+            table.appendChild(emptyRow);
+        }
+    }
+
+    setupPagination(totalItems);
 }
 
 // Call this function to initialize the pagination when the page loads
