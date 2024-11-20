@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add these pagination variables
 let currentPage = 1;
-const rowsPerPage = 10;
+const rowsPerPage = 7;
 let totalPages = 1;
 
 function setupPagination(totalItems) {
@@ -384,9 +384,27 @@ function setupPagination(totalItems) {
             </button>
         `;
 
-        // Add page numbers
-        for (let i = 1; i <= totalPages; i++) {
-            html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+        // Add page numbers with limits
+        if (totalPages <= 3) {
+            // Show all pages if total pages are 3 or less
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+            }
+        } else {
+            // Show first page
+            html += `<a href="#" onclick="goToPage(1)" class="${currentPage === 1 ? 'active' : ''}">1</a>`;
+            // Show second page
+            if (currentPage > 1) {
+                html += `<a href="#" onclick="goToPage(2)" class="${currentPage === 2 ? 'active' : ''}">2</a>`;
+            }
+            // Show ellipsis if current page is greater than 2
+            if (currentPage > 2) {
+                html += `<span>...</span>`;
+            }
+            // Show last page if current page is not the last
+            if (currentPage < totalPages) {
+                html += `<a href="#" onclick="goToPage(${totalPages})" class="${currentPage === totalPages ? 'active' : ''}">${totalPages}</a>`;
+            }
         }
 
         html += `
@@ -419,21 +437,25 @@ function goToPage(page) {
 function displayRoomTableRows() {
     const table = document.querySelector('.room-table table tbody');
     const rows = table.getElementsByTagName('tr');
-    const totalItems = rows.length;
+    const totalItems = Array.from(rows).filter(row => !row.classList.contains('empty-row')).length; // Count only non-empty rows
     
     // Calculate start and end indices for current page
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
     
     // Hide all rows first
-    for (let i = 0; i < totalItems; i++) {
+    for (let i = 0; i < rows.length; i++) {
         rows[i].style.display = 'none';
     }
     
     // Show rows for current page
-    for (let i = startIndex; i < endIndex; i++) {
-        if (i < totalItems) {
-            rows[i].style.display = '';
+    let displayedRows = 0; // To count how many actual rows are displayed
+    for (let i = 0; i < rows.length; i++) {
+        if (!rows[i].classList.contains('empty-row')) {
+            if (displayedRows >= startIndex && displayedRows < endIndex) {
+                rows[i].style.display = ''; // Show the row
+            }
+            displayedRows++;
         }
     }
 
@@ -489,4 +511,4 @@ function handleAddRoomSuccess() {
     // Reset to first page and refresh table
     currentPage = 1;
     displayRoomTableRows();
-} 
+}

@@ -303,3 +303,124 @@ document.addEventListener('DOMContentLoaded', function() {
         searchInput.addEventListener('search', debouncedFilterHomepage); // For clear button
     }
 });
+
+// Add these pagination variables
+let currentPage = 1;
+const rowsPerPage = 7; // Adjust this based on your needs
+let totalPages = 1;
+
+function setupPagination(totalItems) {
+    totalPages = Math.ceil(totalItems / rowsPerPage);
+    
+    // Update pagination UI
+    const paginationContainer = document.querySelector('.custom-pagination-btn');
+    if (paginationContainer) {
+        let html = `
+            <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+        `;
+
+        // Add page numbers with ellipsis logic
+        if (totalPages <= 3) {
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
+            }
+        } else {
+            html += `<a href="#" onclick="goToPage(1)" class="${currentPage === 1 ? 'active' : ''}">1</a>`;
+            if (currentPage > 2) {
+                html += `<a href="#" onclick="goToPage(2)" class="${currentPage === 2 ? 'active' : ''}">2</a>`;
+                if (currentPage > 3) {
+                    html += `<span>...</span>`;
+                }
+            }
+            html += `<a href="#" onclick="goToPage(${totalPages})" class="${currentPage === totalPages ? 'active' : ''}">${totalPages}</a>`;
+        }
+
+        html += `
+            <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+            <button onclick="goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
+        `;
+
+        paginationContainer.innerHTML = html;
+    }
+
+    // Update results info
+    const resultsInfo = document.querySelector('.results-info');
+    if (resultsInfo) {
+        const startItem = (currentPage - 1) * rowsPerPage + 1;
+        const endItem = Math.min(currentPage * rowsPerPage, totalItems);
+        resultsInfo.textContent = `Showing ${startItem} to ${endItem} out of ${totalItems} results`;
+    }
+}
+
+function goToPage(page) {
+    if (page < 1 || page > totalPages) return;
+    currentPage = page;
+    displayHomepageTableRows(); // Call your function to display the relevant rows
+}
+
+function displayHomepageTableRows() {
+    const table = document.querySelector('.custom-table-container .dash-table table tbody'); // Update selector for homepage table
+    const rows = table.getElementsByTagName('tr');
+    const totalItems = rows.length; // Count all rows, including empty ones
+
+    // Calculate start and end indices for current page
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
+    
+    // Hide all rows first
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = 'none';
+    }
+    
+    // Show rows for current page
+    for (let i = startIndex; i < endIndex; i++) {
+        if (i < totalItems) {
+            rows[i].style.display = ''; // Show the row
+        }
+    }
+
+    setupPagination(totalItems); // Update pagination UI
+}
+
+// Call this function to initialize the pagination when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    const totalItems = document.querySelectorAll('.custom-table-container .dash-table table tbody tr').length; // Count total rows
+    setupPagination(totalItems);
+    displayHomepageTableRows(); // Display the initial rows
+});
+
+// Function to toggle the dropdown visibility
+function toggleDropdown() {
+    const options = document.getElementById('statusOptions');
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to select a status
+function selectStatus(status) {
+    document.getElementById('selectedStatus').textContent = status;
+    closeDropdown(); // Close the dropdown after selection
+    // Additional logic can be added here to filter the table based on the selected status
+}
+
+// Function to close the dropdown
+function closeDropdown() {
+    const options = document.getElementById('statusOptions');
+    options.style.display = 'none';
+}
+
+// Close the dropdown if clicked outside
+window.onclick = function(event) {
+    const dropdown = document.getElementById('dropdown');
+    if (!dropdown.contains(event.target)) {
+        closeDropdown();
+    }
+};

@@ -190,26 +190,20 @@
 <!--modal html, copy ni-->
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-           <div class="logo-container1">
-                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
-            </div>
-        <div class="modal-header1">
-            <h2>Add Room</h2>
+        <div class="form-section">
+            <h3>Add New Room</h3>
         </div>
         <form id="addRoomForm" onsubmit="addRoom(event)">
             <div class="form-section">
-                <h3>Room Information</h3>
                 <label for="roomName">Room Name </label>
                 <input type="text" id="roomName" name="roomName" placeholder="Enter room name" required>
 
                 <label for="capacity">Capacity</label>
                 <input type="text" id="capacity" name="capacity" placeholder="Enter capacity" required>
             </div>
-
-            <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="submit-bttn">Submit</button>
+            <div class="room-booking-btn-group">
+                <button type="button" class="room-booking-btn room-booking-btn-cancel" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="room-booking-btn room-booking-btn-submit">Submit</button>
             </div>
         </form>
     </div>
