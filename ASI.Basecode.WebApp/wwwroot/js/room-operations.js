@@ -375,10 +375,10 @@ function setupPagination(totalItems) {
 
     if (paginationContainer) {
         let html = `
-            <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
+            <button class="custom-pagination-btn" onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
                 <i class="fa-solid fa-angles-left"></i>
             </button>
-            <button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+            <button "custom-pagination-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
                 <i class="fa-solid fa-angle-left"></i>
             </button>
         `;

@@ -45,18 +45,24 @@
     background-color: transparent;
     cursor: pointer;
 }
-.grid-item-container:hover{
-    background-color: rgba(255, 255, 255, 0.1);
+.grid-item-button{
     outline: none;
     border: none;
+    background-color: transparent;
 }
-.grid-item-container:focus-visible,
-.grid-item-container:active {
-    outline: none;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.1);
 
+.grid-item-button:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
+    border: none;
 }
+.grid-item-button:focus{
+    background-color: rgba(255, 255, 255, 0.1);
+    outline: none;
+    border: none;
+}
+
+
 
 .grid-item i {
     width: 30px;

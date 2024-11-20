@@ -10,17 +10,17 @@
     </div>
 
     <!-- Grid Container with Buttons -->
-    <div class="grid-container">
-        <a href="@Url.Action("Homepage", "Home")" class="grid-item-button grid-item-container grid-item i">
+     <div class="grid-container">
+        <a href="@Url.Action("Homepage", "Home")" class="grid-item-button grid-item-container grid-item i" data-focus-id="home">
             <i class="fas fa-home"></i>
         </a>
-        <a href="@Url.Action("AdminRoom", "Account")" class="grid-item-button grid-item-container grid-item i">
+        <a href="@Url.Action("AdminRoom", "Account")" class="grid-item-button grid-item-container grid-item i" data-focus-id="adminRoom">
             <i class="fa-solid fa-door-open"></i>
         </a>
-        <a href="@Url.Action("AccountInfo", "Account")" class="grid-item-button grid-item-container grid-item i">
+        <a href="@Url.Action("AccountInfo", "Account")" class="grid-item-button grid-item-container grid-item i" data-focus-id="accountInfo">
             <i class="fas fa-user"></i>
         </a>
-        <button class="grid-item-button grid-item-container grid-item i" onclick="showLogoutModal()">
+        <button class="grid-item-button grid-item-container grid-item i" onclick="showLogoutModal()" data-focus-id="logout">
             <i class="fa-solid fa-right-from-bracket"></i>
         </button>
     </div>
@@ -81,13 +81,40 @@
         background-color: #dc3545;
         color: white;
         border: none;
-        border-radius: 4px;
+        border-radius: 60px;
         cursor: pointer;
     }
 </style>
 
-<!-- Add this JavaScript -->
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const gridItems = document.querySelectorAll('.grid-item-button');
+
+    const lastFocusedItem = sessionStorage.getItem('lastFocusedItem');
+    console.log("Last focused item from sessionStorage:", lastFocusedItem); 
+    if (lastFocusedItem) {
+        const itemToFocus = document.querySelector(`[data-focus-id="${lastFocusedItem}"]`);
+        if (itemToFocus) {
+            itemToFocus.classList.add('focused'); 
+            itemToFocus.focus(); 
+            console.log("Focused item:", itemToFocus); 
+        }
+    }
+
+    gridItems.forEach(item => {
+        const focusId = item.getAttribute('data-focus-id');
+        
+        item.addEventListener('click', function() {
+            if (!item.classList.contains('focused')) {
+                gridItems.forEach(i => i.classList.remove('focused'));
+                item.classList.add('focused');
+                sessionStorage.setItem('lastFocusedItem', focusId);
+                console.log("Clicked item:", focusId); 
+            }
+        });
+    });
+    });
+
     function showLogoutModal() {
         document.getElementById('logoutModal').style.display = 'block';
     }
