@@ -118,7 +118,6 @@
             <input type1="text" placeholder="Search...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-
         <!-- Filter -->
         <div class="custom-filter-box">
             <span class="custom-main-text-normal">Filter</span>
@@ -311,14 +310,85 @@
                 </form>
             </div>
         </div>
+        <div id="EditModal2" class="editmodal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="logo-container1">
+                    <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
+                </div>
+                <div class="modal-header1">
+                    <h2>Add User</h2>
+                </div>
+                <form id="addUserForm">
+                    <div class="form-section">
+                        <h3>Personal Information</h3>
+                        <label for="firstName">First Name </label>
+                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+
+                        <label for="lastName">Last Name </label>
+                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+
+                        <label for="contactNumber">Contact Number </label>
+                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Company Information</h3>
+                        <label for="username">Username </label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" required>
+                        <label for="password">Password </label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    function DeleteUser() {
+
+
+
+function EditUser() {
     var selectedUsers = $('.employee-checkbox:checked').map(function () {
         return $(this).data('user-UserId');
     }).get();
+
+    if (selectedUsers.length !== 1) {;
+        alert('Please select at least/only one user to delete.');
+        return;
+    }
+
+    if (confirm('Are you sure you want to delete the selected user(s)?')) {
+        selectedUsers.forEach(function (userId) {
+            const formData = new FormData(this);
+            // Combine Fname and Lname into Name
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        closeModal();
+                        window.location.reload();
+                    } else {
+                        alert('Error creating user');
+                    }
+                },
+                error: function(error) {
+                    alert('Error creating user: ' + error.responseText);
+                }
+    }
+}
+
+function DeleteUser() {
+    var selectedUsers = $('.employee-checkbox:checked').map(function () {
+        return $(this).data('user-UserId');
+    }).get();
+
 
     if (selectedUsers.length === 0) {;
         alert('Please select at least one user to delete.');
@@ -345,6 +415,11 @@
 }
 function openModal() {
     const modal = document.getElementById('myModal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+function openEditModal() {
+    const modal = document.getElementById('myModal2');
     modal.classList.add('show');
     document.body.classList.add('modal-open');
 }
