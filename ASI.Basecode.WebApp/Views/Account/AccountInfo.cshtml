@@ -57,38 +57,32 @@
 
         // Add form submission handler
         $('#addUserForm').on('submit', function(e) {
-            e.preventDefault();
-            
-            if ($('#password').val() !== $('#confirmPassword').val()) {
-                alert('Passwords do not match!');
-                return;
-            }
+    e.preventDefault();
+    
+    const userId = $(this).data('user-id'); // Get user ID from the form data
+    const url = userId ? `/Account/EditUser/${userId}` : '/Account/AddUser'; // Adjust the URL based on action
 
-            const formData = new FormData(this);
-            // Combine Fname and Lname into Name
-            const firstName = formData.get('Fname');
-            const lastName = formData.get('Lname');
-            formData.append('Name', `${firstName} ${lastName}`);
-            
-            $.ajax({
-                url: $(this).attr('action'),
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.success) {
-                        closeModal();
-                        window.location.reload();
-                    } else {
-                        alert('Error creating user');
-                    }
-                },
-                error: function(error) {
-                    alert('Error creating user: ' + error.responseText);
-                }
-            });
-        });
+    const formData = new FormData(this);
+    
+    $.ajax({
+        url: url,
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if (response.success) {
+                closeModal();
+                location.reload(); // Reload the page to see the changes
+            } else {
+                alert('Error saving user');
+            }
+        },
+        error: function(error) {
+            alert('Error saving user: ' + error.responseText);
+        }
+    });
+});
     </script>
 }
     
@@ -110,27 +104,6 @@
 
     </div>
 
-
-
-<!--crud html, copy ni
-</div>
-
-    <div class="custom-toolbar-container">
-    <div class="toolbar">
-        <button class="toolbar-button" id="add-button" onclick="openModal()">
-        <i class="fa-solid fa-circle-plus" style="color: #8A70A4;"></i> 
-        </button>
-        <button class="toolbar-button" id="edit-button" onclick="EditUser()">
-            <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
-        </button>
-        <button class="toolbar-button" id="delete-button" onclick="DeleteUser()">
-           <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
-        </button>
-    </div> 
--->
-
-
-
     <!--table-->
     <div class="info-table-container">
         <div class="info-table">
@@ -149,12 +122,9 @@
                     @foreach (var user in Model)
                     {
                         <tr>
-                            <td>
-                                <input type="checkbox" class="employee-checkbox" data-user-id="@user.UserId" />
-                            </td>
                             <td>@user.Id</td>
-                            <td>@user.UserId</td>
                             <td>@user.Name</td>
+                            <td>@user.UserId</td>
                             <td>@user.Contact</td>
                             <td>
                         <div class="grid-item-toolbar">
@@ -201,72 +171,38 @@
     
 </div>
 
+
 <script>
-function EditUser() {
-    var selectedUsers = $('.employee-checkbox:checked').map(function () {
-        return $(this).data('user-UserId');
-    }).get();
-
-    if (selectedUsers.length !== 1) {
-        alert('Please select at least/only one user to delete.');
-        return;
-    }
-
-    if (confirm('Are you sure you want to delete the selected user(s)?')) {
-        selectedUsers.forEach(function (userId) {
-            const formData = new FormData(this);
-            // Combine Fname and Lname into Name
-            
-            $.ajax({
-                url: $(this).attr('action'),
-                method: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.success) {
-                        closeModal();
-                        window.location.reload();
-                    } else {
-                        alert('Error creating user');
-                    }
-                },
-                error: function(error) {
-                    alert('Error creating user: ' + error.responseText);
-                }
-            });
-        });
-    }
+function editUser(userId) {
+    // Fetch user data (you can use AJAX to get user details)
+    $.ajax({
+        url: `/Account/GetUser/${userId}`, // Adjust the URL as needed
+        type: 'GET',
+        success: function(user) {
+            // Populate the modal fields with user data
+            $('#fullName').val(user.fullName);
+            $('#userName').val(user.userName);
+            $('#contactNumber').val(user.contactNumber);
+            $('#addUserForm').attr('data-user-id', userId); // Store user ID in the form for submission
+            openModal(); // Open the modal
+        },
+        error: function(error) {
+            console.error('Error fetching user data:', error);
+        }
+    });
 }
-
-function DeleteUser() {
-    var selectedUsers = $('.employee-checkbox:checked').map(function () {
-        return $(this).data('user-UserId');
-    }).get();
-
-
-    if (selectedUsers.length === 0) {
-        alert('Please select at least one user to delete.');
-        return;
-    }
-
-    if (confirm('Are you sure you want to delete the selected user(s)?')) {
-        selectedUsers.forEach(function (userId) {
-            alert(userId);
-            $.ajax({
-                url: 'https://localhost:52564/Account/DeleteUser/',
-                type: 'POST',
-                data: { UserId: userId },
-                success: function () {
-                    console.log('User deleted successfully');
-                    location.reload();
-                },
-                error: function (error) {
-                    console.error('Error deleting user:', error);
-                }
-            });
+function deleteUser(userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        $.ajax({
+            url: `/Account/DeleteUser/${userId}`, // Adjust the URL as needed
+            type: 'POST',
+            success: function() {
+                location.reload(); // Reload the page to see the changes
+            },
+            error: function(error) {
+                console.error('Error deleting user:', error);
+            }
         });
-    
     }
 }
 
