@@ -131,6 +131,55 @@
 }
 /*end of add btn*/
 
+/* edit and delete btns*/
+.grid-toolbar-container{
+    display: grid;
+    grid-template-columns: repeat(2, auto);  
+    gap: 13px;  
+    align-items: center;
+    background-color: transparent;
+    justify-content: end;
+    width: 100%;
+    
+}
+
+.grid-toolbar-button {
+    align-items: center;
+    justify-content: flex-end;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.grid-toolbar-button > i {
+    font-size: 18px;
+    color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 28px;
+}
+
+.grid-toolbar-button> i:hover {
+   color: var(--accent-color);
+}
+
+.grid-toolbar-button> i:focus {
+    color: var(--accent-color);
+    border: none;
+    outline: none;
+}
+
+.grid-toolbar-button:focus{
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+/* end edit and delete btns*/
+
+
 
 /*table*/
 .info-table-container {
