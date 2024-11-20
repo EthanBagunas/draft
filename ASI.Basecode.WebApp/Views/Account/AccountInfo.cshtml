@@ -24,7 +24,7 @@
                     $('#delete-button').prop('disabled', false);
                 } else if (selectedCount > 1) {
                     $('#edit-button').prop('disabled', true);
-                    $('#delete-button').prop('disabled', true);
+                    $('#delete-button').prop('disabled', false);
                 } else {
                     $('#edit-button').prop('disabled', true);
                     $('#delete-button').prop('disabled', true);
@@ -120,7 +120,7 @@
         <button class="toolbar-button" id="add-button" onclick="openModal()">
         <i class="fa-solid fa-circle-plus" style="color: #8A70A4;"></i> 
         </button>
-        <button class="toolbar-button" id="edit-button">
+        <button class="toolbar-button" id="edit-button" onclick="EditUser()">
             <i class="fa-regular fa-pen-to-square" style="color: #8A70A4;"></i>
         </button>
         <button class="toolbar-button" id="delete-button" onclick="DeleteUser()">
@@ -245,7 +245,7 @@ function DeleteUser() {
     }).get();
 
 
-    if (selectedUsers.length === 0) {;
+    if (selectedUsers.length === 0) {
         alert('Please select at least one user to delete.');
         return;
     }
@@ -266,18 +266,16 @@ function DeleteUser() {
                 }
             });
         });
+    
     }
 }
+
 function openModal() {
     const modal = document.getElementById('myModal');
     modal.classList.add('show');
     document.body.classList.add('modal-open');
 }
-function openEditModal() {
-    const modal = document.getElementById('myModal2');
-    modal.classList.add('show');
-    document.body.classList.add('modal-open');
-}
+
 
 function closeModal() {
     const modal = document.getElementById('myModal');
