@@ -313,7 +313,67 @@
     margin-left: 40px;
 }
 
-/*add booking btn*/
+/*pagination and add booking btn*/
+.custom-bottom-container{
+    margin: 0;
+    justify-content: space-between;
+    display: flex; 
+    align-items: center;
+    margin-top: 28px;
+}
+/* show result*/
+.results-info {
+    font-size: 14px; 
+    color: var(--main-text-color);
+    opacity: 0.5;
+    align-self: center; 
+    justify-content: flex-start;
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    font-weight: bolder;
+    margin-left: 10px;
+}
+
+/* pagination */
+.custom-pagination-container{
+    display: grid;
+    grid-template-columns: repeat(5, auto );
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.custom-pagination-btn> button{
+    background-color: transparent;
+    border: none; 
+    cursor: pointer;
+    width: 30px; 
+    height: 30px;
+}
+.custom-pagination-btn button:hover{
+    background-color: var(--background-color1);
+    border: none; 
+    outline: none;
+    border-radius: 50%;
+}
+.custom-pagination-btn button:focus{
+    background-color: var(--background-color1);
+    border: none; 
+    outline: none;
+    border-radius: 50%;
+}
+.custom-pagination-btn > button > i {
+    color: var(--main-text-color);
+    opacity: 0.5;
+}
+.custom-pagination-btn > a {
+    color: var(--primary-color);
+    font-weight: bolder;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* add button */
 .custom-add-container{
     margin: 0;
     justify-content: flex-end;
@@ -329,7 +389,6 @@
     border: none;
     border-radius: 30px;
     transition: all 0.2s ease;
-    margin-top: 28px;
 }
 
 .add-booking-btn:hover{

@@ -178,7 +178,7 @@
                                 <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
                             </button>
                             <button class="grid-toolbar-button" onclick="showBookings(@room.Id)">
-                                <i class="fa-solid fa-calendar-days"></i>
+                                <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
                     </td>
@@ -187,10 +187,33 @@
         </tbody>    
     </div>
     </table>
-    <div class="custom-room-add-container">
-        <button class="room-add-booking-btn custom-main-white-text-normal"  id="add-button" onclick="openModal()"
-        </button><span>Add New Room</span>
+    <div class="custom-bottom-container">
+     <div class="results-info">
+        Showing 1 out of 10 results
     </div>
+    <div class="custom-pagination-container">
+        <div class="custom-pagination-btn">
+            <button>
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+             <button>
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <a href="#">1</a>
+             <button>
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+             <button>
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
+        </div>
+
+    </div>
+    <div class="custom-add-container">
+        <button class="add-booking-btn custom-main-white-text-normal" id="add-button" onclick="openModal()"><span>Add New Room</span></button>
+    </div>
+  </div>
+
  </div>
 <!--modal html, copy ni-->
 <div id="myModal" class="modal">
