@@ -133,14 +133,20 @@ function closeBookingsModal() {
     }
 }
 
+let allBookings = []; // Store all bookings
+let currentSortColumn = null;
+let isAscending = true;
+
 function showAllBookings() {
     $.ajax({
         url: '/Account/GetAllBookings',
         type: 'GET',
         success: function(bookings) {
             if (Array.isArray(bookings)) {
+                allBookings = bookings;
                 populateAllBookingsTable(bookings);
                 openAllBookingsModal();
+                initializeSortingListeners();
             } else {
                 console.error('Invalid response format:', bookings);
                 alert('Failed to fetch bookings');
@@ -164,10 +170,8 @@ function populateAllBookingsTable(bookings) {
         return;
     }
 
-    // Sort bookings by Room ID
-    const sortedBookings = bookings.sort((a, b) => a.roomId - b.roomId);
-
-    sortedBookings.forEach(booking => {
+    bookings.forEach(booking => {
+        const statusClass = booking.status ? booking.status.toLowerCase() : '';
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${booking.room?.roomNumber || '--'}</td>
@@ -177,10 +181,80 @@ function populateAllBookingsTable(bookings) {
             <td>${booking.bookingDate ? new Date(booking.bookingDate).toLocaleDateString() : '--'}</td>
             <td>${booking.timeIn ? new Date('1970-01-01T' + booking.timeIn).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
             <td>${booking.timeOut ? new Date('1970-01-01T' + booking.timeOut).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '--'}</td>
-            <td>${booking.status}</td>
+            <td class="status-cell status-${statusClass}">${booking.status}</td>
         `;
         tbody.appendChild(row);
     });
+}
+
+function initializeSortingListeners() {
+    const headers = document.querySelectorAll('.sortable-header');
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+            const sortKey = header.dataset.sort;
+            
+            // Toggle sort direction if clicking the same column
+            if (currentSortColumn === sortKey) {
+                isAscending = !isAscending;
+            } else {
+                currentSortColumn = sortKey;
+                isAscending = true;
+            }
+
+            // Sort the bookings
+            sortBookings(sortKey);
+            
+            // Update sorting indicators
+            headers.forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+            header.classList.add(isAscending ? 'sort-asc' : 'sort-desc');
+        });
+    });
+}
+
+function sortBookings(sortKey) {
+    const sortedBookings = [...allBookings].sort((a, b) => {
+        let valueA, valueB;
+
+        switch(sortKey) {
+            case 'roomNumber':
+                valueA = a.room?.roomNumber || 0;
+                valueB = b.room?.roomNumber || 0;
+                break;
+            case 'roomName':
+                valueA = (a.room?.roomname || '').toLowerCase();
+                valueB = (b.room?.roomname || '').toLowerCase();
+                break;
+            case 'guestName':
+                valueA = (a.customer?.custfname || '').toLowerCase();
+                valueB = (b.customer?.custfname || '').toLowerCase();
+                break;
+            case 'bookingDate':
+                valueA = new Date(a.bookingDate || 0).getTime();
+                valueB = new Date(b.bookingDate || 0).getTime();
+                break;
+            case 'timeIn':
+                valueA = a.timeIn || '';
+                valueB = b.timeIn || '';
+                break;
+            case 'timeOut':
+                valueA = a.timeOut || '';
+                valueB = b.timeOut || '';
+                break;
+            case 'status':
+                valueA = a.status || '';
+                valueB = b.status || '';
+                break;
+            default:
+                return 0;
+        }
+
+        // Compare values based on sort direction
+        if (valueA < valueB) return isAscending ? -1 : 1;
+        if (valueA > valueB) return isAscending ? 1 : -1;
+        return 0;
+    });
+
+    populateAllBookingsTable(sortedBookings);
 }
 
 function openAllBookingsModal() {

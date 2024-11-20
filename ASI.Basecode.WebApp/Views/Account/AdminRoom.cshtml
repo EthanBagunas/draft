@@ -247,7 +247,7 @@
 
 <!-- Add the new modal for all bookings -->
 <div id="allBookingsModal" class="modal">
-    <div class="modal-content" style="width: 90%; max-height: 80vh;">
+    <div class="modal-content">
         <span class="close" onclick="closeAllBookingsModal()">&times;</span>
         <div class="modal-header1">
             <h2>All Room Bookings</h2>
@@ -256,14 +256,14 @@
             <table class="bookings-table">
                 <thead class="th-text">
                     <tr>
-                        <th>Room #</th>
-                        <th>Room Name</th>
-                        <th>Guest Name</th>
+                        <th class="sortable-header" data-sort="roomNumber">Room #</th>
+                        <th class="sortable-header" data-sort="roomName">Room Name</th>
+                        <th class="sortable-header" data-sort="guestName">Guest Name</th>
                         <th>Contact Number</th>
-                        <th>Booking Date</th>
-                        <th>Time In</th>
-                        <th>Time Out</th>
-                        <th>Status</th>
+                        <th class="sortable-header" data-sort="bookingDate">Booking Date</th>
+                        <th class="sortable-header" data-sort="timeIn">Time In</th>
+                        <th class="sortable-header" data-sort="timeOut">Time Out</th>
+                        <th class="sortable-header" data-sort="status">Status</th>
                     </tr>
                 </thead>
                 <tbody id="allBookingsTableBody" class="td-text">
