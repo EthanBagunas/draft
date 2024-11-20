@@ -1,4 +1,4 @@
-/* HOMEPAGE */
+/* HOMEPAGE*/
 
 /* Container styles */
 .custom-table-container {
@@ -6,16 +6,17 @@
     margin-top: 20px;
     border-radius: 20px;
     position: relative;
-    box-sizing: border-box;
-    background-color: white; 
-    overflow: hidden; 
+    overflow-y: hidden;
+    overflow-x: hidden; 
+    scroll-behavior: smooth; 
 }
 
 .dash-table {
     width: 100%;
     padding-bottom: 10px;
     max-height: 460px;
-    overflow-y: none;
+    overflow-x: auto; 
+
 }
 
 .dash-table table,
@@ -43,9 +44,9 @@ table th, table td {
     text-overflow: ellipsis;
     transition: all 0.2s ease-in-out; 
 }
-
-table td {
+table td{
     padding: 16px 20px;
+
 }
 
 table th {
@@ -60,8 +61,7 @@ table tbody tr {
     transition: background-color 0.2s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
-
-table tbody tr:hover {
+table tbody tr:hover{
     background-color: rgba(140, 122, 193, 0.1); 
     cursor: pointer;
 }
