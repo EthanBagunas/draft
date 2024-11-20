@@ -13,7 +13,7 @@
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-   margin-top: 20px;
+    margin-top: 20px;
 }
 
 .custom-room-box { 
@@ -79,7 +79,7 @@
 }
 
 .custom-room-box > input:focus { 
-    background-color: var(--background-color2);
+    background-color: var(--background-color1);
 }
 
 /* filter */
@@ -706,21 +706,30 @@ img.Logo {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 8px 16px;
-    background-color: var(--primary-color);
-    color: white;
+    padding: 8px 18px;
+    background-color: var(--background-color1);
+    color: var(--main-text-color);
     border: none;
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.2s ease;
-}
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+  }
 
 .view-all-bookings-btn:hover {
-    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.view-all-bookings-btn:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: none;
+    outline: none;
 }
 
 .view-all-bookings-btn i {
     font-size: 16px;
+    color: var(--primary-color);
 }
 
 /* Modal styles for all bookings */
@@ -774,8 +783,9 @@ img.Logo {
 }
 
 .sortable-header:hover {
-    background-color: rgba(101, 85, 143, 0.3); /* Darker hover color */
-    color: white; /* Ensure text remains visible on hover */
+    background-color: var(--primary-color);
+    opacity: 0.7;
+    color: white; 
 }
 
 .sortable-header::after {

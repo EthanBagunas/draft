@@ -114,11 +114,11 @@
 }
 
 <div class= "custom-main-container">
+    <!--search -->
     <div class="custom-room-box">
-        <input type="text" id="roomSearchInput" placeholder="Search..." onkeyup="filterRoomTable()">
+        <input id="roomSearchInput" placeholder="Search room name..." onkeyup="filterRoomTable()">
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
-    <!--search -->
     <div class = "custom-room-search-filter-container">
         <div class= "room-page-title">
             <span class="page-title">Room Information</span>
@@ -127,27 +127,12 @@
         <!-- Add View All Bookings button -->
         <div class="view-all-bookings-container">
             <button class="view-all-bookings-btn" onclick="showAllBookings()">
-                <i class="fa-solid fa-calendar-days"></i>
                 <span>View All Bookings</span>
+
             </button>
         </div>
-
-        <!-- Filter and show all -->
-        <div class="custom-room-filter-box">
-             <!-- filter-->
-            <span class="custom-main-text-normal">Sort by:</span>
-            <div class="custom-room-select custom-main-text-normal" id="dropdown">
-            <span>Room Name</span>
-                <button><i class="fa-solid fa-caret-down"></i></button>
-                     <ul class="custom-room-options custom-main-text-normal"> 
-                     <li class="custom-room-options-li">Room Name</li>
-                     <li class="custom-room-options-li">Capacity</li>
-                    </ul>
-            </div> 
-         </div>
-
     </div>  
-  
+
     <!--table-->
   <div class="custom-room-table-container">
     <div class="room-table">
@@ -178,7 +163,7 @@
                                 <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
                             </button>
                             <button class="grid-toolbar-button" onclick="showBookings(@room.Id)">
-                                <i class="fa-solid fa-calendar-days"></i>
+                                <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
                     </td>
@@ -187,9 +172,29 @@
         </tbody>    
     </div>
     </table>
-    <div class="custom-room-add-container">
-        <button class="room-add-booking-btn custom-main-white-text-normal"  id="add-button" onclick="openModal()"
-        </button><span>Add New Room</span>
+      <div class="custom-bottom-container">
+     <div class="results-info">
+        Showing 1 out of 10 results
+    </div>
+    <div class="custom-pagination-container">
+        <div class="custom-pagination-btn">
+            <button>
+                <i class="fa-solid fa-angles-left"></i>
+            </button>
+             <button>
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <a href="#">1</a>
+             <button>
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+             <button>
+                <i class="fa-solid fa-angles-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="custom-add-container">
+        <button class="add-booking-btn custom-main-white-text-normal" id="add-button" onclick="openModal()"><span>Add New</span></button>
     </div>
  </div>
 <!--modal html, copy ni-->
