@@ -210,60 +210,59 @@
 
   
 
- <!--modal html, copy ni-->
-<div id="myModal" class="booking-modal">
-    <div class="booking-modal-content">
-        <span class="booking-close" onclick="closeModal()">&times;</span>
-        <div class="booking-form-section">
+<!--modal html, copy ni-->
+<div id="myModal" class="dash-booking-modal">
+    <div class="dash-booking-modal-content">
+        <span class="dash-booking-close" onclick="closeModal()">&times;</span>
+        <div class="dash-booking-form-section">
             <h3>Add New Booking</h3>
             <form id="bookingForm" onsubmit="addBooking(event)">
-                <div class="booking-form-group">
-                    <label class="booking-label">Room</label>
-                    <select id="roomSelect" name="roomId" class="booking-select" required>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">Room</label>
+                    <select id="roomSelect" name="roomId" class="dash-booking-select" required>
                         <option value="">Select a room</option>
                     </select>
                 </div>
 
-                <div class="booking-form-group">
-                    <label class="booking-label">Date</label>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">Date</label>
                     <input type="date" id="bookingDate" name="bookingDate" 
-                           class="booking-input" required>
+                           class="dash-booking-input" required>
                 </div>
 
-                <div class="booking-form-group">
-                    <label class="booking-label">Start Time</label>
-                    <select id="timeIn" name="timeIn" class="booking-select" required>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">Start Time</label>
+                    <select id="timeIn" name="timeIn" class="dash-booking-select" required>
                         <option value="">Select start time</option>
                     </select>
                 </div>
 
-                <div class="booking-form-group">
-                    <label class="booking-label">End Time</label>
-                    <select id="timeOut" name="timeOut" class="booking-select" required>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">End Time</label>
+                    <select id="timeOut" name="timeOut" class="dash-booking-select" required>
                         <option value="">Select end time</option>
                     </select>
                 </div>
 
-                <div class="booking-form-group">
-                    <label class="booking-label">Guest Name</label>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">Guest Name</label>
                     <input type="text" id="guestName" name="guestName" 
-                           class="booking-input" placeholder="E" required>
+                           class="dash-booking-input" placeholder="Enter guest name" required>
                 </div>
 
-                <div class="booking-form-group">
-                    <label class="booking-label">Contact Number</label>
+                <div class="dash-booking-form-group">
+                    <label class="dash-booking-label">Contact Number</label>
                     <input type="tel" id="contactNumber" name="contactNumber" 
-                           class="booking-input" required>
+                           class="dash-booking-input" placeholder="Enter contact number" required>
                 </div>
 
-                <div class="booking-btn-group">
-                    <button type="button" class="booking-btn booking-btn-cancel" 
+                <div class="dash-booking-btn-group">
+                    <button type="button" class="dash-booking-btn dash-booking-btn-cancel" 
                             onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="booking-btn booking-btn-submit">Submit</button>
+                    <button type="submit" class="dash-booking-btn dash-booking-btn-submit">Submit</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 

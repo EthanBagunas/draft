@@ -1,4 +1,4 @@
-.booking-modal {
+.dash-booking-modal {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -10,7 +10,7 @@
     backdrop-filter: blur(4px);
 }
 
-.booking-modal-content {
+.dash-booking-modal-content {
     background-color: #fff;
     margin: 2% auto;
     padding: 30px 30px 15px;
@@ -21,29 +21,29 @@
     height: fit-content;
 }
 
-.booking-form-section {
+.dash-booking-form-section {
     margin-bottom: 25px;
 }
 
-.booking-form-section h3 {
+.dash-booking-form-section h3 {
     color: #65558F;
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: 600;
 }
 
-.booking-form-group {
+.dash-booking-form-group {
     margin-bottom: 15px;
 }
 
-.booking-form-group> option{
-    font-family: "Inter" sans-serif ;
+.dash-booking-form-group > option {
+    font-family: "Inter" sans-serif;
     font-size: 14px;
     color: var(--main-text-color);
     opacity: 0.7;
 }
 
-.booking-label {
+.dash-booking-label {
     display: block;
     margin-bottom: 8px;
     color: #333;
@@ -51,8 +51,8 @@
     font-size: 14px;
 }
 
-.booking-select,
-.booking-input {
+.dash-booking-select,
+.dash-booking-input {
     width: 100%;
     padding: 10px 15px;
     border: 1.5px solid var(--secondary-color);
@@ -62,21 +62,21 @@
     background-color: #fff;
 }
 
-.booking-select:focus,
-.booking-input:focus {
+.dash-booking-select:focus,
+.dash-booking-input:focus {
     border-color: var(--secondary-color);
     outline: none;
     box-shadow: 0 0 0 2px rgba(101, 85, 143, 0.1);
 }
 
-.booking-btn-group {
+.dash-booking-btn-group {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
 
-.booking-btn {
+.dash-booking-btn {
     width: 100%;
     padding: 10px;
     border-radius: 30px;
@@ -87,28 +87,29 @@
     margin-top: 10px;
 }
 
-.booking-btn-cancel {
+.dash-booking-btn-cancel {
     background-color: #fff;
     border: 1.5px solid #BFA6D0;
     color: #65558F;
 }
 
-.booking-btn-submit {
+.dash-booking-btn-submit {
     background-color: #65558F;
     border: none;
     color: #fff;
 }
 
-.booking-btn:hover {
+.dash-booking-btn:hover {
     opacity: 0.9;
     transform: translateY(-1px);
 }
-.booking-btn:focus{
+
+.dash-booking-btn:focus {
     border: none;
     outline: none;
 }
 
-.booking-close {
+.dash-booking-close {
     position: absolute;
     right: 20px;
     top: 15px;
@@ -117,23 +118,23 @@
     cursor: pointer;
 }
 
-.booking-select option {
+.dash-booking-select option {
     padding: 8px;
 }
 
-.booking-select:disabled {
+.dash-booking-select:disabled {
     background-color: #f5f5f5;
     cursor: not-allowed;
 }
 
 /* Style for date input */
-.booking-input[type="date"] {
+.dash-booking-input[type="date"] {
     appearance: none;
     -webkit-appearance: none;
     padding: 10px 15px;
 }
 
-.booking-input[type="date"]::-webkit-calendar-picker-indicator {
+.dash-booking-input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     padding: 5px;
     filter: invert(0.5);
