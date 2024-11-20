@@ -321,6 +321,7 @@
     display: flex; 
     align-items: center;
     margin-top: 28px;
+    
 }
 /* show result*/
 .results-info {
@@ -336,43 +337,77 @@
 }
 
 /* pagination */
-.custom-pagination-container{
-    display: grid;
-    grid-template-columns: repeat(5, auto );
-    gap: 16px;
-    justify-content: center;
+.custom-bottom-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--background-color2);
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 1%;
 }
-.custom-pagination-btn> button{
-    background-color: transparent;
-    border: none; 
+
+.custom-pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custom-pagination-btn button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--background-color1);
     cursor: pointer;
-    width: 30px; 
-    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.custom-pagination-btn button:hover{
-    background-color: var(--background-color1);
-    border: none; 
-    outline: none;
-    border-radius: 50%;
-}
-.custom-pagination-btn button:focus{
-    background-color: var(--background-color1);
-    border: none; 
-    outline: none;
-    border-radius: 50%;
-}
-.custom-pagination-btn > button > i {
-    color: var(--main-text-color);
+
+.custom-pagination-btn button:disabled {
     opacity: 0.5;
+    cursor: not-allowed;
 }
-.custom-pagination-btn > a {
-    color: var(--primary-color);
-    font-weight: bolder;
-    font-size: 16px;
-    font-family: 'Inter', sans-serif;
+
+.custom-pagination-btn button:hover:not(:disabled) {
+    background-color: var(--hover-color1);
 }
+
+.custom-pagination-btn a {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--main-text-color);
+}
+
+.custom-pagination-btn a.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.empty-row td {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    height: 60px; /* Match your regular row height */
+}
+
+/* Results info styles */
+.results-info {
+    color: var(--main-text-color);
+    opacity: 0.7;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
 
 .custom-add-container{
     margin: 0;

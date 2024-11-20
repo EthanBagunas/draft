@@ -209,7 +209,9 @@
     margin-top: 20px;
     border-radius: 20px;
     position: relative;
-    overflow-x: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    max-height: 60%;
 }
 
 .room-table {
@@ -242,18 +244,6 @@
     height: 53px;
 }
 
-.custom-bottom-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 20px;
-    background-color: var(--background-color2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
 
 .admin-page-title{
     font-size: 1.8rem;
@@ -316,38 +306,6 @@
 
 
 
-/*add new room*/
-.custom-room-add-container{
-    margin: 0;
-    justify-content: flex-end;
-    display: flex;  
-}
-.room-add-booking-btn{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 30px;
-    transition: all 0.2s ease;
-    margin-top: 28px;
-}
-
-.room-add-booking-btn:hover{
-    background-color: var(--primary-color);
-    border: none;
-    outline: none;
-    opacity: 0.7;
-}
-.room-add-booking-btn:focus{
-    background-color: var(--primary-color);
-    border: none;
-    outline: none;
-    opacity: 0.7;
-}
-/*end of add btn*/
 
 /*room table*/
 .custom-roomtable-container {
@@ -362,7 +320,7 @@
 
 .room-table {
     width: 100%;
-    max-height: 480px;
+    max-height: 60%;
 }
 
 .room-table table {
@@ -833,6 +791,21 @@ img.Logo {
 }
 
 /* Pagination styles */
+.custom-bottom-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--background-color2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 1%;
+}
+
 .custom-pagination-btn {
     display: flex;
     align-items: center;
@@ -886,7 +859,40 @@ img.Logo {
     color: var(--main-text-color);
     opacity: 0.7;
     font-size: 14px;
+    margin-left: 10px;
 }
+/*add new room*/
+.custom-room-add-container{
+    margin: 0;
+    justify-content: flex-end;
+    display: flex;  
+}
+.room-add-booking-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+.room-add-booking-btn:hover{
+    background-color: var(--primary-color);
+    border: none;
+    outline: none;
+    opacity: 0.7;
+}
+.room-add-booking-btn:focus{
+    background-color: var(--primary-color);
+    border: none;
+    outline: none;
+    opacity: 0.7;
+}
+/*end of add btn*/
+
 
 
 
