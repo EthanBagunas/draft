@@ -319,22 +319,44 @@ function setupPagination(totalItems) {
             </button>
         `;
 
-        // Add page numbers with ellipsis logic
+        // Pagination logic for pages
         if (totalPages <= 3) {
+            // Show all pages if total pages are 3 or fewer
             for (let i = 1; i <= totalPages; i++) {
                 html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
             }
         } else {
-            html += `<a href="#" onclick="goToPage(1)" class="${currentPage === 1 ? 'active' : ''}">1</a>`;
-            if (currentPage > 2) {
-                html += `<a href="#" onclick="goToPage(2)" class="${currentPage === 2 ? 'active' : ''}">2</a>`;
-                if (currentPage > 3) {
-                    html += `<span>...</span>`;
+            if (currentPage === 1) {
+                // Page 1: Show 1 2 ... n
+                html += `<a href="#" onclick="goToPage(1)" class="active">1</a>`;
+                html += `<a href="#" onclick="goToPage(2)">2</a>`;
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(${totalPages})">${totalPages}</a>`;
+            } else if (currentPage === 2) {
+                // Page 2: Show 2 3 4 (No ellipsis)
+                html += `<a href="#" onclick="goToPage(2)" class="active">2</a>`;
+                html += `<a href="#" onclick="goToPage(3)">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)">4</a>`;
+            } else if (currentPage === totalPages) {
+                // Last Page: Show ... 3 4 (Next/Last disabled)
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(${totalPages - 1})">${totalPages - 1}</a>`;
+                html += `<a href="#" onclick="goToPage(${totalPages})" class="active">${totalPages}</a>`;
+            } else {
+                // Middle Pages: Show ... currentPage-1 currentPage currentPage+1 ...
+                html += `<a href="#" onclick="goToPage(1)">1</a>`;
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(${currentPage - 1})">${currentPage - 1}</a>`;
+                html += `<a href="#" onclick="goToPage(${currentPage})" class="active">${currentPage}</a>`;
+                html += `<a href="#" onclick="goToPage(${currentPage + 1})">${currentPage + 1}</a>`;
+                if (currentPage < totalPages - 1) {
+                    html += `<span class="ellipsis">...</span>`;
+                    html += `<a href="#" onclick="goToPage(${totalPages})">${totalPages}</a>`;
                 }
             }
-            html += `<a href="#" onclick="goToPage(${totalPages})" class="${currentPage === totalPages ? 'active' : ''}">${totalPages}</a>`;
         }
 
+        // Next and Last buttons
         html += `
             <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
                 <i class="fa-solid fa-angle-right"></i>
@@ -359,11 +381,11 @@ function setupPagination(totalItems) {
 function goToPage(page) {
     if (page < 1 || page > totalPages) return;
     currentPage = page;
-    displayHomepageTableRows(); // Call your function to display the relevant rows
+    displayBookingTableRows(); // Call your function to display the relevant rows
 }
 
-function displayHomepageTableRows() {
-    const table = document.querySelector('.custom-table-container .dash-table table tbody'); // Update selector for homepage table
+function displayBookingTableRows() {
+    const table = document.querySelector('.custom-table-container .dash-table table tbody'); // Update selector for booking table
     const rows = table.getElementsByTagName('tr');
     const totalItems = rows.length; // Count all rows, including empty ones
 

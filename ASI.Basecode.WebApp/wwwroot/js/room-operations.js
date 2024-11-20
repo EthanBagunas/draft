@@ -370,10 +370,9 @@ const rowsPerPage = 7;
 let totalPages = 1;
 
 function setupPagination(totalItems) {
-    totalPages = Math.ceil(totalItems / rowsPerPage);
-    
-    // Update pagination UI
+    const totalPages = Math.ceil(totalItems / rowsPerPage);
     const paginationContainer = document.querySelector('.custom-pagination-btn');
+
     if (paginationContainer) {
         let html = `
             <button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>
@@ -384,34 +383,56 @@ function setupPagination(totalItems) {
             </button>
         `;
 
-        // Add page numbers with limits
+        // Handle pagination logic for pages
         if (totalPages <= 3) {
-            // Show all pages if total pages are 3 or less
+            // Show all pages if total pages are 3 or fewer
             for (let i = 1; i <= totalPages; i++) {
                 html += `<a href="#" onclick="goToPage(${i})" class="${currentPage === i ? 'active' : ''}">${i}</a>`;
             }
         } else {
-            // Show first page
-            html += `<a href="#" onclick="goToPage(1)" class="${currentPage === 1 ? 'active' : ''}">1</a>`;
-            // Show second page
-            if (currentPage > 1) {
-                html += `<a href="#" onclick="goToPage(2)" class="${currentPage === 2 ? 'active' : ''}">2</a>`;
-            }
-            // Show ellipsis if current page is greater than 2
-            if (currentPage > 2) {
-                html += `<span>...</span>`;
-            }
-            // Show last page if current page is not the last
-            if (currentPage < totalPages) {
-                html += `<a href="#" onclick="goToPage(${totalPages})" class="${currentPage === totalPages ? 'active' : ''}">${totalPages}</a>`;
+            if (currentPage === 1) {
+                // Page 1: Show 1 2 ... n
+                html += `<a href="#" onclick="goToPage(1)" class="active">1</a>`;
+                html += `<a href="#" onclick="goToPage(2)">2</a>`;
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(${totalPages})">${totalPages}</a>`;
+            } else if (currentPage === 2) {
+                // Page 2: Show 2 3 4 (No ellipsis)
+                html += `<a href="#" onclick="goToPage(2)" class="active">2</a>`;
+                html += `<a href="#" onclick="goToPage(3)">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)">4</a>`;
+            } else if (currentPage === 3) {
+                // Page 3: Show ... 3 4 (No ellipsis, Next/Last disabled)
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(3)" class="active">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)">4</a>`;
+            } else if (currentPage === totalPages) {
+                // Last Page (Page 4): Show ... 3 4 (Next/Last buttons disabled)
+                html += `<span class="ellipsis">...</span>`;
+                html += `<a href="#" onclick="goToPage(3)">3</a>`;
+                html += `<a href="#" onclick="goToPage(4)" class="active">4</a>`;
+            } else {
+                // Middle Pages: Show ... currentPage-1 currentPage currentPage+1 ...
+                if (currentPage > 2) {
+                    html += `<a href="#" onclick="goToPage(1)">1</a>`;
+                    html += `<span class="ellipsis">...</span>`;
+                }
+                html += `<a href="#" onclick="goToPage(${currentPage - 1})">${currentPage - 1}</a>`;
+                html += `<a href="#" onclick="goToPage(${currentPage})" class="active">${currentPage}</a>`;
+                html += `<a href="#" onclick="goToPage(${currentPage + 1})">${currentPage + 1}</a>`;
+                if (currentPage < totalPages - 1) {
+                    html += `<span class="ellipsis">...</span>`;
+                    html += `<a href="#" onclick="goToPage(${totalPages})">${totalPages}</a>`;
+                }
             }
         }
 
+        // Next and Last buttons
         html += `
             <button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
                 <i class="fa-solid fa-angle-right"></i>
             </button>
-            <button onclick="goToPage(totalPages)" ${currentPage === totalPages ? 'disabled' : ''}>
+            <button onclick="goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>
                 <i class="fa-solid fa-angles-right"></i>
             </button>
         `;
@@ -419,7 +440,6 @@ function setupPagination(totalItems) {
         paginationContainer.innerHTML = html;
     }
 
-    // Update results info
     const resultsInfo = document.querySelector('.results-info');
     if (resultsInfo) {
         const startItem = (currentPage - 1) * rowsPerPage + 1;
@@ -429,37 +449,36 @@ function setupPagination(totalItems) {
 }
 
 function goToPage(page) {
-    if (page < 1 || page > totalPages) return;
-    currentPage = page;
-    displayRoomTableRows();
+    const totalPages = Math.ceil(document.querySelectorAll('.room-table table tbody tr:not(.empty-row)').length / rowsPerPage);
+
+    if (page < 1 || page > totalPages) return; // Prevent navigation to invalid pages
+    currentPage = page; // Update current page
+    displayRoomTableRows(); // Refresh displayed rows
+    setupPagination(totalItems); // Refresh pagination UI
 }
 
 function displayRoomTableRows() {
     const table = document.querySelector('.room-table table tbody');
     const rows = table.getElementsByTagName('tr');
-    const totalItems = Array.from(rows).filter(row => !row.classList.contains('empty-row')).length; // Count only non-empty rows
-    
-    // Calculate start and end indices for current page
+    const totalItems = Array.from(rows).filter(row => !row.classList.contains('empty-row')).length;
+
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = Math.min(startIndex + rowsPerPage, totalItems);
-    
-    // Hide all rows first
+
     for (let i = 0; i < rows.length; i++) {
         rows[i].style.display = 'none';
     }
-    
-    // Show rows for current page
-    let displayedRows = 0; // To count how many actual rows are displayed
+
+    let displayedRows = 0;
     for (let i = 0; i < rows.length; i++) {
         if (!rows[i].classList.contains('empty-row')) {
             if (displayedRows >= startIndex && displayedRows < endIndex) {
-                rows[i].style.display = ''; // Show the row
+                rows[i].style.display = '';
             }
             displayedRows++;
         }
     }
 
-    // Add empty rows if needed
     const existingEmptyRows = table.querySelectorAll('.empty-row');
     existingEmptyRows.forEach(row => row.remove());
 
