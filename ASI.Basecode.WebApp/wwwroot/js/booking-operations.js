@@ -232,19 +232,16 @@ function filterHomepageTable() {
     // Skip header row
     for (let i = 1; i < rows.length; i++) {
         const row = rows[i];
-        const roomNameCell = row.getElementsByTagName('td')[1]; // Index 1 is Room Name column
+        const roomNameCell = row.getElementsByTagName('td')[1];
         let shouldShow = false;
 
         if (filter === '') {
-            // Show all rows if search is empty
             shouldShow = true;
         } else if (roomNameCell) {
             const roomName = roomNameCell.textContent || roomNameCell.innerText;
-            // Check if room name contains search term
             shouldShow = roomName.toLowerCase().indexOf(filter) > -1;
         }
 
-        // Show/hide the row based on search match
         if (shouldShow) {
             row.style.display = '';
             visibleCount++;
@@ -253,11 +250,9 @@ function filterHomepageTable() {
         }
     }
 
-    // Show/hide no results message
-    updateNoResultsMessage(visibleCount, filter);
-
-    // Log search results for debugging
-    console.log(`Search: "${filter}" - Found ${visibleCount} matches`);
+    // Reset to first page when filtering
+    currentPage = 1;
+    displayTableRows();
 }
 
 function updateNoResultsMessage(visibleCount, filter) {
