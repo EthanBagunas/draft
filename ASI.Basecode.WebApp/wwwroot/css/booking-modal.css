@@ -7,16 +7,18 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(4px);
 }
 
 .booking-modal-content {
     background-color: #fff;
-    margin: 5% auto;
-    padding: 30px;
+    margin: 2% auto;
+    padding: 30px 30px 15px;
     width: 500px;
     border-radius: 15px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: auto;
+    height: fit-content;
 }
 
 .booking-form-section {
@@ -34,10 +36,18 @@
     margin-bottom: 15px;
 }
 
+.booking-form-group> option{
+    font-family: "Inter" sans-serif ;
+    font-size: 14px;
+    color: var(--main-text-color);
+    opacity: 0.7;
+}
+
 .booking-label {
     display: block;
     margin-bottom: 8px;
     color: #333;
+    opacity: 0.7;
     font-size: 14px;
 }
 
@@ -45,8 +55,8 @@
 .booking-input {
     width: 100%;
     padding: 10px 15px;
-    border: 1.5px solid #BFA6D0;
-    border-radius: 8px;
+    border: 1.5px solid var(--secondary-color);
+    border-radius: 30px;
     font-size: 14px;
     color: #333;
     background-color: #fff;
@@ -54,25 +64,27 @@
 
 .booking-select:focus,
 .booking-input:focus {
-    border-color: #65558F;
+    border-color: var(--secondary-color);
     outline: none;
     box-shadow: 0 0 0 2px rgba(101, 85, 143, 0.1);
 }
 
 .booking-btn-group {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
 
 .booking-btn {
-    padding: 10px 20px;
-    border-radius: 8px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 30px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    margin-top: 10px;
 }
 
 .booking-btn-cancel {
@@ -90,6 +102,10 @@
 .booking-btn:hover {
     opacity: 0.9;
     transform: translateY(-1px);
+}
+.booking-btn:focus{
+    border: none;
+    outline: none;
 }
 
 .booking-close {
