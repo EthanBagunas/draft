@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/customtable.css" />
     <link rel="stylesheet" href="~/css/admin-info.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
@@ -90,10 +89,7 @@
                 }
             });
         });
-    });
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
     
 @{
@@ -102,42 +98,21 @@
 }
 
 <div class= "custom-main-container">
-  <div class="custom-back">
-    <button class = "custom-btn-top"><i class="fa-solid fa-arrow-left"></i></button>
-    <span class="page-title">Account Information</span>
-  </div>
-   <!--search -->
-  <div class = "custom-search-filter-container">
-    <div class="custom-box">
-      <input type1="text" placeholder="Search...">
-      <button><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
     <!--search -->
-    <div class="custom-search-filter-container">
-        <div class="custom-box">
-            <input type1="text" placeholder="Search...">
+        <div class="custom-info-box">
+            <input placeholder="Search...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
-        <!-- Filter -->
-        <div class="custom-filter-box">
-            <span class="custom-main-text-normal">Filter</span>
-            <span class="custom-main-text-normal">Role</span>
-            <div class="custom-filter-select custom-main-text-normal" id="dropdown">
-                <span>Administrator</span>
-                <button><i class="fa-solid fa-caret-down"></i></button>
-                <ul class="custom-filter-options custom-main-text-normal">
-                    <li class="custom-filter-options-li">Administrator</li>
-                    <li class="custom-filter-options-li">Employee</li>
-                </ul>
-            </div>
-
-
+        <div class ="custom-info-search-container">
+        <div class = "info-page-title">
+        <span class="page-title">Account Information</span>
         </div>
 
-        <!--crud html, copy ni-->
     </div>
 
-<!--crud html, copy ni-->
+
+
+<!--crud html, copy ni
 </div>
 
     <div class="custom-toolbar-container">
@@ -152,106 +127,21 @@
            <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
         </button>
     </div> 
+-->
 
 
-</div>
-      <!--table-->
-  <div class="custom-roomtable-container">
-    <div class="room-table">
-      <table>
-          <thead class = "th-text">
-            <tr>
-                    <th>   </th>
-                    <th>Profile</th>
-                    <th>ID</th>
-                    <th>User ID</th>
-                    <th>Last Name</th>
-                    <th>First Name</th>
-                    <th>Name</th>
-                    <th>Contact Number</th>
-                    <th>Password</th>
-          </tr>
-          </thead>
-          <!--start sa content sa table-->
-        <tbody class="td-text">
-            @foreach (var user in Model)
-            {
-                <tr>
-                    <td>
-                        <input type="checkbox" class="employee-checkbox" data-user-id="@user.UserId" />
-                    </td>
-                    <td>
-                        <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
-                    </td>
-                    <td>@user.Id</td>
-                    <td>@user.UserId</td>
-                    <td>@user.Lname</td>
-                    <td>@user.Fname</td>
-                    <td>@user.Name</td>
-                    <td>@user.Contact</td>
-                </tr>
-            }
-        </tbody>
-    </div>
-    </table>
-  <!--end-->
 
-  <!--modal html, copy ni-->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-           <div class="logo-container1">
-                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
-            </div>
-        <div class="modal-header1">
-            <h2>Add User</h2>
-        </div>
-        <form id="addUserForm" method="post" action="@Url.Action("CreateUser", "Account")">
-            <div class="form-section">
-                <h3>Personal Information</h3>
-                <label for="firstName">First Name </label>
-                <input type="text" id="firstName" name="Fname" placeholder="Enter first name" required>
-
-                <label for="lastName">Last Name </label>
-                <input type="text" id="lastName" name="Lname" placeholder="Enter last name" required>
-
-                <label for="contactNumber">Contact Number </label>
-                <input type="text" id="contactNumber" name="Contact" placeholder="Enter contact number" required>
-            </div>
-
-            <div class="form-section">
-                <h3>Company Information</h3>
-                <label for="username">Username </label>
-                <input type="text" id="username" name="UserId" placeholder="Enter username" required>
-                
-                <label for="password">Password </label>
-                <input type="password" id="password" name="Password" placeholder="Enter password" required>
-
-                <label for="confirmPassword">Confirm Password </label>
-                <input type="password" id="confirmPassword" name="ConfirmPassword" placeholder="Confirm password" required>
-            </div>
-
-            <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="submit-bttn">Submit</button>
-            </div>
-        </form>
-    </div>
     <!--table-->
-    <div class="custom-roomtable-container">
-        <div class="room-table">
+    <div class="info-table-container">
+        <div class="info-table">
             <table>
                 <thead class="th-text">
                     <tr>
-                        <th>   </th>
-                        <th>Profile</th>
-                        <th>ID</th>
-                        <th>User ID</th>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Name</th>
+                        <th>Employee ID</th>
+                        <th>Full Name</th>
+                        <th>UserName</th>
                         <th>Contact Number</th>
-                        <th>Password</th>
+                        <th>Tools</th>
                     </tr>
                 </thead>
                 <!--start sa content sa table-->
@@ -262,99 +152,62 @@
                             <td>
                                 <input type="checkbox" class="employee-checkbox" data-user-id="@user.UserId" />
                             </td>
-                            <td>
-                                <img src="/img/profile-logo.png" alt="Profile" class="profile-pic" />
-                            </td>
                             <td>@user.Id</td>
                             <td>@user.UserId</td>
-                            <td>@user.Lname</td>
-                            <td>@user.Fname</td>
                             <td>@user.Name</td>
                             <td>@user.Contact</td>
+                            <td>
+                        <div class="grid-item-toolbar">
+                            <button class="grid-toolbar-button" onclick="editUser(@user.Id)">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </button>
+                            <button class="grid-toolbar-button" onclick="deleteUser(@user.Id)">
+                                <i class="fa-regular fa-trash-can" style="color: #b3261e;"></i>
+                            </button>
+                
+                        </div>
+                    </td>
                         </tr>
                     }
                 </tbody>
-        </div>
         </table>
-        <!--end-->
-        <!--modal html, copy ni-->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div class="logo-container1">
-                    <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
-                </div>
-                <div class="modal-header1">
-                    <h2>Add User</h2>
-                </div>
-                <form id="addUserForm">
-                    <div class="form-section">
-                        <h3>Personal Information</h3>
-                        <label for="firstName">First Name </label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
-
-                        <label for="lastName">Last Name </label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
-
-                        <label for="contactNumber">Contact Number </label>
-                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
-                    </div>
-
-                    <div class="form-section">
-                        <h3>Company Information</h3>
-                        <label for="username">Username </label>
-                        <input type="text" id="username" name="username" placeholder="Enter username" required>
-                        <label for="password">Password </label>
-                        <input type="password" id="password" name="password" placeholder="Enter password" required>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="EditModal2" class="editmodal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <div class="logo-container1">
-                    <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
-                </div>
-                <div class="modal-header1">
-                    <h2>Add User</h2>
-                </div>
-                <form id="addUserForm">
-                    <div class="form-section">
-                        <h3>Personal Information</h3>
-                        <label for="firstName">First Name </label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
-
-                        <label for="lastName">Last Name </label>
-                        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
-
-                        <label for="contactNumber">Contact Number </label>
-                        <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
-                    </div>
-
-                    <div class="form-section">
-                        <h3>Company Information</h3>
-                        <label for="username">Username </label>
-                        <input type="text" id="username" name="username" placeholder="Enter username" required>
-                        <label for="password">Password </label>
-                        <input type="password" id="password" name="password" placeholder="Enter password" required>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
+</div>
+ <div class="info-room-add-container">
+    <button class="info-add-booking-btn custom-main-white-text-normal" id="addUserForm" onclick="openModal()">Add New User</button>
+  </div>
+       
+ <!--modal html, copy ni-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header1">
+            <h2>Add User</h2>
+        </div>
+        <form id="addUserForm">
+                <label for="fullName">Full Name </label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
+
+                <label for="userName">UserName </label>
+                <input type="text" id="userName" name="userName" placeholder="Enter username" required>
+
+                <label for="contactNumber">Contact Number </label>
+                <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+            <div class="modal-footer1">
+                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="submit" class="submit-bttn">Submit</button>
+            </div>
+        </form>
+    </div>
+    
 </div>
 
 <script>
-
-
-
 function EditUser() {
     var selectedUsers = $('.employee-checkbox:checked').map(function () {
         return $(this).data('user-UserId');
     }).get();
 
-    if (selectedUsers.length !== 1) {;
+    if (selectedUsers.length !== 1) {
         alert('Please select at least/only one user to delete.');
         return;
     }
@@ -381,6 +234,8 @@ function EditUser() {
                 error: function(error) {
                     alert('Error creating user: ' + error.responseText);
                 }
+            });
+        });
     }
 }
 
