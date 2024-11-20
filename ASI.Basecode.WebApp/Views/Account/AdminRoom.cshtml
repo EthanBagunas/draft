@@ -124,7 +124,15 @@
             <span class="page-title">Room Information</span>
         </div>
 
-         <!-- Filter and show all -->
+        <!-- Add View All Bookings button -->
+        <div class="view-all-bookings-container">
+            <button class="view-all-bookings-btn" onclick="showAllBookings()">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>View All Bookings</span>
+            </button>
+        </div>
+
+        <!-- Filter and show all -->
         <div class="custom-room-filter-box">
              <!-- filter-->
             <span class="custom-main-text-normal">Sort by:</span>
@@ -231,6 +239,34 @@
                     </tr>
                 </thead>
                 <tbody id="bookingsTableBody" class="td-text">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add the new modal for all bookings -->
+<div id="allBookingsModal" class="modal">
+    <div class="modal-content" style="width: 90%; max-height: 80vh;">
+        <span class="close" onclick="closeAllBookingsModal()">&times;</span>
+        <div class="modal-header1">
+            <h2>All Room Bookings</h2>
+        </div>
+        <div class="bookings-table-container">
+            <table class="bookings-table">
+                <thead class="th-text">
+                    <tr>
+                        <th>Room #</th>
+                        <th>Room Name</th>
+                        <th>Guest Name</th>
+                        <th>Contact Number</th>
+                        <th>Booking Date</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="allBookingsTableBody" class="td-text">
                 </tbody>
             </table>
         </div>

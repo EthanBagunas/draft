@@ -308,5 +308,26 @@ namespace ASI.Basecode.WebApp.Controllers
                 return Json(new { success = false, message = $"Failed to add room: {ex.Message}" });
             }
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult GetAllBookings()
+        {
+            try
+            {
+                var books = _bookService.GetAllBooks()
+                                       .OrderBy(b => b.RoomId)
+                                       .ThenBy(b => b.BookingDate)
+                                       .ThenBy(b => b.TimeIn)
+                                       .ToList();
+                
+                return Json(books);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error fetching all bookings: {ex.Message}");
+                return Json(new { success = false, message = "Failed to fetch bookings" });
+            }
+        }
     }
 }

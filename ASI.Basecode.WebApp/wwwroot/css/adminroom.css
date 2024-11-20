@@ -698,6 +698,57 @@ img.Logo {
     z-index: 1;
 }
 
+.view-all-bookings-container {
+    display: flex;
+    align-items: center;
+}
+
+.view-all-bookings-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-all-bookings-btn:hover {
+    opacity: 0.9;
+}
+
+.view-all-bookings-btn i {
+    font-size: 16px;
+}
+
+/* Modal styles for all bookings */
+#allBookingsModal .modal-content {
+    overflow-y: auto;
+}
+
+#allBookingsModal .bookings-table-container {
+    margin-top: 20px;
+}
+
+#allBookingsModal .bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#allBookingsModal .bookings-table th,
+#allBookingsModal .bookings-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+#allBookingsModal .bookings-table tr:hover {
+    background-color: rgba(140, 122, 193, 0.1);
+}
+
 
 
 
