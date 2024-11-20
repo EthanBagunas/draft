@@ -220,3 +220,86 @@ document.getElementById('roomSelect').addEventListener('change', function() {
 });
 
 document.getElementById('timeIn').addEventListener('change', updateEndTimeOptions);
+
+// Add these new functions for homepage search
+function filterHomepageTable() {
+    const searchInput = document.getElementById('homeSearchInput');
+    const filter = searchInput.value.toLowerCase().trim();
+    const table = document.querySelector('.dash-table table');
+    const rows = table.getElementsByTagName('tr');
+    let visibleCount = 0;
+
+    // Skip header row
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const roomNameCell = row.getElementsByTagName('td')[1]; // Index 1 is Room Name column
+        let shouldShow = false;
+
+        if (filter === '') {
+            // Show all rows if search is empty
+            shouldShow = true;
+        } else if (roomNameCell) {
+            const roomName = roomNameCell.textContent || roomNameCell.innerText;
+            // Check if room name contains search term
+            shouldShow = roomName.toLowerCase().indexOf(filter) > -1;
+        }
+
+        // Show/hide the row based on search match
+        if (shouldShow) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    }
+
+    // Show/hide no results message
+    updateNoResultsMessage(visibleCount, filter);
+
+    // Log search results for debugging
+    console.log(`Search: "${filter}" - Found ${visibleCount} matches`);
+}
+
+function updateNoResultsMessage(visibleCount, filter) {
+    let noResultsMessage = document.querySelector('.no-results-message');
+    
+    // Create the message element if it doesn't exist
+    if (!noResultsMessage) {
+        noResultsMessage = document.createElement('div');
+        noResultsMessage.className = 'no-results-message';
+        const tableContainer = document.querySelector('.custom-table-container');
+        tableContainer.appendChild(noResultsMessage);
+    }
+
+    if (visibleCount === 0 && filter !== '') {
+        noResultsMessage.style.display = 'block';
+        noResultsMessage.textContent = `No rooms found matching "${filter}"`;
+    } else {
+        noResultsMessage.style.display = 'none';
+    }
+}
+
+// Add debounce function to improve performance
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Create debounced version of the filter function
+const debouncedFilterHomepage = debounce(filterHomepageTable, 300);
+
+// Add event listeners when document is ready
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('homeSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keyup', debouncedFilterHomepage);
+        searchInput.addEventListener('search', debouncedFilterHomepage); // For clear button
+    }
+});
