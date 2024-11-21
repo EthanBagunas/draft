@@ -21,10 +21,11 @@ namespace ASI.Basecode.Services.Services
     {
         private readonly IBookRepository _repository;
         private readonly IRoomService _roomService;
-        private static Timer _timer;
         private readonly ICustomerRepository _customerRepository;
 
-        public BookService(IBookRepository repository, IRoomService roomService, ICustomerRepository customerRepository) 
+        public BookService(IBookRepository repository, 
+                          IRoomService roomService, 
+                          ICustomerRepository customerRepository) 
         {
             _repository = repository;
             _roomService = roomService;
@@ -187,7 +188,6 @@ namespace ASI.Basecode.Services.Services
             {
                 if (booking.BookingDate?.Date == currentTime.Date)
                 {
-                    // Convert TimeSpan to DateTime for comparison
                     var bookingStart = booking.BookingDate.Value.Date.Add(booking.TimeIn ?? TimeSpan.Zero);
                     var bookingEnd = booking.BookingDate.Value.Date.Add(booking.TimeOut ?? TimeSpan.Zero);
 

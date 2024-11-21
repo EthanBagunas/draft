@@ -129,6 +129,7 @@ namespace ASI.Basecode.WebApp
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IBookService, BookService>();
+            services.AddScoped<ITimedBookService, BookService>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
         }
 

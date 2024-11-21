@@ -6,76 +6,48 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using ASI.Basecode.Services.Interfaces;
 
-public class TimedHostedService : IHostedService, IDisposable
-{
-    private readonly ILogger<TimedHostedService> _logger;
-    private readonly IServiceScopeFactory _serviceScopeFactory;
-    private Timer _timer;
-    
-    public TimedHostedService(ILogger<TimedHostedService> logger,
-                                IServiceScopeFactory serviceScopeFactory)   
-    {   
-        _logger = logger;
-         _serviceScopeFactory = serviceScopeFactory;
-    }
-    
 namespace ASI.Basecode.Services.Services
 {
-    #nullable enable
     public class TimedHostedService : IHostedService, IDisposable
     {
         private readonly ILogger<TimedHostedService> _logger;
-        private readonly IServiceProvider _services;
-        private Timer? _timer = null;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
+        private Timer _timer;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger, IServiceProvider services)
+        public TimedHostedService(ILogger<TimedHostedService> logger,
+                                IServiceScopeFactory serviceScopeFactory)
         {
             _logger = logger;
-            _services = services;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
-    public Task StartAsync(CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Timed Hosted Service running.");
-        _timer = new Timer(Runthis, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
-        return Task.CompletedTask;
-    }
-        public Task StartAsync(CancellationToken stoppingToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, 
-                TimeSpan.FromMinutes(1));
-
+            _logger.LogInformation("Timed Hosted Service running.");
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromSeconds(30));
             return Task.CompletedTask;
         }
 
-    private void Runthis(object state)
-    {
-         try
+        private void DoWork(object state)
         {
-            using (var scope = _serviceScopeFactory.CreateScope())
+            try
             {
-            var timedBookService = scope.ServiceProvider.GetRequiredService<ITimedBookService>();
-            timedBookService.UpdateCompletedBooks();
+                using (var scope = _serviceScopeFactory.CreateScope())
+                {
+                    var bookService = scope.ServiceProvider.GetRequiredService<IBookService>();
+                    bookService.UpdateBookingStatuses();
+                    _logger.LogInformation("Updated booking statuses at: {time}", DateTimeOffset.Now);
+                }
             }
-        }
-
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while executing DoWork.");
-        }
-    }
-        private void DoWork(object? state)
-        {
-            using (var scope = _services.CreateScope())
+            catch (Exception ex)
             {
-                var bookService = scope.ServiceProvider.GetRequiredService<IBookService>();
-                bookService.UpdateBookingStatuses();
-                _logger.LogInformation("Updated booking statuses at: {time}", DateTimeOffset.Now);
+                _logger.LogError(ex, "An error occurred while executing DoWork.");
             }
         }
 
         public Task StopAsync(CancellationToken stoppingToken)
         {
+            _logger.LogInformation("Timed Hosted Service is stopping.");
             _timer?.Change(Timeout.Infinite, 0);
             return Task.CompletedTask;
         }
@@ -85,5 +57,4 @@ namespace ASI.Basecode.Services.Services
             _timer?.Dispose();
         }
     }
-    #nullable disable
 }
