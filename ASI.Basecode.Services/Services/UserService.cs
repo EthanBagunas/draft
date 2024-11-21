@@ -122,6 +122,7 @@ namespace ASI.Basecode.Services.Services
             }
             try
             {
+            
                 _mapper.Map(model, user);
                 user.Password = PasswordManager.EncryptPassword(model.Password);
                 user.UpdatedTime = DateTime.Now;
