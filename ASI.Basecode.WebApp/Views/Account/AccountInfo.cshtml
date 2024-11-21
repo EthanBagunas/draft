@@ -179,15 +179,17 @@
                 <label for="uid">Id </label>
                 <input type="text" id="uid" name="uid" readonly>
                 <label for="firstname">First Name </label>
-                <input type="text" id="firstname" name="firstname" placeholder="Enter first name" required>
+                <input type="text" id="efirstname" name="firstname" placeholder="Enter first name" required>
                 <label for="lastname">Last Name </label>
-                <input type="text" id="lastname" name="lastname" placeholder="Enter last name" required>
+                <input type="text" id="elastname" name="lastname" placeholder="Enter last name" required>
+                
+                <label for="euserid">Email </label>
+                <input type="text" id="euserid" name="euserid" placeholder="Enter new email" required>
 
-                <label for="userName">Email </label>
-                <input type="text" id="userName" name="userName" placeholder="Enter new email" required>
-
-                <label for="contactNumber">Contact Number </label>
-                <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+                <label for="econtactNumber">Contact Number </label>
+                <input type="text" id="econtactNumber" name="econtactNumber" placeholder="Enter contact number" required>
+                <label for="epassword">Password </label>
+                <input type="text" id="epassword" name="epassword" placeholder="Enter contact number" required>
             <div class="modal-footer1">
                 <button type="button" class="cancel-bttn" onclick="closeEditModal()">Cancel</button>
                 <button type="submit" class="submit-bttn">Submit</button>
@@ -199,21 +201,33 @@
 
 
 <script>
-function editUser(userId) {
-    // Fetch user data (you can use AJAX to get user details)
+document.getElementById('editUserForm').addEventListener('submit', editUser);
+function editUser(event) {
+    event.preventDefault();
+    const uid = document.getElementById('uid').value;
+    const firstName = document.getElementById('efirstname').value;
+    const lastName = document.getElementById('elastname').value;
+    const email = document.getElementById('euserid').value;
+    const contactNumber = document.getElementById('econtactNumber').value;
+    const password = document.getElementById('epassword').value;
+    const name = firstName + ' ' + lastName;
     $.ajax({
-        url: `/Account/GetUser/${userId}`, // Adjust the URL as needed
-        type: 'GET',
-        success: function(user) {
-            // Populate the modal fields with user data
-            $('#fullName').val(user.fullName);
-            $('#userName').val(user.userName);
-            $('#contactNumber').val(user.contactNumber);
-            $('#addUserForm').attr('data-user-id', userId); // Store user ID in the form for submission
-            openModal(); // Open the modal
+        url: '/Account/UpdateUser/', // Adjust the URL as needed
+        type: 'POST',
+        data: {
+            Id: uid,
+            Name: name,
+            UserId: email,
+            Contact: contactNumber,
+            Fname: firstName,
+            Lname: lastName,
+            Password: password
+        },
+        success: function() {
+            location.reload(); // Reload the page to see the changes
         },
         error: function(error) {
-            console.error('Error fetching user data:', error);
+            console.error('Error editing user:', error);
         }
     });
 }
