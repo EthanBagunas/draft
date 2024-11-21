@@ -15,5 +15,6 @@ namespace ASI.Basecode.Services.Interfaces
         void DeleteRoom(int roomId);
         Dictionary<int, string> GetCurrentRoomStatuses();
         Room GetRoomById(int id);
+        void UpdateRoom(EditRoomViewModel model);
     }
 }
