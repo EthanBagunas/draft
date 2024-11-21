@@ -153,6 +153,7 @@
             <h2>Add User</h2>
         </div>
         <form id="addUserForm">
+                
                 <label for="fullName">Full Name </label>
                 <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
 
@@ -175,6 +176,8 @@
             <h2>Add User</h2>
         </div>
         <form id="editUserForm">
+                <label for="uid">Id </label>
+                <input type="text" id="uid" name="uid" readonly>
                 <label for="firstname">First Name </label>
                 <input type="text" id="firstname" name="firstname" placeholder="Enter first name" required>
                 <label for="lastname">Last Name </label>
@@ -186,7 +189,7 @@
                 <label for="contactNumber">Contact Number </label>
                 <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
             <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
+                <button type="button" class="cancel-bttn" onclick="closeEditModal()">Cancel</button>
                 <button type="submit" class="submit-bttn">Submit</button>
             </div>
         </form>
@@ -219,7 +222,7 @@ function deleteUser(userId) {
         $.ajax({
             url: `/Account/DeleteUser/`, // Adjust the URL as needed
             type: 'POST',
-            data: {UserId: userId},
+            data: {Id: userId},
             success: function() {
                 location.reload(); // Reload the page to see the changes
             },
@@ -250,7 +253,8 @@ window.onclick = function(event) {
         closeModal();
     }
 }
-function openEditModal() {
+function openEditModal(userid) {
+    document.getElementById('uid').value = userid;
     const modal = document.getElementById('editModal');
     modal.classList.add('show');
     document.body.classList.add('modal-open');
