@@ -124,26 +124,41 @@ namespace ASI.Basecode.Services.Services
 
             foreach (var room in rooms)
             {
-                var currentBooking = _bookRepository.GetAllBooks()
+                // Get all bookings for today that are not cancelled or completed
+                var todayBookings = _bookRepository.GetAllBooks()
                     .Where(b => b.RoomId == room.Id && 
                            b.BookingDate.HasValue && 
-                           b.BookingDate.Value.Date == currentTime.Date)
+                           b.BookingDate.Value.Date == currentTime.Date &&
+                           b.Status != "CANCELLED" &&
+                           b.Status != "COMPLETED")
                     .OrderBy(b => b.TimeIn)
-                    .FirstOrDefault();
+                    .ToList();
 
-                if (currentBooking == null)
+                if (!todayBookings.Any())
                 {
                     statuses[room.Id] = "Vacant";
                     continue;
                 }
 
-                if (currentTime.TimeOfDay < currentBooking.TimeIn)
-                    statuses[room.Id] = "Reserved";
-                else if (currentTime.TimeOfDay >= currentBooking.TimeIn && 
-                         currentTime.TimeOfDay <= currentBooking.TimeOut)
+                // Check if there's a current booking (time is between TimeIn and TimeOut)
+                var currentBooking = todayBookings
+                    .FirstOrDefault(b => 
+                        currentTime.TimeOfDay >= b.TimeIn && 
+                        currentTime.TimeOfDay <= b.TimeOut);
+
+                if (currentBooking != null)
+                {
                     statuses[room.Id] = "Occupied";
+                }
+                // Check if there's an upcoming booking today
+                else if (todayBookings.Any(b => currentTime.TimeOfDay < b.TimeIn))
+                {
+                    statuses[room.Id] = "Reserved";
+                }
                 else
+                {
                     statuses[room.Id] = "Vacant";
+                }
             }
 
             return statuses;
