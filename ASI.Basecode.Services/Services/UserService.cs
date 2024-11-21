@@ -136,7 +136,7 @@ namespace ASI.Basecode.Services.Services
         }
         public IEnumerable<User> GetAllUsers()
         {
-            return _repository.GetAll().ToList();
+            return _repository.GetAll().Where(u => u.Status != "INACTIVE").ToList();
         }
     }
 }
