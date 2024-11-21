@@ -62,9 +62,8 @@ table {
     display: inline-block;
     max-width: 100%;
     margin: 0 auto;
-    width: 100px; 
-    text-align: center; 
 }
+
 .status-vacant { background-color: #E6FFB0; }
 .status-occupied { background-color: #FFE1B0; }
 .status-reserved { background-color: #DCD4F3; }
