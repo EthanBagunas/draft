@@ -12,6 +12,6 @@ namespace ASI.Basecode.Data.Models
         [Column("max_capacity")]
         public int? MaxCapacity { get; set; }
         public string Status { get; set; }
-        public int RoomNumber { get; set; }
+        public int? RoomNumber { get; set; }
     }
 }
