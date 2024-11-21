@@ -102,10 +102,10 @@ namespace ASI.Basecode.Services.Services
         public void DeleteUser(UserViewModel model)
         {
 
-            var user = _repository.GetUsers().FirstOrDefault(x => x.UserId == model.UserId);
+            var user = _repository.GetUsers().FirstOrDefault(x => x.Id == model.Id);
             if (user == null)
             {
-                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+                throw new ArgumentException($"User  with ID {model.Id} not found.");
             }
             user.Status = "INACTIVE";
             _repository.UpdateUser(user);
@@ -113,12 +113,12 @@ namespace ASI.Basecode.Services.Services
         public void UpdateUser(EditUserViewModel model)
         {
             //var user = new User();
-            var user = _repository.GetUsers().FirstOrDefault(x => x.UserId == model.UserId);
+            var user = _repository.GetUsers().FirstOrDefault(x => x.Id == model.Id);
 
             // Check if the user was found
             if (user == null)
             {
-                throw new ArgumentException($"User  with ID {model.UserId} not found.");
+                throw new ArgumentException($"User  with ID {model.Id} not found.");
             }
             try
             {
