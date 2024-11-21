@@ -122,6 +122,37 @@
         function closeEditModal() {
             document.getElementById("editModal").style.display = "none";
         }
+document.getElementById('editRoomForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(this); // Create a FormData object from the form
+
+    // Create a POST request
+    fetch('/Home/UpdateRoom', {
+        method: 'POST',
+        body: formData // Use the FormData object as the request body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // Parse the JSON response
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Room updated successfully:', data);
+            alert('Room updated successfully!');
+            location.reload(); // Reload the page to reflect the updated room details
+        } else {
+            console.error('Error updating room:', data.message);
+            alert(data.message || 'Failed to update room');
+        }
+    })
+    .catch(error => {
+        console.error('Error updating room:', error);
+        alert('Failed to update room. Please check console for details.');
+    });
+});
         
     </script>
 }
