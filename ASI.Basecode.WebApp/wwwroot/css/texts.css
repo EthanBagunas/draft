@@ -99,3 +99,11 @@
   font-weight: normal;
   color: var(--background-color2);
 }
+
+.custom-no-data-normal{
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--main-text-color);
+  text-align: center;
+}

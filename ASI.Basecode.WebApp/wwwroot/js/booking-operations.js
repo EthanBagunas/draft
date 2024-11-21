@@ -453,7 +453,35 @@ function toggleDropdown() {
 function selectStatus(status) {
     document.getElementById('selectedStatus').textContent = status;
     closeDropdown(); // Close the dropdown after selection
-    // Additional logic can be added here to filter the table based on the selected status
+    filterTableByStatus(status); // Call the function to filter the table
+}
+
+// Function to filter the table based on selected status
+// Function to filter the table based on selected status
+function filterTableByStatus(selectedStatus) {
+    const rows = document.querySelectorAll('.custom-table-container .dash-table table tbody tr:not(#noDataMessage)');
+    let visibleCount = 0; // Counter for visible rows
+    const noDataMessage = document.getElementById('noDataMessage'); // Reference to the no data message element
+
+    rows.forEach(row => {
+        const statusCell = row.querySelector('td p.status'); // Assuming status is in a <p> tag within a <td>
+        const roomStatus = statusCell ? statusCell.textContent.trim() : '';
+
+        // Show or hide the row based on the selected status
+        if (selectedStatus === 'All' || roomStatus === selectedStatus) {
+            row.style.display = ''; // Show row
+            visibleCount++;
+        } else {
+            row.style.display = 'none'; // Hide row
+        }
+    });
+
+    // Show or hide the "No data found" message based on visible rows
+    if (visibleCount === 0) {
+        noDataMessage.style.display = 'table-row'; // Show message as a table row
+    } else {
+        noDataMessage.style.display = 'none'; // Hide message
+    }
 }
 
 // Function to close the dropdown

@@ -152,32 +152,39 @@
           </thead>
 
                 <!--start sa content sa table-->
-                <tbody class="td-text">
-                  @foreach (var room in Model.Rooms)
-                  {
-                      var booking = Model.Bookings
-                          .Where(b => b.RoomId == room.Id && b.Status != "COMPLETED" && b.Status != "CANCELLED")
-                          .OrderBy(b => b.BookingDate)
-                          .ThenBy(b => b.TimeIn)
-                          .FirstOrDefault();
-                      
-                      var status = Model.RoomStatuses[room.Id];
-                      
-                      <tr onclick="openBookingModal(@room.Id)">
-                          <td>
-                              <p class="status status-@status.ToLower()-text status-@status.ToLower()">
-                                  @status
-                              </p>
-                          </td>
-                          <td>@room.Roomname</td>
-                          <td>@room.MaxCapacity</td>
-                          <td>@(booking != null ? booking.Customer?.Custfname : "--")</td>
-                          <td>@(booking != null ? booking.BookingDate?.ToString("MM/dd/yyyy") : "--")</td>
-                          <td>@(booking != null ? booking.TimeIn?.ToString(@"hh\:mm") : "--")</td>
-                          <td>@(booking != null ? booking.TimeOut?.ToString(@"hh\:mm") : "--")</td>
-                      </tr>
-                  }
-                </tbody>
+        <tbody class="td-text">
+            @if (Model.Rooms.Any()) // Check if there are any rooms
+            {
+                @foreach (var room in Model.Rooms)
+            {
+                var booking = Model.Bookings
+                    .Where(b => b.RoomId == room.Id && b.Status != "COMPLETED" && b.Status != "CANCELLED")
+                    .OrderBy(b => b.BookingDate)
+                    .ThenBy(b => b.TimeIn)
+                    .FirstOrDefault();
+            
+                var status = Model.RoomStatuses[room.Id];
+            
+                <tr onclick="openBookingModal(@room.Id)">
+                    <td>
+                        <p class="status status-@status.ToLower()-text status-@status.ToLower()">
+                            @status
+                        </p>
+                    </td>
+                    <td>@room.Roomname</td>
+                    <td>@room.MaxCapacity</td>
+                    <td>@(booking != null ? booking.Customer?.Custfname : "--")</td>
+                    <td>@(booking != null ? booking.BookingDate?.ToString("MM/dd/yyyy") : "--")</td>
+                    <td>@(booking != null ? booking.TimeIn?.ToString(@"hh\:mm") : "--")</td>
+                    <td>@(booking != null ? booking.TimeOut?.ToString(@"hh\:mm") : "--")</td>
+                </tr>
+            }
+         }
+         <!-- no data message if way makita -->
+        <tr class="custom-no-data-normal" id="noDataMessage" style="display: none;">
+            <td colspan="7">No data found.</td> 
+         </tr>
+        </tbody>
       </table>
     </div>
   </div>
