@@ -218,7 +218,7 @@ document.getElementById('editRoomForm').addEventListener('submit', function(even
                 </tr>
             }
         </tbody>    
-    </div>
+        </div>
     </table>
     <div class="custom-bottom-container">
         <div class="results-info">
@@ -311,16 +311,11 @@ document.getElementById('editRoomForm').addEventListener('submit', function(even
 </div>
 <div id="editModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeEditModal()">&times;</span>
-           <div class="logo-container1">
-                <img src="~/img/logo2.svg" style="width: 80px; color: 65558F; " alt="logo">
-            </div>
-        <div class="modal-header1">
+        <div class="form-section">
             <h2>Edit Room</h2>
         </div>
         <form id="editRoomForm" >
             <div class="form-section">
-                <h3>Room Information</h3>
                 <label for="Roomid">Room Id </label>
                 <input type="text" id="Roomid" name="Roomid" readonly>
                 <label for="Roomname">Room Name </label>
@@ -330,9 +325,9 @@ document.getElementById('editRoomForm').addEventListener('submit', function(even
                 <input type="text" id="MaxCapacity" name="MaxCapacity" placeholder="Enter capacity" required>
             </div>
 
-            <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeEditModal()">Cancel</button>
-                <button type="submit" class="submit-bttn">Submit</button>
+            <div class="room-booking-btn-group">
+                <button type="button" class="room-booking-btn room-booking-btn-cancel" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="room-booking-btn room-booking-btn-submit">Submit</button>
             </div>
         </form>
     </div>
