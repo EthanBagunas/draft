@@ -2,6 +2,7 @@
 
 @using System.Collections.Generic
 @using static ASI.Basecode.Resources.Views.Screen
+@using System.ComponentModel.DataAnnotations
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
@@ -15,39 +16,106 @@
 @section Scripts {
     <script src="~/js/user-operations.js"></script>
     <script>
-const createbtn = document.getElementById('createbtn');
-createbtn.addEventListener('submit', AddUser);
-function AddUser(event){
+    document.getElementById('addUserForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const userData = {
-        Fname: document.getElementById('cfname').value;
-        Lname: document.getElementById('clname').value;
-        UserId:document.getElementById('cemail').value;
-        Contact: document.getElementById('ccontact').value;
-        Password: document.getElementById('cpassword').value;
-        confirmPassword: document.getElementById('confirmPassword').value;
-    };
+    const password = document.getElementById('Password').value;
+    const confirmPassword = document.getElementById('ConfirmPassword').value;
+    if (password === confirmPassword) {
+        // Submit the form
+        this.submit();
+    } else {
+        alert('Passwords do not match.');
+    }
+});
+document.getElementById('editUserForm').addEventListener('submit', editUser);
+function editUser(event) {
+    event.preventDefault();
+    const uid = document.getElementById('uid').value;
+    const firstName = document.getElementById('efirstname').value;
+    const lastName = document.getElementById('elastname').value;
+    const email = document.getElementById('euserid').value;
+    const contactNumber = document.getElementById('econtactNumber').value;
+    const password = document.getElementById('epassword').value;
+    const name = firstName + ' ' + lastName;
     $.ajax({
-        url: '/Account/CreateUser/',
+        url: '/Account/UpdateUser/', // Adjust the URL as needed
         type: 'POST',
-        data: userData,
-        success: function(response) {
-            if (response.success) {
-                console.log('Employee added successfully:', response);
-                alert('Employee added successfully!');
-                closeModal();
-                location.reload();
-            } else {
-                console.error('Error adding Employee:', response.message);
-                alert(response.message || 'Failed to add Employee');
-            }
+        data: {
+            Id: uid,
+            Name: name,
+            UserId: email,
+            Contact: contactNumber,
+            Fname: firstName,
+            Lname: lastName,
+            Password: password
+        },
+        success: function() {
+            location.reload(); // Reload the page to see the changes
         },
         error: function(error) {
-            console.error('Error adding Employee:', error);
-            alert('Failed to add Employee. Please check console for details.');
+            console.error('Error editing user:', error);
         }
     });
-} 
+}
+function deleteUser(userId) {
+    if (confirm('Are you sure you want to delete this user?')) {
+        $.ajax({
+            url: `/Account/DeleteUser/`, // Adjust the URL as needed
+            type: 'POST',
+            data: {Id: userId},
+            success: function() {
+                location.reload(); // Reload the page to see the changes
+            },
+            error: function(error) {
+                console.error('Error deleting user:', error);
+            }
+        });
+    }
+}
+
+
+function openCreateModal() {
+    const modal = document.getElementById('createModal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+
+
+function closeCreateModal() {
+    const modal = document.getElementById('createModal');
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('createModal');
+    if (event.target === modal) {
+        closeCreateModal();
+    }
+}
+function openEditModal(userid) {
+    document.getElementById('uid').value = userid;
+    const modal = document.getElementById('editModal');
+    modal.classList.add('show');
+    document.body.classList.add('modal-open');
+}
+
+
+function closeEditModal() {
+    const modal = document.getElementById('editModal');
+    modal.classList.remove('show');
+    document.body.classList.remove('modal-open');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('editModal');
+    if (event.target === modal) {
+        closeEditModal();
+    }
+}
+
     </script>
 }
     
@@ -179,97 +247,8 @@ function AddUser(event){
 
 
 <script>
-document.getElementById('editUserForm').addEventListener('submit', editUser);
-function editUser(event) {
-    event.preventDefault();
-    const uid = document.getElementById('uid').value;
-    const firstName = document.getElementById('efirstname').value;
-    const lastName = document.getElementById('elastname').value;
-    const email = document.getElementById('euserid').value;
-    const contactNumber = document.getElementById('econtactNumber').value;
-    const password = document.getElementById('epassword').value;
-    const name = firstName + ' ' + lastName;
-    $.ajax({
-        url: '/Account/UpdateUser/', // Adjust the URL as needed
-        type: 'POST',
-        data: {
-            Id: uid,
-            Name: name,
-            UserId: email,
-            Contact: contactNumber,
-            Fname: firstName,
-            Lname: lastName,
-            Password: password
-        },
-        success: function() {
-            location.reload(); // Reload the page to see the changes
-        },
-        error: function(error) {
-            console.error('Error editing user:', error);
-        }
-    });
-}
-function deleteUser(userId) {
-    if (confirm('Are you sure you want to delete this user?')) {
-        $.ajax({
-            url: `/Account/DeleteUser/`, // Adjust the URL as needed
-            type: 'POST',
-            data: {Id: userId},
-            success: function() {
-                location.reload(); // Reload the page to see the changes
-            },
-            error: function(error) {
-                console.error('Error deleting user:', error);
-            }
-        });
-    }
-}
-
-
-function openCreateModal() {
-    const modal = document.getElementById('createModal');
-    modal.classList.add('show');
-    document.body.classList.add('modal-open');
-}
-
-
-function closeCreateModal() {
-    const modal = document.getElementById('createModal');
-    modal.classList.remove('show');
-    document.body.classList.remove('modal-open');
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('createModal');
-    if (event.target === modal) {
-        closeCreateModal();
-    }
-}
-function openEditModal(userid) {
-    document.getElementById('uid').value = userid;
-    const modal = document.getElementById('editModal');
-    modal.classList.add('show');
-    document.body.classList.add('modal-open');
-}
-
-
-function closeEditModal() {
-    const modal = document.getElementById('editModal');
-    modal.classList.remove('show');
-    document.body.classList.remove('modal-open');
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const modal = document.getElementById('editModal');
-    if (event.target === modal) {
-        closeEditModal();
-    }
-}
 
 </script>
-
 
 
 
