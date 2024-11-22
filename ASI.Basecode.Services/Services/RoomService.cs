@@ -72,32 +72,11 @@ namespace ASI.Basecode.Services.Services
         {
             try
             {
-                // Get the room to be deleted
                 var room = _repository.GetAll().FirstOrDefault(r => r.Id == roomId);
-                if (room != null && room.RoomNumber.HasValue)
+                if (room != null)
                 {
-                    // Store the current room number
-                    var deletedRoomNumber = room.RoomNumber.Value;
-
-                    // Set the room as inactive and null its room number
                     room.Status = "INACTIVE";
-                    room.RoomNumber = null;
                     _repository.UpdateRoom(room);
-
-                    // Update the room numbers for all rooms that come after the deleted room
-                    var roomsToUpdate = _repository.GetAll()
-                        .Where(r => r.Status != "INACTIVE" && r.RoomNumber > deletedRoomNumber)
-                        .OrderBy(r => r.RoomNumber)
-                        .ToList();
-
-                    foreach (var roomToUpdate in roomsToUpdate)
-                    {
-                        if (roomToUpdate.RoomNumber.HasValue)
-                        {
-                            roomToUpdate.RoomNumber = roomToUpdate.RoomNumber.Value - 1;
-                            _repository.UpdateRoom(roomToUpdate);
-                        }
-                    }
                 }
             }
             catch (Exception ex)
