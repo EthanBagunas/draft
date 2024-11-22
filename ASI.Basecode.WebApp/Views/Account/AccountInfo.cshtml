@@ -2,7 +2,6 @@
 
 @using System.Collections.Generic
 @using static ASI.Basecode.Resources.Views.Screen
-using ASI.Basecode.Services.ServiceModels
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
@@ -13,47 +12,44 @@ using ASI.Basecode.Services.ServiceModels
 }
 <!--copy ang script-->
 @section Scripts {
-    <script src="~/js/modal.js"></script>
     <script>
-        // Add form submission handler
-   document.getElementById('addUserForm').addEventListener('submit', function(e) {
+       function Adduser(e){
     e.preventDefault();
-    const url = 'https://localhost:52564/Account/Register'; // Adjust the URL based on your action
-
-    const firstName = document.getElementById('Fname').value;
-    const lastName = document.getElementById('Lname').value;
-    const email = document.getElementById('UserId').value;
-    const contactNumber = document.getElementById('Contact').value;
-    const password = document.getElementById('Password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    const userData = {
+        Fname:document.getElementById('cfname').value;
+        Lname:document.getElementById('clname').value;
+        UserId:document.getElementById('cemail').value;
+        Contact= document.getElementById('ccontact').value;
+        Password= document.getElementById('cpassword').value;
+    }
+    const confirmPassword= document.getElementById('confirmPassword').value;
 
     if (password !== confirmPassword) {
         alert('Password and confirm password do not match');
         return;
     }
+
     $.ajax({
-        url: url,
-        method: 'POST',
-        data: {
-            Fname: firstName,
-            Lname: lastName,
-            UserId: email,
-            Contact: contactNumber,
-            Password: password
-        },
-        success: function(response) {
+        url: '/Account/CreateUser',
+        type: 'POST',
+        data: userData,
+    success: function(response) {
             if (response.success) {
+                console.log('Employee added successfully:', response);
+                alert('Employee added successfully!');
                 closeModal();
-                location.reload(); // Reload the page to see the changes
+                location.reload();
             } else {
-                alert('Error saving user');
+                console.error('Error adding Employee:', response.message);
+                alert(response.message || 'Failed to add Employee');
             }
         },
         error: function(error) {
-            alert('Error saving user: ' + error.responseText);
+            console.error('Error adding Employee:', error);
+            alert('Failed to add Employee. Please check console for details.');
         }
     });
-});
+} 
     </script>
 }
     
@@ -123,17 +119,18 @@ using ASI.Basecode.Services.ServiceModels
         <div class="modal-header1">
             <h2>Add User</h2>
         </div>
-        <form id="addUserForm">
-             <label for="Fname">First Name </label>
-            <input type="text" id="Fname" name="Fname" placeholder="Enter first name" required>
-            <label for="Lname">Last Name </label>
-            <input type="text" id="Lname" name="Lname" placeholder="Enter last name" required>
-            <label for="UserId">Email </label>
-            <input type="text" id="UserId" name="UserId" placeholder="Enter email" required>
-            <label for="Contact">Contact Number </label>
-            <input type="text" id="Contact" name="Contact" placeholder="Enter contact number" required>UserId
-            <label for="Password">Password </label>
-            <input type="password" id="Password" name="Password" placeholder="Enter password" required>
+        <form id="addUserForm" onsubmit="Adduser(event)">
+             <label for="cfname">First Name </label>
+            <input type="text" id="cfname" name="cfname" placeholder="Enter first name" required>
+            <label for="clname">Last Name </label>
+            <input type="text" id="clname" name="clname" placeholder="Enter last name" required>
+            <label for="cemail">Email </label>
+            <input type="text" id="cemail" name="cemail" placeholder="Enter email" required>
+
+            <label for="ccontact">Contact Number </label>
+            <input type="text" id="ccontact" name="ccontact" placeholder="Enter contact number" required>
+            <label for="cpassword">Password </label>
+            <input type="password" id="cpassword" name="cpassword" placeholder="Enter password" required>
             <label for="confirmPassword">Confirm Password </label>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
             <div class="modal-footer1">
@@ -219,6 +216,7 @@ function deleteUser(userId) {
     }
 }
 
+
 function openModal() {
     const modal = document.getElementById('myModal');
     modal.classList.add('show');
@@ -234,7 +232,7 @@ function closeModal() {
 
 // Close modal when clicking outside
 window.onclick = function(event) {
-    const modal = document.getElementById('createModal');
+    const modal = document.getElementById('myModal');
     if (event.target === modal) {
         closeModal();
     }
