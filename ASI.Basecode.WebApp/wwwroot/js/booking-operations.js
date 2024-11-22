@@ -440,7 +440,7 @@ function displayRoomTableRows() {
 document.addEventListener('DOMContentLoaded', function() {
     const totalItems = document.querySelectorAll('.custom-table-container .dash-table table tbody tr').length; // Count total rows
     setupPagination(totalItems);
-    displayHomepageTableRows(); // Display the initial rows
+    displayHomepageTableRows(); 
 });
 
 // Function to toggle the dropdown visibility
@@ -456,7 +456,6 @@ function selectStatus(status) {
     filterTableByStatus(status); // Call the function to filter the table
 }
 
-// Function to filter the table based on selected status
 // Function to filter the table based on selected status
 function filterTableByStatus(selectedStatus) {
     const rows = document.querySelectorAll('.custom-table-container .dash-table table tbody tr:not(#noDataMessage)');

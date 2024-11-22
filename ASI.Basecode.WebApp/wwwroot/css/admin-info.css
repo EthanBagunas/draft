@@ -187,61 +187,50 @@
     margin-top: 20px;
     border-radius: 20px;
     position: relative;
+    overflow-x: hidden;
     overflow-y: hidden;
-    overflow-x: hidden; 
-    scroll-behavior: smooth; 
+    max-height: 70vh;
 }
 
-.info-table {
+.info-table {  
     width: 100%;
+    height: 100%;
     padding-bottom: 10px;
-    max-height: 460px;
-    overflow-x: auto; 
-
 }
 
-.info-table table,
-.info-table table th,
-.info-table table td {
-    text-align: center !important;
+.info-table table {  
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
 }
 
-/* Table styles */
-table {
-    table-layout: auto; 
-    width: 100%; 
-    border-collapse: separate; 
-    text-align: center;
-    border-spacing: 0;
-}
-
-table th, table td {
-    min-width: 100px; 
-    max-width: 300px; 
-    padding: 8px;
-    text-align: center;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    transition: all 0.2s ease-in-out; 
-}
-table td{
-    padding: 16px 20px;
-
-}
-
-table th {
+.info-table table th {  
     position: sticky;
     top: 0;
     z-index: 10;
     background-color: var(--secondary-color);
-    padding: 14px 20px;
+    padding: 12px 20px;
+    font-weight: 600;
+    text-align: center;
 }
 
-table tbody tr {
+.info-table table td { 
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 14px 16px; 
+    text-align: center;
+    line-height: 1.4; 
+}
+
+.info-table tbody tr {  
     transition: background-color 0.2s ease;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+.info-table tbody tr:hover {  
+    background-color: rgba(140, 122, 193, 0.1); 
+    cursor: pointer;
+}
+
 
 
 

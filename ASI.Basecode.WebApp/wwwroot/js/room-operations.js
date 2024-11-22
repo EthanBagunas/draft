@@ -453,8 +453,8 @@ function goToPage(page) {
 
     if (page < 1 || page > totalPages) return; // Prevent navigation to invalid pages
     currentPage = page; // Update current page
-    displayRoomTableRows(); // Refresh displayed rows
-    setupPagination(totalItems); // Refresh pagination UI
+    displayRoomTableRows(); 
+    setupPagination(totalItems); 
 }
 
 function displayRoomTableRows() {

@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="~/css/texts.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/admin-info.css" />
+    <link rel="stylesheet" href="~/css/homepage.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="icon" type="image/svg+xml" href="~/img/logo-invert.svg">
 }
 <!--copy ang script-->
 @section Scripts {
+    <script src="~/js/user-operations.js"></script>
     <script>
 const createbtn = document.getElementById('createbtn');
 createbtn.addEventListener('submit', AddUser);
@@ -105,9 +107,21 @@ function AddUser(event){
         </table>
     </div>
 </div>
- <div class="info-room-add-container">
-    <button class="info-add-booking-btn custom-main-white-text-normal" onclick="openCreateModal()">Add New User</button>
-  </div>
+    <div class="custom-bottom-container">
+        <div class="results-info">
+        Showing 1 out of 10 results
+        </div>
+        <div class="custom-pagination-container">
+            <div class="custom-pagination-btn">
+            <!-- Pagination will be populated by JavaScript -->
+            </div>
+        </div>
+        <div class="info-room-add-container">
+            <button class="info-add-booking-btn custom-main-white-text-normal" onclick="openCreateModal()">Add New User</button>
+        </div>    
+    </div>
+
+ 
        
  <!--modal html, copy ni-->
 <div id="createModal" class="modal">
