@@ -13,27 +13,23 @@
 <!--copy ang script-->
 @section Scripts {
     <script>
-       function Adduser(e){
-    e.preventDefault();
+const createbtn = document.getElementById('createbtn');
+createbtn.addEventListener('submit', AddUser);
+function AddUser(event){
+    event.preventDefault();
     const userData = {
-        Fname:document.getElementById('cfname').value;
-        Lname:document.getElementById('clname').value;
+        Fname: document.getElementById('cfname').value;
+        Lname: document.getElementById('clname').value;
         UserId:document.getElementById('cemail').value;
-        Contact= document.getElementById('ccontact').value;
-        Password= document.getElementById('cpassword').value;
-    }
-    const confirmPassword= document.getElementById('confirmPassword').value;
-
-    if (password !== confirmPassword) {
-        alert('Password and confirm password do not match');
-        return;
-    }
-
+        Contact: document.getElementById('ccontact').value;
+        Password: document.getElementById('cpassword').value;
+        confirmPassword: document.getElementById('confirmPassword').value;
+    };
     $.ajax({
-        url: '/Account/CreateUser',
+        url: '/Account/CreateUser/',
         type: 'POST',
         data: userData,
-    success: function(response) {
+        success: function(response) {
             if (response.success) {
                 console.log('Employee added successfully:', response);
                 alert('Employee added successfully!');
@@ -110,32 +106,31 @@
     </div>
 </div>
  <div class="info-room-add-container">
-    <button class="info-add-booking-btn custom-main-white-text-normal" id="addUserForm" onclick="openModal()">Add New User</button>
+    <button class="info-add-booking-btn custom-main-white-text-normal" onclick="openCreateModal()">Add New User</button>
   </div>
        
  <!--modal html, copy ni-->
-<div id="myModal" class="modal">
+<div id="createModal" class="modal">
     <div class="modal-content">
         <div class="modal-header1">
             <h2>Add User</h2>
         </div>
-        <form id="addUserForm" onsubmit="Adduser(event)">
-             <label for="cfname">First Name </label>
-            <input type="text" id="cfname" name="cfname" placeholder="Enter first name" required>
-            <label for="clname">Last Name </label>
-            <input type="text" id="clname" name="clname" placeholder="Enter last name" required>
-            <label for="cemail">Email </label>
-            <input type="text" id="cemail" name="cemail" placeholder="Enter email" required>
-
-            <label for="ccontact">Contact Number </label>
-            <input type="text" id="ccontact" name="ccontact" placeholder="Enter contact number" required>
-            <label for="cpassword">Password </label>
-            <input type="password" id="cpassword" name="cpassword" placeholder="Enter password" required>
-            <label for="confirmPassword">Confirm Password </label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+        <form id="addUserForm" action="/Account/CreateUser/" method="post">
+            <label for="Fname">First Name </label>
+            <input type="text" id="Fname" name="Fname" placeholder="Enter first name" required>
+            <label for="Lname">Last Name </label>
+            <input type="text" id="Lname" name="Lname" placeholder="Enter last name" required>
+            <label for="UserId">Email </label>
+            <input type="text" id="UserId" name="UserId" placeholder="Enter email" required>
+            <label for="Contact">Contact Number </label>
+            <input type="text" id="Contact" name="Contact" placeholder="Enter contact number" required>
+            <label for="Password">Password </label>
+            <input type="password" id="Password" name="Password" placeholder="Enter password" required>
+            <label for="ConfirmPassword">Confirm Password </label>
+            <input type="password" id="ConfirmPassword" name="ConfirmPassword" placeholder="Confirm password" required>
             <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="submit-bttn">Submit</button>
+                <button type="button" class="cancel-bttn" onclick="closeCreateModal()">Cancel</button>
+                <button id="createbtn" type="submit" class="submit-bttn">Submit</button>
             </div>
         </form>
     </div>
@@ -217,24 +212,24 @@ function deleteUser(userId) {
 }
 
 
-function openModal() {
-    const modal = document.getElementById('myModal');
+function openCreateModal() {
+    const modal = document.getElementById('createModal');
     modal.classList.add('show');
     document.body.classList.add('modal-open');
 }
 
 
-function closeModal() {
-    const modal = document.getElementById('myModal');
+function closeCreateModal() {
+    const modal = document.getElementById('createModal');
     modal.classList.remove('show');
     document.body.classList.remove('modal-open');
 }
 
 // Close modal when clicking outside
 window.onclick = function(event) {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById('createModal');
     if (event.target === modal) {
-        closeModal();
+        closeCreateModal();
     }
 }
 function openEditModal(userid) {

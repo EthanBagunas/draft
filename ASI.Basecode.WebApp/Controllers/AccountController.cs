@@ -262,7 +262,7 @@ namespace ASI.Basecode.WebApp.Controllers
                     model.CreatedBy = User.Identity?.Name ?? "System";
 
                     _userService.AddUser(model);
-                    return Json(new { success = true });
+                    return RedirectToAction("AccountInfo", "Account");
                 }
                 return BadRequest(ModelState);
             }
