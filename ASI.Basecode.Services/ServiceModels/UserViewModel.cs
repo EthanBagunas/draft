@@ -13,8 +13,11 @@ namespace ASI.Basecode.Services.ServiceModels
         [Required(ErrorMessage = "Username is required.")]
         public string UserId { get; set; }
 
-        [Required(ErrorMessage = "Name is required.")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "First Name is required.")]
+        public string Fname { get; set; }
+        [Required(ErrorMessage = "Last Name is required.")]
+        
+        public string Lname { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; }
@@ -24,11 +27,10 @@ namespace ASI.Basecode.Services.ServiceModels
         public string ConfirmPassword { get; set; }
 
         public int Id { get; set; }
-        public string Fname { get; set; }
-        public string Lname { get; set; }
         public string Contact { get; set; }
         public DateTime CreatedTime { get; set; }
         public string CreatedBy { get; set; }
+        public string Name { get; set; }
     }
     public class EditUserViewModel 
     
@@ -41,7 +43,5 @@ namespace ASI.Basecode.Services.ServiceModels
         public string Contact {  get; set; }   
         public string Password { get; set; }        
         public string ConfirmPassword { get; set; }
-
-
     }
 }

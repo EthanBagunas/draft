@@ -1,6 +1,8 @@
 @model IEnumerable<ASI.Basecode.Data.Models.User>
+
 @using System.Collections.Generic
 @using static ASI.Basecode.Resources.Views.Screen
+using ASI.Basecode.Services.ServiceModels
 @section Styles {
     <link rel="stylesheet" href="~/css/headerfinal.css" />
     <link rel="stylesheet" href="~/css/texts.css" />
@@ -13,63 +15,32 @@
 @section Scripts {
     <script src="~/js/modal.js"></script>
     <script>
-        $(document).ready(function () {
-            // Handle checkbox selection
-            $('.employee-checkbox').on('change', function () {
-                var selectedCount = $('.employee-checkbox:checked').length;
-
-                // Enable/disable edit and delete buttons based on selection
-                if (selectedCount === 1) {
-                    $('#edit-button').prop('disabled', false);
-                    $('#delete-button').prop('disabled', false);
-                } else if (selectedCount > 1) {
-                    $('#edit-button').prop('disabled', true);
-                    $('#delete-button').prop('disabled', false);
-                } else {
-                    $('#edit-button').prop('disabled', true);
-                    $('#delete-button').prop('disabled', true);
-                }
-            });
-
-            // Handle delete button click
-            $('#delete-button').click(function () {
-                var selectedUsers = $('.employee-checkbox:checked').map(function () {
-                    return $(this).data('user-id');
-                }).get();
-
-                if (confirm('Are you sure you want to delete the selected user(s)?')) {
-                    selectedUsers.forEach(function (userId) {
-                        $.ajax({
-                            url: '@Url.Action("DeleteUser", "Account")',
-                            type: 'POST',
-                            data: { UserId: userId },
-                            success: function () {
-                                location.reload();
-                            },
-                            error: function (error) {
-                                console.error('Error deleting user:', error);
-                            }
-                        });
-                    });
-                }
-            });
-        });
-
         // Add form submission handler
-        $('#addUserForm').on('submit', function(e) {
+   document.getElementById('addUserForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
-    const userId = $(this).data('user-id'); // Get user ID from the form data
-    const url = userId ? `/Account/EditUser/${userId}` : '/Account/AddUser'; // Adjust the URL based on action
+    const url = 'https://localhost:52564/Account/Register'; // Adjust the URL based on your action
 
-    const formData = new FormData(this);
-    
+    const firstName = document.getElementById('Fname').value;
+    const lastName = document.getElementById('Lname').value;
+    const email = document.getElementById('UserId').value;
+    const contactNumber = document.getElementById('Contact').value;
+    const password = document.getElementById('Password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert('Password and confirm password do not match');
+        return;
+    }
     $.ajax({
         url: url,
         method: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
+        data: {
+            Fname: firstName,
+            Lname: lastName,
+            UserId: email,
+            Contact: contactNumber,
+            Password: password
+        },
         success: function(response) {
             if (response.success) {
                 closeModal();
@@ -153,22 +124,24 @@
             <h2>Add User</h2>
         </div>
         <form id="addUserForm">
-                
-                <label for="fullName">Full Name </label>
-                <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
-
-                <label for="userName">UserName </label>
-                <input type="text" id="userName" name="userName" placeholder="Enter username" required>
-
-                <label for="contactNumber">Contact Number </label>
-                <input type="text" id="contactNumber" name="contactNumber" placeholder="Enter contact number" required>
+             <label for="Fname">First Name </label>
+            <input type="text" id="Fname" name="Fname" placeholder="Enter first name" required>
+            <label for="Lname">Last Name </label>
+            <input type="text" id="Lname" name="Lname" placeholder="Enter last name" required>
+            <label for="UserId">Email </label>
+            <input type="text" id="UserId" name="UserId" placeholder="Enter email" required>
+            <label for="Contact">Contact Number </label>
+            <input type="text" id="Contact" name="Contact" placeholder="Enter contact number" required>UserId
+            <label for="Password">Password </label>
+            <input type="password" id="Password" name="Password" placeholder="Enter password" required>
+            <label for="confirmPassword">Confirm Password </label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
             <div class="modal-footer1">
                 <button type="button" class="cancel-bttn" onclick="closeModal()">Cancel</button>
                 <button type="submit" class="submit-bttn">Submit</button>
             </div>
         </form>
     </div>
-    
 </div>
 <div id="editModal" class="modal">
     <div class="modal-content">
@@ -196,7 +169,6 @@
             </div>
         </form>
     </div>
-    
 </div>
 
 
@@ -262,7 +234,7 @@ function closeModal() {
 
 // Close modal when clicking outside
 window.onclick = function(event) {
-    const modal = document.getElementById('myModal');
+    const modal = document.getElementById('createModal');
     if (event.target === modal) {
         closeModal();
     }

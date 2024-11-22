@@ -76,6 +76,7 @@ namespace ASI.Basecode.Services.Services
                     user.Password = PasswordManager.EncryptPassword(model.Password);
                     user.CreatedTime = DateTime.Now;
                     user.UpdatedTime = DateTime.Now;
+                    user.Name = model.Fname + " " + model.Lname;
                     user.CreatedBy = System.Environment.UserName;
                     user.UpdatedBy = System.Environment.UserName;
                    

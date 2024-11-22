@@ -291,6 +291,8 @@ table tbody tr {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         display: flex;
         padding: 20px;
+        overflow-y: auto;
+        max-height: 600px;
     }
     
     .modal-header1 h2 {
