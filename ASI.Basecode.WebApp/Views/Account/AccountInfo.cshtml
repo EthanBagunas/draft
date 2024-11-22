@@ -127,7 +127,7 @@ function AddUser(event){
 <div id="createModal" class="modal">
     <div class="modal-content">
         <div class="modal-header1">
-            <h2>Add User</h2>
+            <h1>Add User</h1>
         </div>
         <form id="addUserForm" action="/Account/CreateUser/" method="post">
             <label for="Fname">First Name </label>
@@ -143,8 +143,8 @@ function AddUser(event){
             <label for="ConfirmPassword">Confirm Password </label>
             <input type="password" id="ConfirmPassword" name="ConfirmPassword" placeholder="Confirm password" required>
             <div class="modal-footer1">
-                <button type="button" class="cancel-bttn" onclick="closeCreateModal()">Cancel</button>
-                <button id="createbtn" type="submit" class="submit-bttn">Submit</button>
+                <button type="button" class="user-info-btn user-info-btn-cancel" onclick="closeCreateModal()">Cancel</button>
+                <button id="createbtn" type="submit" class="user-info-btn user-info-btn-submit">Submit</button>
             </div>
         </form>
     </div>
