@@ -116,7 +116,25 @@ window.onclick = function(event) {
     }
 }
 
-    </script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('keyup', function () {
+        const searchValue = this.value.toLowerCase().trim(); // Trim input for consistency
+        const rows = document.querySelectorAll('.info-table tbody tr');
+
+        rows.forEach(row => {
+            const nameCell = row.cells[1].textContent.toLowerCase().trim();
+            if (nameCell.includes(searchValue)) {
+                row.style.display = ''; // Show matching rows
+            } else {
+                row.style.display = 'none'; // Hide non-matching rows
+            }
+        });
+    });
+});
+
+</script>
 }
     
 @{
@@ -126,10 +144,10 @@ window.onclick = function(event) {
 
 <div class= "custom-main-container">
     <!--search -->
-        <div class="custom-info-box">
-            <input placeholder="Search...">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+    <div class="custom-info-box">
+        <input id="searchInput" placeholder="Search by name...">
+        <button id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
         <div class ="custom-info-search-container">
         <div class = "info-page-title">
         <span class="page-title">Account Information</span>
